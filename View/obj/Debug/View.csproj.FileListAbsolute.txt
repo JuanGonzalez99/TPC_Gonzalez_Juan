@@ -1,0 +1,12 @@
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.csprojAssemblyReference.cache
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.frmAlumno.resources
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.frmPrincipal.resources
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.frmProfesor.resources
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.Properties.Resources.resources
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.csproj.GenerateResource.cache
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\bin\Debug\View.exe.config
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\bin\Debug\View.exe
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\bin\Debug\View.pdb
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.exe
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\View\obj\Debug\View.pdb

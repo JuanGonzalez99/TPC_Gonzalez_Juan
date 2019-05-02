@@ -1,0 +1,2 @@
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\Model\obj\Debug\Model.csprojAssemblyReference.cache
+C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
