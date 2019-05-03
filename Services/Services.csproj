@@ -51,14 +51,15 @@
     <Compile Include="Services\MateriaService.cs" />
     <Compile Include="Services\ProfesorService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DB_Script\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{76b5f84a-cfd9-4f16-b77d-d51550284905}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB_Script\Script_DB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
