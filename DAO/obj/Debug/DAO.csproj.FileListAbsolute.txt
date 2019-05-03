@@ -1,6 +1,0 @@
-C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\DAO\bin\Debug\DAO.dll
-C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\DAO\bin\Debug\DAO.pdb
-C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\DAO\obj\Debug\DAO.csprojAssemblyReference.cache
-C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\DAO\obj\Debug\DAO.csproj.CoreCompileInputs.cache
-C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\DAO\obj\Debug\DAO.dll
-C:\Users\Juan\source\repos\TPC_Gonzalez_Juan\DAO\obj\Debug\DAO.pdb
