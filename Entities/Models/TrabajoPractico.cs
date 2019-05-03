@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Entities
 {
-    public class TipoExamen
+    public class TrabajoPractico : Evaluacion
     {
-        public short ID { get; set; }
-        public string Descripcion { get; set; }
-
+        public bool Grupal { get; set; }
     }
 }

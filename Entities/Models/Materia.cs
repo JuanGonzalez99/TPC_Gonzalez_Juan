@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Entities
 {
-    public class Examen : Evaluacion
+    public class Materia
     {
-        public TipoExamen TipoExamen { get; set; }
+        public long ID { get; set; }
+        public string Nombre { get; set; }
+
     }
 }

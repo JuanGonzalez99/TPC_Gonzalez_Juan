@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Entities
 {
-    public class TrabajoPractico : Evaluacion
+    public class Examen : Evaluacion
     {
-        public bool Grupal { get; set; }
+        public TipoExamen TipoExamen { get; set; }
     }
 }

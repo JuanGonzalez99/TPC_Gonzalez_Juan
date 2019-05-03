@@ -1,0 +1,6 @@
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Model\bin\Debug\Entities.dll
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Model\bin\Debug\Entities.pdb
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Model\obj\Debug\Entities.csprojAssemblyReference.cache
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Model\obj\Debug\Entities.csproj.CoreCompileInputs.cache
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Model\obj\Debug\Entities.dll
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Model\obj\Debug\Entities.pdb
