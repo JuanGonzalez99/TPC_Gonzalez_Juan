@@ -8,6 +8,8 @@ namespace Entities
 {
     public class Profesor : Persona
     {
+        public long Id { get; set; }
+        public DateTime FechaIngreso { get; set; }
         public List<Materia> Materias { get; set; }
     }
 }

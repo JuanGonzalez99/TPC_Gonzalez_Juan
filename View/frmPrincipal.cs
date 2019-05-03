@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entities;
+using Services.Services;
 
 namespace View
 {
@@ -17,48 +19,94 @@ namespace View
             InitializeComponent();
         }
 
-        private void btnProfesor_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void tsmAlumno_Click(object sender, EventArgs e)
+        private void atsmAlumno_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(frmAlumno))
+                if (form.GetType() == typeof(frmAltaAlumno))
                 {
+                    if (form.WindowState == FormWindowState.Minimized)
+                        form.WindowState = FormWindowState.Normal;
                     form.Activate();
                     return;
                 }
             }
 
-            frmAlumno frmAlumno = new frmAlumno
+            frmAltaAlumno ventana = new frmAltaAlumno
             {
-                MdiParent = this,
-                WindowState = FormWindowState.Maximized,
-                ControlBox = false
+                MdiParent = this
             };
-            frmAlumno.Show();
+
+            ventana.Show();
         }
 
-        private void tsmProfesor_Click(object sender, EventArgs e)
+        private void mtsmAlumno_Click(object sender, EventArgs e)
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(frmProfesor))
+                if (form.GetType() == typeof(frmAltaAlumno))
                 {
+                    if (form.WindowState == FormWindowState.Minimized)
+                        form.WindowState = FormWindowState.Normal;
                     form.Activate();
                     return;
                 }
             }
 
-            frmProfesor frmProfesor = new frmProfesor
+            AlumnoService s = new AlumnoService();
+            List<Alumno> alumnos = s.GetList();
+            Random random = new Random(DateTime.Now.Millisecond);
+
+            frmAltaAlumno ventana = new frmAltaAlumno(alumnos[random.Next(alumnos.Count)])
             {
-                MdiParent = this,
-                WindowState = FormWindowState.Maximized,
-                ControlBox = false
+                MdiParent = this
             };
-            frmProfesor.Show();
+
+            ventana.Show();
+        }
+
+        private void atsmProfesor_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(frmAltaProfesor))
+                {
+                    if (form.WindowState == FormWindowState.Minimized)
+                        form.WindowState = FormWindowState.Normal;
+                    form.Activate();
+                    return;
+                }
+            }
+
+            frmAltaProfesor ventana = new frmAltaProfesor
+            {
+                MdiParent = this
+            };
+            ventana.Show();
+        }
+
+        private void mtsmProfesor_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(frmAltaProfesor))
+                {
+                    if (form.WindowState == FormWindowState.Minimized)
+                        form.WindowState = FormWindowState.Normal;
+                    form.Activate();
+                    return;
+                }
+            }
+
+            ProfesorService s = new ProfesorService();
+            List<Profesor> profes = s.GetList();
+            Random random = new Random(DateTime.Now.Millisecond);
+
+            frmAltaProfesor ventana = new frmAltaProfesor(profes[random.Next(profes.Count)])
+            {
+                MdiParent = this
+            };
+            ventana.Show();
         }
     }
 }

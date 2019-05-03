@@ -24,7 +24,7 @@ namespace Services.DAO
             throw new NotImplementedException();
         }
 
-        public override DataSet GetAll()
+        public DataSet GetAll()
         {
             throw new NotImplementedException();
         }

@@ -1,0 +1,9 @@
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\bin\Debug\Services.dll
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\bin\Debug\Services.pdb
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\bin\Debug\Entities.dll
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\bin\Debug\Entities.pdb
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\obj\Debug\Services.csprojAssemblyReference.cache
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\obj\Debug\Services.csproj.CoreCompileInputs.cache
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\obj\Debug\Services.csproj.CopyComplete
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\obj\Debug\Services.dll
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\Services\obj\Debug\Services.pdb

@@ -8,6 +8,7 @@ namespace Entities
 {
     public class Alumno : Persona
     {
+        public long Id { get; set; }
         public List<Materia> Materias { get; set; }
     }
 }

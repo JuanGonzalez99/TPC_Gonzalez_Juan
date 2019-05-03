@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using Services.DAO;
 
 namespace Services.Services
 {
@@ -13,29 +14,30 @@ namespace Services.Services
         public List<Alumno> GetList()
         {
             AlumnoDAO dao = new AlumnoDAO();
-            DataSet ds = dao.GetAll();
+            return dao.GetAll();
 
-            List<Alumno> lList = new List<Alumno>();
+            //List<Alumno> lList = new List<Alumno>();
 
-            foreach (DataRow lRow in ds.Tables[0].Rows)
-            {
-                lList.Add(Make(lRow, false));
-            }
+            //foreach (DataRow lRow in ds.Tables[0].Rows)
+            //{
+            //    lList.Add(Make(lRow, false));
+            //}
 
-            return lList;
+            //return lList;
         }
 
-        private Alumno Make(DataRow dataRow, bool complete)
-        {
-            Alumno entidad = new Alumno();
+        //private Alumno Make(DataRow dataRow, bool complete)
+        //{
+        //    Alumno entidad = new Alumno();
 
-            entidad.DNI = (int)dataRow["DNI"];
-            entidad.Apellido = (string)dataRow["APELLIDO"];
-            entidad.Nombre = (string)dataRow["NOMBRE"];
+        //    //entidad.DNI = (int)dataRow["DNI"];
+        //    entidad.Apellido = (string)dataRow["APELLIDO"];
+        //    entidad.Nombre = (string)dataRow["NOMBRE"];
+        //    entidad.FechaNac = (DateTime)dataRow["FECHA_NAC"];
             
-            if (complete) { }
+        //    if (complete) { }
 
-            return entidad;
-        }
+        //    return entidad;
+        //}
     }
 }

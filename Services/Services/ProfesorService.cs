@@ -14,29 +14,30 @@ namespace Services.Services
         public List<Profesor> GetList()
         {
             ProfesorDAO dao = new ProfesorDAO();
-            DataSet ds = dao.GetAll();
+            return dao.GetAll();
 
-            List<Profesor> lList = new List<Profesor>();
+            //List<Profesor> lList = new List<Profesor>();
 
-            foreach (DataRow lRow in ds.Tables[0].Rows)
-            {
-                lList.Add(Make(lRow, false));
-            }
+            //foreach (DataRow lRow in ds.Tables[0].Rows)
+            //{
+            //    lList.Add(Make(lRow, false));
+            //}
 
-            return lList;
+            //return lList;
         }
 
-        private Profesor Make(DataRow dataRow, bool complete)
-        {
-            Profesor entidad = new Profesor();
+        //private Profesor Make(DataRow dataRow, bool complete)
+        //{
+        //    Profesor entidad = new Profesor();
 
-            entidad.DNI = (int)dataRow["DNI"];
-            entidad.Apellido = (string)dataRow["APELLIDO"];
-            entidad.Nombre = (string)dataRow["NOMBRE"];
+        //    entidad.Id = (long)dataRow["CD_PROFESOR"];
+        //    entidad.Apellido = (string)dataRow["APELLIDO"];
+        //    entidad.Nombre = (string)dataRow["NOMBRE"];
+        //    entidad.FechaNac = (DateTime)dataRow["FECHA_NAC"];
 
-            if (complete) { }
+        //    if (complete) { }
 
-            return entidad;
-        }
+        //    return entidad;
+        //}
     }
 }

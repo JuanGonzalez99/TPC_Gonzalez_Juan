@@ -9,16 +9,16 @@ namespace Services
 {
     public abstract class baseDAO
     {
-        public virtual string Coneccion
+        public virtual string CadenaConeccion
         {
             get
             {
-                return "data source=localhost\\SQLEXPRESS; initial catalog=DB_Gonzalez_Juan; integrated security=sspi";
+                return "data source=(local); initial catalog=GONZALEZ_JUAN_DB; integrated security=sspi";
             }
         }
         public abstract void Insert();
         public abstract void Update();
         public abstract void Delete();
-        public abstract DataSet GetAll();
+        //public abstract DataSet GetAll();
     }
 }

@@ -52,8 +52,6 @@
     <Compile Include="Models\TipoExamen.cs" />
     <Compile Include="Models\TrabajoPractico.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

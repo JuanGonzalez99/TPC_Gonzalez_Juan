@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities;
 
 namespace Services.DAO
 {
@@ -24,9 +26,51 @@ namespace Services.DAO
             throw new NotImplementedException();
         }
 
-        public override DataSet GetAll()
+        public List<Profesor> GetAll()
         {
-            throw new NotImplementedException();
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            try
+            {
+                conexion.ConnectionString = CadenaConeccion;
+                comando.CommandType = CommandType.Text;
+                comando.CommandText = "SELECT * FROM TB_PROFESORES";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+
+                List<Profesor> list = new List<Profesor>();
+                while (lector.Read())
+                {
+                    list.Add(Make(lector, false));
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        private Profesor Make(SqlDataReader lector, bool complete)
+        {
+            Profesor entidad = new Profesor();
+
+            entidad.Id = (long)lector["CD_PROFESOR"];
+            entidad.Apellido = (string)lector["APELLIDO"];
+            entidad.Nombre = (string)lector["NOMBRE"];
+            entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
+            entidad.FechaIngreso = (DateTime)lector["FECHA_INGRESO"];
+
+            if (complete) { }
+
+            return entidad;
         }
     }
 }
