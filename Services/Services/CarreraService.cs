@@ -8,15 +8,15 @@ using Entities;
 
 namespace Services.Services
 {
-    public class MateriaService
+    public class CarreraService
     {
-        public List<Materia> GetAll()
+        public List<Carrera> GetAll()
         {
-            List<Materia> listado = new List<Materia>();
+            List<Carrera> listado = new List<Carrera>();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS");
+                accesoDatos.setearConsulta("SELECT * FROM TB_CARRERAS");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
@@ -36,23 +36,23 @@ namespace Services.Services
             }
         }
 
-        public Materia GetById(int id)
+        public Carrera GetById(int id)
         {
-            Materia materia = new Materia();
+            Carrera carrera = new Carrera();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_Materias = @Id");
+                accesoDatos.setearConsulta("SELECT * FROM TB_CARRERAS WHERE CD_CARRERAS = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    materia = Make(accesoDatos.Lector, true);
+                    carrera = Make(accesoDatos.Lector, true);
                 }
 
-                return materia;
+                return carrera;
             }
             catch (Exception ex)
             {
@@ -64,29 +64,9 @@ namespace Services.Services
             }
         }
 
-        public void InsertMateria(Materia nuevo)
+        private Carrera Make(SqlDataReader lector, bool complete)
         {
-            DataAccessManager accesoDatos = new DataAccessManager();
-            try
-            {
-                accesoDatos.setearConsulta("INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, CD_PROFESOR, CD_AYUDANTE, AÑO, CUATRIMESTRE) " +
-                    "values('" + nuevo.Nombre + "', '" + nuevo.Carrera.Id + "', '" + nuevo.Profesor.Id + "', '" + nuevo.Ayudante.Id + "', '" + nuevo.Año + "', '" + nuevo.Cuatrimestre + "')");
-                accesoDatos.abrirConexion();
-                accesoDatos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accesoDatos.cerrarConexion();
-            }
-        }
-
-        private Materia Make(SqlDataReader lector, bool complete)
-        {
-            Materia entidad = new Materia
+            Carrera entidad = new Carrera
             {
                 Id = (int)lector["CD_MATERIA"],
                 Nombre = (string)lector["NOMBRE"]

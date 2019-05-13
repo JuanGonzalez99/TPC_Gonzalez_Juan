@@ -1,43 +1,125 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
-using Services.DAO;
 
 namespace Services.Services
 {
-    public class AlumnoService : baseService
+    public class AlumnoService
     {
-        public List<Alumno> GetList()
+        public List<Alumno> GetAll()
         {
-            AlumnoDAO dao = new AlumnoDAO();
-            return dao.GetAll();
+            List<Alumno> listado = new List<Alumno>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_ALUMNOS");
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    listado.Add(Make(accesoDatos.Lector, false));
+                }
 
-            //List<Alumno> lList = new List<Alumno>();
-
-            //foreach (DataRow lRow in ds.Tables[0].Rows)
-            //{
-            //    lList.Add(Make(lRow, false));
-            //}
-
-            //return lList;
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
         }
 
-        //private Alumno Make(DataRow dataRow, bool complete)
-        //{
-        //    Alumno entidad = new Alumno();
+        public Alumno GetById(long id)
+        {
+            Alumno alumno = new Alumno();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_ALUMNOS WHERE CD_PROFESOR = @Id");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    alumno = Make(accesoDatos.Lector, true);
+                }
 
-        //    //entidad.DNI = (int)dataRow["DNI"];
-        //    entidad.Apellido = (string)dataRow["APELLIDO"];
-        //    entidad.Nombre = (string)dataRow["NOMBRE"];
-        //    entidad.FechaNac = (DateTime)dataRow["FECHA_NAC"];
-            
-        //    if (complete) { }
+                return alumno;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
 
-        //    return entidad;
-        //}
+        public void InsertAlumno(Alumno nuevo)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("INSERT INTO TB_ALUMNOS (APELLIDO, NOMBRE, FECHA_NAC) " +
+                    "values('" + nuevo.Apellido + "', '" + nuevo.Nombre + "', '" + nuevo.FechaNac + "')");
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void UpdateAlumno(Alumno modificar)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE TB_ALUMNOS SET APELLIDO=@Apellido, NOMBRE=@Nombre, FECHA_NAC=@FechaNac Where CD_ALUMNO=" + modificar.Id.ToString());
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Apellido", modificar.Apellido);
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        private Alumno Make(SqlDataReader lector, bool complete)
+        {
+            Alumno entidad = new Alumno
+            {
+                Id = (long)lector["CD_ALUMNO"],
+                Apellido = (string)lector["APELLIDO"],
+                Nombre = (string)lector["NOMBRE"],
+                FechaNac = (DateTime)lector["FECHA_NAC"]
+            };
+
+            if (complete) { }
+
+            return entidad;
+        }
     }
 }
