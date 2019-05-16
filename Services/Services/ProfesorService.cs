@@ -111,14 +111,12 @@ namespace Services.Services
 
         private Profesor Make(SqlDataReader lector, bool complete)
         {
-            Profesor entidad = new Profesor
-            {
-                Id = (long)lector["CD_PROFESOR"],
-                Apellido = (string)lector["APELLIDO"],
-                Nombre = (string)lector["NOMBRE"],
-                FechaNac = (DateTime)lector["FECHA_NAC"],
-                FechaIngreso = (DateTime)lector["FECHA_INGRESO"]
-            };
+            Profesor entidad = new Profesor();
+            entidad.Id = (int)lector["CD_PROFESOR"];
+            entidad.Apellido = (string)lector["APELLIDO"];
+            entidad.Nombre = (string)lector["NOMBRE"];
+            entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
+            entidad.FechaIngreso = (DateTime)lector["FECHA_INGRESO"];
 
             if (complete) { }
 

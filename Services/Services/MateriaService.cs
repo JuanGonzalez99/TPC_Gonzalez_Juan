@@ -70,7 +70,7 @@ namespace Services.Services
             try
             {
                 accesoDatos.setearConsulta("INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, CD_PROFESOR, CD_AYUDANTE, AÑO, CUATRIMESTRE) " +
-                    "values('" + nuevo.Nombre + "', '" + nuevo.Carrera.Id + "', '" + nuevo.Profesor.Id + "', '" + nuevo.Ayudante.Id + "', '" + nuevo.Año + "', '" + nuevo.Cuatrimestre + "')");
+                    "values('" + nuevo.Nombre + "', '" + nuevo.Carrera.Id + "', '" + nuevo.Año + "', '" + nuevo.Cuatrimestre + "')");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -86,11 +86,9 @@ namespace Services.Services
 
         private Materia Make(SqlDataReader lector, bool complete)
         {
-            Materia entidad = new Materia
-            {
-                Id = (int)lector["CD_MATERIA"],
-                Nombre = (string)lector["NOMBRE"]
-            };
+            Materia entidad = new Materia();
+            entidad.Id = (int)lector["CD_MATERIA"];
+            entidad.Nombre = (string)lector["NOMBRE"];
 
             if (complete) { }
 

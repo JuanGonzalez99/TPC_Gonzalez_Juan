@@ -8,11 +8,9 @@ namespace Entities
 {
     public class Carrera
     {
-        public int Id { get; set; }
+        public short Id { get; set; }
         public string Nombre { get; set; }
         public byte Duracion { get; set; }
         public List<Materia> Materias { get; set; }
-        public bool Deshabilitado { get; set; }
-        public DateTime FechaDeshabilitado { get; set; }
     }
 }

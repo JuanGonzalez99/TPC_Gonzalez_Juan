@@ -17,7 +17,7 @@ namespace View
         public frmPrincipal()
         {
             InitializeComponent();
-            moveSidePanel(btnAlumnos);
+            moveSidePanel(btnInicio);
         }
 
         //private void atsmAlumno_Click(object sender, EventArgs e)
@@ -116,39 +116,24 @@ namespace View
             pnlSelec.Height = btn.Height;
         }
 
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            moveSidePanel(btnInicio);
+        }
+
         private void btnAlumnos_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnAlumnos);
-            Alumno a = new Alumno
-            {
-                Id = 3,
-                Apellido = "Gomez",
-                Nombre = "José",
-                FechaNac = DateTime.Now.Date.AddYears(-20)
-            };
-            AlumnoService s = new AlumnoService();
-            s.UpdateAlumno(a);
         }
 
         private void btnProfesores_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnProfesores);
-            ProfesorService s = new ProfesorService();
-            frmAltaProfesor ventana = new frmAltaProfesor(s.GetById(1));
-            ventana.Show();
         }
 
         private void btnMaterias_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnMaterias);
-            //MateriaService s = new MateriaService();
-            //Materia m = new Materia();
-            //m.Nombre = "Mi Materia";
-            //m.Carrera = new Carrera();
-            //m.Carrera.Id = 1;
-            //m.Profesor = new Profesor();
-            //m.Profesor.Id = 1;
-            //m.Año = 
         }
 
         private void btnCarreras_Click(object sender, EventArgs e)

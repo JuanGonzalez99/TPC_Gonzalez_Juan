@@ -66,11 +66,9 @@ namespace Services.Services
 
         private Carrera Make(SqlDataReader lector, bool complete)
         {
-            Carrera entidad = new Carrera
-            {
-                Id = (int)lector["CD_MATERIA"],
-                Nombre = (string)lector["NOMBRE"]
-            };
+            Carrera entidad = new Carrera();
+            entidad.Id = (short)lector["CD_MATERIA"];
+            entidad.Nombre = (string)lector["NOMBRE"];
 
             if (complete) { }
 
