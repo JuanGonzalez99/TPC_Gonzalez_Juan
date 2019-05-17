@@ -52,6 +52,12 @@
     <Compile Include="Forms\frmAlumno.Designer.cs">
       <DependentUpon>frmAlumno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmCarrera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCarrera.Designer.cs">
+      <DependentUpon>frmCarrera.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMateria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\frmAlumno.resx">
       <DependentUpon>frmAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCarrera.resx">
+      <DependentUpon>frmCarrera.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMateria.resx">
       <DependentUpon>frmMateria.cs</DependentUpon>

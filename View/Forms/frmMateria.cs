@@ -15,26 +15,26 @@ namespace View.Forms
     public partial class frmMateria : Form
     {
         private Materia materia { get; set; }
-        private bool Edit { get; set; }
+        private List<byte> años { get; set; }
 
         public frmMateria()
         {
             InitializeComponent();
-            Edit = false;
-            materia = new Materia();
         }
 
         public frmMateria(Materia materia)
         {
             InitializeComponent();
-            Edit = true;
             this.materia = materia;
         }
 
         private void frmMateria_Load(object sender, EventArgs e)
         {
             cmbCarrera.DataSource = new CarreraService().GetAll();
-            if (Edit)
+            List<byte> cuatrimestres = new List<byte>{ 0, 1, 2 };
+            cmbCuatrimestre.DataSource = cuatrimestres;
+
+            if (this.materia != null)
             {
                 txtID.Text = materia.Id.ToString();
                 txtNombre.Text = materia.Nombre;
@@ -69,6 +69,18 @@ namespace View.Forms
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void cmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Carrera aux = (Carrera)cmbCarrera.SelectedItem;
+            byte length = aux.Duracion;
+            List<byte> años = new List<byte>();
+            for (byte i = 1; i <= length; i++)
+            {
+                años.Add(i);
+            }
+            cmbAño.DataSource = años;
         }
     }
 }

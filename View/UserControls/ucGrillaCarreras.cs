@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using AccesoDatos.Services;
+using View.Forms;
 
 namespace View.UserControls
 {
@@ -30,7 +31,8 @@ namespace View.UserControls
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
+            frmCarrera frm = new frmCarrera();
+            frm.ShowDialog();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)

@@ -16,12 +16,12 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE NM_CARRERA FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE NM_CARRERA, C.DURACION FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    listado.Add(Make(accesoDatos.Lector, false));
+                    listado.Add(Make(accesoDatos.Lector, true));
                 }
 
                 return listado;
@@ -42,7 +42,8 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_Materias = @Id");
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE NM_CARRERA, C.DURACION FROM TB_MATERIAS M " +
+                    "INNER JOIN TB_CARRERAS C ON M.CD_CARRERA = C.CD_CARRERA WHERE CD_Materias = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
@@ -137,11 +138,13 @@ namespace AccesoDatos.Services
             if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
                 entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
 
-            entidad.Carrera = new Carrera();
-            entidad.Carrera.Id = (short)lector["CD_CARRERA"];
-            entidad.Carrera.Nombre = (string)lector["NM_CARRERA"];
-
-            if (complete) { }
+            if (complete)
+            {
+                entidad.Carrera = new Carrera();
+                entidad.Carrera.Id = (short)lector["CD_CARRERA"];
+                entidad.Carrera.Nombre = (string)lector["NM_CARRERA"];
+                entidad.Carrera.Duracion = (byte)lector["DURACION"];
+            }
 
             return entidad;
         }
