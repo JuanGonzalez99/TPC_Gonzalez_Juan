@@ -27,3 +27,4 @@ C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View
 C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View.frmAltaProfesor.resources
 C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\bin\Debug\Services.dll
 C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\bin\Debug\Services.pdb
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View.ucGrillaAlumnos.resources

@@ -11,7 +11,12 @@ namespace Entities
         public int Id { get; set; }
         public string Nombre { get; set; }
         public Carrera Carrera { get; set; }
-        public short Año { get; set; }
+        public byte Año { get; set; }
         public byte Cuatrimestre { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

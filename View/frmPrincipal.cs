@@ -7,8 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Entities;
-using Services.Services;
+using View.UserControls;
 
 namespace View
 {
@@ -115,30 +114,45 @@ namespace View
             pnlSelec.Top = btn.Top;
             pnlSelec.Height = btn.Height;
         }
+        private void fillMainDock(Control frm)
+        {
+            frm.Dock = DockStyle.Fill;
+            pnlContenido.Controls.Clear();
+            pnlContenido.Controls.Add(frm);
+        }
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnInicio);
+            pnlContenido.Controls.Clear();
         }
 
         private void btnAlumnos_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnAlumnos);
+            ucGrillaAlumnos uc = new ucGrillaAlumnos();
+            fillMainDock(uc);
         }
 
         private void btnProfesores_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnProfesores);
+            ucGrillaProfesores uc = new ucGrillaProfesores();
+            fillMainDock(uc);
         }
 
         private void btnMaterias_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnMaterias);
+            ucGrillaMaterias uc = new ucGrillaMaterias();
+            fillMainDock(uc);
         }
 
         private void btnCarreras_Click(object sender, EventArgs e)
         {
             moveSidePanel(btnCarreras);
+            ucGrillaCarreras uc = new ucGrillaCarreras();
+            fillMainDock(uc);
         }
     }
 }

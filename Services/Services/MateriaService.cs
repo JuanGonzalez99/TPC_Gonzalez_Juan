@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 
-namespace Services.Services
+namespace AccesoDatos.Services
 {
     public class MateriaService
     {
@@ -16,7 +16,7 @@ namespace Services.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS");
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE NM_CARRERA FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
@@ -64,13 +64,57 @@ namespace Services.Services
             }
         }
 
-        public void InsertMateria(Materia nuevo)
+        public void Insert(Materia nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, CD_PROFESOR, CD_AYUDANTE, AÑO, CUATRIMESTRE) " +
-                    "values('" + nuevo.Nombre + "', '" + nuevo.Carrera.Id + "', '" + nuevo.Año + "', '" + nuevo.Cuatrimestre + "')");
+                accesoDatos.setearConsulta("INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, AÑO, CUATRIMESTRE) " +
+                    "values('" + nuevo.Nombre + "', " + nuevo.Carrera.Id + ", " + nuevo.Año + ", " + nuevo.Cuatrimestre + ")");
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void Update(Materia modificar)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE TB_MATERIAS SET " +
+                    "NOMBRE=@Nombre, CD_CARRERA=@Carrera, AÑO=@Año, CUATRIMESTRE=@Cuatrimestre WHERE CD_MATERIA=" + modificar.Id.ToString());
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@Carrera", modificar.Carrera.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@Año", modificar.Año);
+                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", modificar.Cuatrimestre);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("DELETE FROM TB_MATERIAS WHERE CD_MATERIA = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -89,6 +133,13 @@ namespace Services.Services
             Materia entidad = new Materia();
             entidad.Id = (int)lector["CD_MATERIA"];
             entidad.Nombre = (string)lector["NOMBRE"];
+            entidad.Año = (byte)lector["AÑO"];
+            if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
+                entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
+
+            entidad.Carrera = new Carrera();
+            entidad.Carrera.Id = (short)lector["CD_CARRERA"];
+            entidad.Carrera.Nombre = (string)lector["NM_CARRERA"];
 
             if (complete) { }
 

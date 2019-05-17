@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 
-namespace Services.Services
+namespace AccesoDatos.Services
 {
     public class CarreraService
     {
@@ -63,12 +63,75 @@ namespace Services.Services
                 accesoDatos.cerrarConexion();
             }
         }
+        public void Insert(Carrera nuevo)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("INSERT INTO TB_CARRERAS (NOMBRE, DURACION) " +
+                    "values('" + nuevo.Nombre + "', " + nuevo.Duracion + ")");
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+
+        public void Update(Carrera modificar)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE TB_CARRERA SET NOMBRE=@Nombre, DURACION=@Duracion " +
+                    "WHERE CD_CARRERA=" + modificar.Id.ToString());
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@Duracion", modificar.Duracion);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("DELETE FROM TB_CARRERAS WHERE CD_CARRERA = " + id.ToString());
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
 
         private Carrera Make(SqlDataReader lector, bool complete)
         {
             Carrera entidad = new Carrera();
-            entidad.Id = (short)lector["CD_MATERIA"];
+            entidad.Id = (short)lector["CD_CARRERA"];
             entidad.Nombre = (string)lector["NOMBRE"];
+            entidad.Duracion = (byte)lector["DURACION"];
 
             if (complete) { }
 

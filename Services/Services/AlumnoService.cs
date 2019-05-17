@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities;
 
-namespace Services.Services
+namespace AccesoDatos.Services
 {
     public class AlumnoService
     {
@@ -36,7 +36,7 @@ namespace Services.Services
             }
         }
 
-        public Alumno GetById(long id)
+        public Alumno GetById(int id)
         {
             Alumno alumno = new Alumno();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -64,13 +64,13 @@ namespace Services.Services
             }
         }
 
-        public void InsertAlumno(Alumno nuevo)
+        public void Insert(Alumno nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("INSERT INTO TB_ALUMNOS (APELLIDO, NOMBRE, FECHA_NAC) " +
-                    "values('" + nuevo.Apellido + "', '" + nuevo.Nombre + "', '" + nuevo.FechaNac + "')");
+                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' INSERT INTO TB_ALUMNOS (APELLIDO, NOMBRE, FECHA_NAC) " +
+                    "values('" + nuevo.Apellido + "', '" + nuevo.Nombre + "', '" + nuevo.FechaNac.ToShortDateString() + "')");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -84,16 +84,35 @@ namespace Services.Services
             }
         }
 
-        public void UpdateAlumno(Alumno modificar)
+        public void Update(Alumno modificar)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("UPDATE TB_ALUMNOS SET APELLIDO=@Apellido, NOMBRE=@Nombre, FECHA_NAC=@FechaNac Where CD_ALUMNO=" + modificar.Id.ToString());
+                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' UPDATE TB_ALUMNOS SET APELLIDO=@Apellido, NOMBRE=@Nombre, FECHA_NAC=@FechaNac Where CD_ALUMNO=" + modificar.Id.ToString());
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Apellido", modificar.Apellido);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
-                accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac);
+                accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac.ToShortDateString());
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("DELETE FROM TB_ALUMNOS WHERE CD_ALUMNO = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }

@@ -12,5 +12,10 @@ namespace Entities
         public string Nombre { get; set; }
         public byte Duracion { get; set; }
         public List<Materia> Materias { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }
