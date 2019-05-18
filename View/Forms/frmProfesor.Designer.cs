@@ -47,7 +47,7 @@
             this.dtpNacimiento.Location = new System.Drawing.Point(104, 157);
             this.dtpNacimiento.Name = "dtpNacimiento";
             this.dtpNacimiento.Size = new System.Drawing.Size(138, 20);
-            this.dtpNacimiento.TabIndex = 16;
+            this.dtpNacimiento.TabIndex = 3;
             // 
             // label5
             // 
@@ -64,7 +64,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(150, 283);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 33);
-            this.btnCancelar.TabIndex = 19;
+            this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -74,7 +74,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(40, 283);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(92, 33);
-            this.btnAceptar.TabIndex = 17;
+            this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -102,7 +102,7 @@
             this.txtApellido.Location = new System.Drawing.Point(104, 124);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(138, 20);
-            this.txtApellido.TabIndex = 14;
+            this.txtApellido.TabIndex = 2;
             // 
             // label2
             // 
@@ -118,7 +118,7 @@
             this.txtNombre.Location = new System.Drawing.Point(104, 91);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(138, 20);
-            this.txtNombre.TabIndex = 13;
+            this.txtNombre.TabIndex = 1;
             // 
             // label1
             // 
@@ -134,7 +134,7 @@
             this.dtpFechaIngreso.Location = new System.Drawing.Point(104, 190);
             this.dtpFechaIngreso.Name = "dtpFechaIngreso";
             this.dtpFechaIngreso.Size = new System.Drawing.Size(138, 20);
-            this.dtpFechaIngreso.TabIndex = 21;
+            this.dtpFechaIngreso.TabIndex = 4;
             // 
             // lblIngreso
             // 

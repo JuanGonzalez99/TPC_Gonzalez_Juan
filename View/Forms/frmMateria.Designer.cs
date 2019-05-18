@@ -47,7 +47,7 @@
             this.txtNombre.Location = new System.Drawing.Point(104, 90);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(138, 20);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 1;
             // 
             // label1
             // 
@@ -74,7 +74,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(40, 283);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(92, 33);
-            this.btnAceptar.TabIndex = 6;
+            this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -112,7 +112,7 @@
             this.cmbCarrera.Location = new System.Drawing.Point(104, 130);
             this.cmbCarrera.Name = "cmbCarrera";
             this.cmbCarrera.Size = new System.Drawing.Size(138, 21);
-            this.cmbCarrera.TabIndex = 11;
+            this.cmbCarrera.TabIndex = 2;
             this.cmbCarrera.SelectedIndexChanged += new System.EventHandler(this.cmbCarrera_SelectedIndexChanged);
             // 
             // label4
@@ -139,7 +139,7 @@
             this.cmbAño.Location = new System.Drawing.Point(104, 167);
             this.cmbAño.Name = "cmbAño";
             this.cmbAño.Size = new System.Drawing.Size(138, 21);
-            this.cmbAño.TabIndex = 16;
+            this.cmbAño.TabIndex = 3;
             // 
             // cmbCuatrimestre
             // 
@@ -147,7 +147,7 @@
             this.cmbCuatrimestre.Location = new System.Drawing.Point(104, 207);
             this.cmbCuatrimestre.Name = "cmbCuatrimestre";
             this.cmbCuatrimestre.Size = new System.Drawing.Size(138, 21);
-            this.cmbCuatrimestre.TabIndex = 17;
+            this.cmbCuatrimestre.TabIndex = 4;
             // 
             // frmMateria
             // 
@@ -169,6 +169,7 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);
             this.Name = "frmMateria";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMateria";
             this.Load += new System.EventHandler(this.frmMateria_Load);
             this.ResumeLayout(false);

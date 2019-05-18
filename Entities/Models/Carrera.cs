@@ -10,12 +10,13 @@ namespace Entities
     {
         public short Id { get; set; }
         public string Nombre { get; set; }
+        public string NombreCorto { get; set; }
         public byte Duracion { get; set; }
         public List<Materia> Materias { get; set; }
 
         public override string ToString()
         {
-            return Nombre;
+            return NombreCorto;
         }
     }
 }

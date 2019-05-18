@@ -14,26 +14,22 @@ namespace View
 {
     public partial class frmAlumno : Form
     {
-        private Alumno alumno = null;
-        private Boolean Edit;
+        private Alumno alumno { get; set; }
 
         public frmAlumno()
         {
             InitializeComponent();
-            Edit = false;
-            this.alumno = new Alumno();
         }
 
         public frmAlumno(Alumno alumno)
         {
             InitializeComponent();
-            Edit = true;
             this.alumno = alumno;
         }
 
         private void frmAlumno_Load(object sender, EventArgs e)
         {
-            if (Edit)
+            if (this.alumno != null)
             {
                 txtID.Text = alumno.Id.ToString();
                 txtApellido.Text = alumno.Apellido;
@@ -44,30 +40,43 @@ namespace View
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK);
-                return;
+                validarEntidad();
+
+                if (alumno == null) alumno = new Alumno();
+                alumno.Apellido = txtApellido.Text;
+                alumno.Nombre = txtNombre.Text;
+                alumno.FechaNac = dtpNacimiento.Value;
+
+                AlumnoService s = new AlumnoService();
+                if (this.alumno.Id != 0)
+                    s.Update(alumno);
+                else
+                    s.Insert(alumno);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            AlumnoService s = new AlumnoService();
-            alumno.Apellido = txtApellido.Text;
-            alumno.Nombre = txtNombre.Text;
-            alumno.FechaNac = dtpNacimiento.Value;
-
-            if (Edit)
-                s.Update(alumno);
-            else
-                s.Insert(alumno);
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void validarEntidad()
+        {
+            if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
+                throw new Exception("Debe completar todos los campos");
+
+            if (dtpNacimiento.Value.AddYears(16) > DateTime.Now)
+                throw new Exception("No se pueden agregar alumnos menores de 16");
         }
     }
 }

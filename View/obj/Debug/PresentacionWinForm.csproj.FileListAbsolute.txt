@@ -20,3 +20,4 @@ C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View
 C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View.frmAlumno.resources
 C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View.Forms.frmProfesor.resources
 C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View.Forms.frmMateria.resources
+C:\Users\Juan\UTN-TSP\3C\Programación III\TPC_Gonzalez_Juan\View\obj\Debug\View.Forms.frmCarrera.resources

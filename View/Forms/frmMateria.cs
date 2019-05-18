@@ -15,7 +15,6 @@ namespace View.Forms
     public partial class frmMateria : Form
     {
         private Materia materia { get; set; }
-        private List<byte> años { get; set; }
 
         public frmMateria()
         {
@@ -44,25 +43,29 @@ namespace View.Forms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Debe ingresar un nombre", "Advertencia", MessageBoxButtons.OK);
-                return;
+                validarEntidad();
+
+                if (materia == null) materia = new Materia();
+                materia.Nombre = txtNombre.Text;
+                materia.Carrera = (Carrera)cmbCarrera.SelectedItem;
+                materia.Año = (byte)cmbAño.SelectedItem;
+                materia.Cuatrimestre = (byte)cmbCuatrimestre.SelectedItem;
+
+                MateriaService s = new MateriaService();
+                if (this.materia.Id != 0)
+                    s.Update(materia);
+                else
+                    s.Insert(materia);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            MateriaService s = new MateriaService();
-            materia.Nombre = txtNombre.Text;
-            materia.Carrera = (Carrera)cmbCarrera.SelectedItem;
-            materia.Año = (byte)cmbAño.SelectedItem;
-            materia.Cuatrimestre = (byte)cmbCuatrimestre.SelectedItem;
-
-            if (this.materia.Id != 0)
-                s.Update(materia);
-            else
-                s.Insert(materia);
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -81,6 +84,12 @@ namespace View.Forms
                 años.Add(i);
             }
             cmbAño.DataSource = años;
+        }
+
+        private void validarEntidad()
+        {
+            if (txtNombre.Text.Trim() == "")
+                throw new Exception("Debe ingresar un nombre");
         }
     }
 }

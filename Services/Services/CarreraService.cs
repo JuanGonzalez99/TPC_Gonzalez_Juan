@@ -68,8 +68,8 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("INSERT INTO TB_CARRERAS (NOMBRE, DURACION) " +
-                    "values('" + nuevo.Nombre + "', " + nuevo.Duracion + ")");
+                accesoDatos.setearConsulta("INSERT INTO TB_CARRERAS (NOMBRE, NOMBRE_CORTO, DURACION) " +
+                    "values('" + nuevo.Nombre + "', '" + nuevo.NombreCorto + "', " + nuevo.Duracion + ")");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -131,6 +131,7 @@ namespace AccesoDatos.Services
             Carrera entidad = new Carrera();
             entidad.Id = (short)lector["CD_CARRERA"];
             entidad.Nombre = (string)lector["NOMBRE"];
+            entidad.NombreCorto = (string)lector["NOMBRE_CORTO"];
             entidad.Duracion = (byte)lector["DURACION"];
 
             if (complete) { }

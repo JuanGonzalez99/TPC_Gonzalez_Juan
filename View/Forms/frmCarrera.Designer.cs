@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbCarrera = new System.Windows.Forms.ComboBox();
+            this.cmbDuracion = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,20 +36,22 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtNombreCorto = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cmbCarrera
+            // cmbDuracion
             // 
-            this.cmbCarrera.FormattingEnabled = true;
-            this.cmbCarrera.Location = new System.Drawing.Point(106, 152);
-            this.cmbCarrera.Name = "cmbCarrera";
-            this.cmbCarrera.Size = new System.Drawing.Size(138, 21);
-            this.cmbCarrera.TabIndex = 25;
+            this.cmbDuracion.FormattingEnabled = true;
+            this.cmbDuracion.Location = new System.Drawing.Point(115, 195);
+            this.cmbDuracion.Name = "cmbDuracion";
+            this.cmbDuracion.Size = new System.Drawing.Size(138, 21);
+            this.cmbDuracion.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 155);
+            this.label2.Location = new System.Drawing.Point(35, 198);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 24;
@@ -57,7 +59,7 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(106, 76);
+            this.txtID.Location = new System.Drawing.Point(115, 78);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(138, 20);
@@ -67,7 +69,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 79);
+            this.label3.Location = new System.Drawing.Point(35, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(21, 13);
             this.label3.TabIndex = 23;
@@ -79,7 +81,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(152, 280);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 33);
-            this.btnCancelar.TabIndex = 21;
+            this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -89,26 +91,42 @@
             this.btnAceptar.Location = new System.Drawing.Point(42, 280);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(92, 33);
-            this.btnAceptar.TabIndex = 20;
+            this.btnAceptar.TabIndex = 4;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(106, 112);
+            this.txtNombre.Location = new System.Drawing.Point(115, 118);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(138, 20);
-            this.txtNombre.TabIndex = 19;
+            this.txtNombre.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 115);
+            this.label1.Location = new System.Drawing.Point(35, 121);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 18;
             this.label1.Text = "Nombre:";
+            // 
+            // txtNombreCorto
+            // 
+            this.txtNombreCorto.Location = new System.Drawing.Point(115, 155);
+            this.txtNombreCorto.Name = "txtNombreCorto";
+            this.txtNombreCorto.Size = new System.Drawing.Size(138, 20);
+            this.txtNombreCorto.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(35, 158);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Nombre corto:";
             // 
             // frmCarrera
             // 
@@ -117,7 +135,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(284, 328);
-            this.Controls.Add(this.cmbCarrera);
+            this.Controls.Add(this.txtNombreCorto);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.cmbDuracion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label3);
@@ -127,7 +147,9 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmCarrera";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCarrera";
+            this.Load += new System.EventHandler(this.frmCarrera_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,7 +157,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbCarrera;
+        private System.Windows.Forms.ComboBox cmbDuracion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label3;
@@ -143,5 +165,7 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNombreCorto;
+        private System.Windows.Forms.Label label4;
     }
 }

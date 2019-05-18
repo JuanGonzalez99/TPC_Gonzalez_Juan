@@ -16,7 +16,7 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE NM_CARRERA, C.DURACION FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA, C.DURACION FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
@@ -42,7 +42,7 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE NM_CARRERA, C.DURACION FROM TB_MATERIAS M " +
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA, C.DURACION FROM TB_MATERIAS M " +
                     "INNER JOIN TB_CARRERAS C ON M.CD_CARRERA = C.CD_CARRERA WHERE CD_Materias = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
@@ -142,7 +142,8 @@ namespace AccesoDatos.Services
             {
                 entidad.Carrera = new Carrera();
                 entidad.Carrera.Id = (short)lector["CD_CARRERA"];
-                entidad.Carrera.Nombre = (string)lector["NM_CARRERA"];
+                entidad.Carrera.Nombre = (string)lector["NOMBRE_CARRERA"];
+                entidad.Carrera.NombreCorto = (string)lector["NM_CORTO_CARRERA"];
                 entidad.Carrera.Duracion = (byte)lector["DURACION"];
             }
 

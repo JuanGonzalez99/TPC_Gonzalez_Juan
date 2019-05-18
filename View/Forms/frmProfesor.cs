@@ -15,25 +15,21 @@ namespace View.Forms
     public partial class frmProfesor : Form
     {
         private Profesor profesor { get; set; }
-        private bool Edit { get; set; }
 
         public frmProfesor()
         {
             InitializeComponent();
-            Edit = false;
-            this.profesor = new Profesor();
         }
 
         public frmProfesor(Profesor profesor)
         {
             InitializeComponent();
-            Edit = true;
             this.profesor = profesor;
         }
 
         private void frmProfesor_Load(object sender, EventArgs e)
         {
-            if (Edit)
+            if (this.profesor != null)
             {
                 txtID.Text = profesor.Id.ToString();
                 txtApellido.Text = profesor.Apellido;
@@ -45,31 +41,41 @@ namespace View.Forms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Debe completar todos los campos", "Advertencia", MessageBoxButtons.OK);
-                return;
+                validarEntidad();
+
+                if (profesor == null) profesor = new Profesor();
+                profesor.Apellido = txtApellido.Text;
+                profesor.Nombre = txtNombre.Text;
+                profesor.FechaNac = dtpNacimiento.Value;
+                profesor.FechaIngreso = dtpFechaIngreso.Value;
+
+                ProfesorService s = new ProfesorService();
+                if (this.profesor.Id != 0)
+                    s.Update(profesor);
+                else
+                    s.Insert(profesor);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            ProfesorService s = new ProfesorService();
-            profesor.Apellido = txtApellido.Text;
-            profesor.Nombre = txtNombre.Text;
-            profesor.FechaNac = dtpNacimiento.Value;
-            profesor.FechaIngreso = dtpFechaIngreso.Value;
-
-            if (Edit)
-                s.Update(profesor);
-            else
-                s.Insert(profesor);
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void validarEntidad()
+        {
+            if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
+                throw new Exception("Debe completar todos los campos");
         }
     }
 }

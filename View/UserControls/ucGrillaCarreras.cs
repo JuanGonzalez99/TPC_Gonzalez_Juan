@@ -15,7 +15,7 @@ namespace View.UserControls
 {
     public partial class ucGrillaCarreras : UserControl
     {
-        private BindingList<Carrera> carreras { get; set; }
+        private List<Carrera> carreras { get; set; }
 
         public ucGrillaCarreras()
         {
@@ -24,21 +24,23 @@ namespace View.UserControls
 
         private void ucGrillaCarreras_Load(object sender, EventArgs e)
         {
-            CarreraService s = new CarreraService();
-            carreras = new BindingList<Carrera>(s.GetAll());
-            dgvGrilla.DataSource = carreras;
+            cargarGrilla();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             frmCarrera frm = new frmCarrera();
-            frm.ShowDialog();
+            if (frm.ShowDialog() == DialogResult.OK)
+                cargarGrilla();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (carreras.Count < 1) return;
-
+            
+            frmCarrera frm = new frmCarrera((Carrera)dgvGrilla.SelectedRows[0].DataBoundItem);
+            if (frm.ShowDialog() == DialogResult.OK)
+                cargarGrilla();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -55,6 +57,13 @@ namespace View.UserControls
             carreras.Remove(carreras.First(x => x.Id == c.Id));
             s.Delete(c.Id);
             dgvGrilla.Refresh();
+        }
+
+        private void cargarGrilla()
+        {
+            CarreraService s = new CarreraService();
+            carreras = s.GetAll();
+            dgvGrilla.DataSource = carreras;
         }
     }
 }
