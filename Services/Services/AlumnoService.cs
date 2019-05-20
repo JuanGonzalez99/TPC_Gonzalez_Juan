@@ -64,6 +64,7 @@ namespace AccesoDatos.Services
             }
         }
 
+
         public void Insert(Alumno nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -125,6 +126,7 @@ namespace AccesoDatos.Services
                 accesoDatos.cerrarConexion();
             }
         }
+
 
         private Alumno Make(SqlDataReader lector, bool complete)
         {

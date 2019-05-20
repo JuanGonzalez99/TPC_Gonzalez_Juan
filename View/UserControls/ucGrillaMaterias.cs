@@ -15,7 +15,7 @@ namespace View.UserControls
 {
     public partial class ucGrillaMaterias : UserControl
     {
-        private List<Materia> materias { get; set; }
+        private List<Materia> Materias { get; set; }
 
         public ucGrillaMaterias()
         {
@@ -24,7 +24,6 @@ namespace View.UserControls
 
         private void ucGrillaMaterias_Load(object sender, EventArgs e)
         {
-            MateriaService s = new MateriaService();
             cargarGrilla();
         }
 
@@ -37,7 +36,7 @@ namespace View.UserControls
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (materias.Count < 1) return;
+            if (Materias.Count < 1) return;
 
             frmMateria frm = new frmMateria((Materia)dgvGrilla.SelectedRows[0].DataBoundItem);
             if (frm.ShowDialog() == DialogResult.OK)
@@ -46,8 +45,8 @@ namespace View.UserControls
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (materias.Count < 1) return;
-
+            if (Materias.Count < 1) return;
+            
             if (MessageBox.Show("¿Está seguro que desea eliminar el registro seleccionado?",
                 "Atención", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                 return;
@@ -62,8 +61,8 @@ namespace View.UserControls
         private void cargarGrilla()
         {
             MateriaService s = new MateriaService();
-            materias = s.GetAll();
-            dgvGrilla.DataSource = materias;
+            Materias = s.GetAll();
+            dgvGrilla.DataSource = Materias;
         }
     }
 }

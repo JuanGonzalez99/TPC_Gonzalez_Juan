@@ -16,7 +16,8 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA, C.DURACION FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA," +
+                    " C.DURACION FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
@@ -64,6 +65,35 @@ namespace AccesoDatos.Services
                 accesoDatos.cerrarConexion();
             }
         }
+
+        public List<Materia> GetByCarreraId(short carreraId)
+        {
+            List<Materia> listado = new List<Materia>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_CARRERA = @Id");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@CarreraId", carreraId);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    listado.Add(Make(accesoDatos.Lector, false));
+                }
+
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
 
         public void Insert(Materia nuevo)
         {
@@ -128,6 +158,7 @@ namespace AccesoDatos.Services
                 accesoDatos.cerrarConexion();
             }
         }
+
 
         private Materia Make(SqlDataReader lector, bool complete)
         {

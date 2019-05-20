@@ -63,7 +63,7 @@ namespace View.Forms
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            catch (WarningException ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -78,10 +78,13 @@ namespace View.Forms
         private void validarEntidad()
         {
             if (txtNombre.Text.Trim() == "" || txtNombreCorto.Text.Trim() == "")
-                throw new Exception("Debe completar todos los campos");
+                throw new WarningException("Debe completar todos los campos");
+
+            if (txtNombre.Text.Length > 50)
+                throw new WarningException("Nombre demasiado largo");
             
             if (txtNombreCorto.Text.Length > 10)
-                throw new Exception("Nombre corto demasiado largo");
+                throw new WarningException("Nombre corto demasiado largo");
         }
     }
 }

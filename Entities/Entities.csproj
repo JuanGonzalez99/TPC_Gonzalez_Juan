@@ -42,16 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Alumno.cs" />
-    <Compile Include="Models\Calificacion.cs" />
     <Compile Include="Models\Carrera.cs" />
-    <Compile Include="Models\Evaluacion.cs" />
-    <Compile Include="Models\Examen.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Profesor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\TipoExamen.cs" />
-    <Compile Include="Models\TrabajoPractico.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

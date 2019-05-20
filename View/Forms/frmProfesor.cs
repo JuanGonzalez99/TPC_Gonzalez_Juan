@@ -14,7 +14,7 @@ namespace View.Forms
 {
     public partial class frmProfesor : Form
     {
-        private Profesor profesor { get; set; }
+        private Profesor Profesor { get; set; }
 
         public frmProfesor()
         {
@@ -24,18 +24,22 @@ namespace View.Forms
         public frmProfesor(Profesor profesor)
         {
             InitializeComponent();
-            this.profesor = profesor;
+            this.Profesor = profesor;
         }
 
         private void frmProfesor_Load(object sender, EventArgs e)
         {
-            if (this.profesor != null)
+            if (this.Profesor != null)
             {
-                txtID.Text = profesor.Id.ToString();
-                txtApellido.Text = profesor.Apellido;
-                txtNombre.Text = profesor.Nombre;
-                dtpNacimiento.Value = profesor.FechaNac;
-                dtpFechaIngreso.Value = profesor.FechaIngreso;
+                txtID.Text = Profesor.Id.ToString();
+                txtApellido.Text = Profesor.Apellido;
+                txtNombre.Text = Profesor.Nombre;
+                dtpNacimiento.Value = Profesor.FechaNac;
+                dtpFechaIngreso.Value = Profesor.FechaIngreso;
+            }
+            else
+            {
+                dtpNacimiento.Value = DateTime.Now.AddYears(-18);
             }
         }
 
@@ -45,22 +49,22 @@ namespace View.Forms
             {
                 validarEntidad();
 
-                if (profesor == null) profesor = new Profesor();
-                profesor.Apellido = txtApellido.Text;
-                profesor.Nombre = txtNombre.Text;
-                profesor.FechaNac = dtpNacimiento.Value;
-                profesor.FechaIngreso = dtpFechaIngreso.Value;
+                if (Profesor == null) Profesor = new Profesor();
+                Profesor.Apellido = txtApellido.Text;
+                Profesor.Nombre = txtNombre.Text;
+                Profesor.FechaNac = dtpNacimiento.Value;
+                Profesor.FechaIngreso = dtpFechaIngreso.Value;
 
                 ProfesorService s = new ProfesorService();
-                if (this.profesor.Id != 0)
-                    s.Update(profesor);
+                if (this.Profesor.Id != 0)
+                    s.Update(Profesor);
                 else
-                    s.Insert(profesor);
+                    s.Insert(Profesor);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            catch (WarningException ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -75,7 +79,10 @@ namespace View.Forms
         private void validarEntidad()
         {
             if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
-                throw new Exception("Debe completar todos los campos");
+                throw new WarningException("Debe completar todos los campos");
+
+            if (dtpNacimiento.Value.AddYears(18) > DateTime.Now)
+                throw new WarningException("No se pueden registrar menores de edad como profesores");
         }
     }
 }

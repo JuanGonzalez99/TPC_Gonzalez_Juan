@@ -36,7 +36,7 @@ namespace AccesoDatos.Services
             }
         }
 
-        public Carrera GetById(int id)
+        public Carrera GetById(short id)
         {
             Carrera carrera = new Carrera();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -63,6 +63,8 @@ namespace AccesoDatos.Services
                 accesoDatos.cerrarConexion();
             }
         }
+
+
         public void Insert(Carrera nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -83,16 +85,16 @@ namespace AccesoDatos.Services
             }
         }
 
-
         public void Update(Carrera modificar)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("UPDATE TB_CARRERA SET NOMBRE=@Nombre, DURACION=@Duracion " +
+                accesoDatos.setearConsulta("UPDATE TB_CARRERAS SET NOMBRE=@Nombre, NOMBRE_CORTO=@NombreCorto, DURACION=@Duracion " +
                     "WHERE CD_CARRERA=" + modificar.Id.ToString());
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@NombreCorto", modificar.NombreCorto);
                 accesoDatos.Comando.Parameters.AddWithValue("@Duracion", modificar.Duracion);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
@@ -125,6 +127,7 @@ namespace AccesoDatos.Services
                 accesoDatos.cerrarConexion();
             }
         }
+
 
         private Carrera Make(SqlDataReader lector, bool complete)
         {

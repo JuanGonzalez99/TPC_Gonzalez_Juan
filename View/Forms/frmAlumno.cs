@@ -36,6 +36,10 @@ namespace View
                 txtNombre.Text = alumno.Nombre;
                 dtpNacimiento.Value = alumno.FechaNac;
             }
+            else
+            {
+                dtpNacimiento.Value = DateTime.Now.AddYears(-16);
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -58,7 +62,7 @@ namespace View
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            catch (WarningException ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -73,10 +77,10 @@ namespace View
         private void validarEntidad()
         {
             if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
-                throw new Exception("Debe completar todos los campos");
+                throw new WarningException("Debe completar todos los campos");
 
             if (dtpNacimiento.Value.AddYears(16) > DateTime.Now)
-                throw new Exception("No se pueden agregar alumnos menores de 16");
+                throw new WarningException("No se pueden agregar alumnos menores de 16");
         }
     }
 }

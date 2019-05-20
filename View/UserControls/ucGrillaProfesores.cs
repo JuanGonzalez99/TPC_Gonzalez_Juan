@@ -15,7 +15,7 @@ namespace View
 {
     public partial class ucGrillaProfesores : UserControl
     {
-        private List<Profesor> profesores { get; set; }
+        private List<Profesor> Profesores { get; set; }
 
         public ucGrillaProfesores()
         {
@@ -24,7 +24,6 @@ namespace View
 
         private void ucGrillaProfesores_Load(object sender, EventArgs e)
         {
-            ProfesorService s = new ProfesorService();
             cargarGrilla();
         }
 
@@ -37,7 +36,7 @@ namespace View
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (profesores.Count < 1) return;
+            if (Profesores.Count < 1) return;
 
             frmProfesor frm = new frmProfesor((Profesor)dgvGrilla.SelectedRows[0].DataBoundItem);
             if (frm.ShowDialog() == DialogResult.OK)
@@ -46,7 +45,7 @@ namespace View
         
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (profesores.Count < 1) return;
+            if (Profesores.Count < 1) return;
 
             if (MessageBox.Show("¿Está seguro que desea eliminar el registro seleccionado?",
                 "Atención", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
@@ -62,8 +61,8 @@ namespace View
         private void cargarGrilla()
         {
             ProfesorService s = new ProfesorService();
-            profesores = s.GetAll();
-            dgvGrilla.DataSource = profesores;
+            Profesores = s.GetAll();
+            dgvGrilla.DataSource = Profesores;
         }
     }
 }

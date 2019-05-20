@@ -14,7 +14,7 @@ namespace View.Forms
 {
     public partial class frmMateria : Form
     {
-        private Materia materia { get; set; }
+        private Materia Materia { get; set; }
 
         public frmMateria()
         {
@@ -24,20 +24,26 @@ namespace View.Forms
         public frmMateria(Materia materia)
         {
             InitializeComponent();
-            this.materia = materia;
+            this.Materia = materia;
         }
 
         private void frmMateria_Load(object sender, EventArgs e)
         {
             cmbCarrera.DataSource = new CarreraService().GetAll();
-            List<byte> cuatrimestres = new List<byte>{ 0, 1, 2 };
+            List<byte> cuatrimestres = new List<byte> { 0, 1, 2 };
             cmbCuatrimestre.DataSource = cuatrimestres;
 
-            if (this.materia != null)
+            if (this.Materia != null)
             {
-                txtID.Text = materia.Id.ToString();
-                txtNombre.Text = materia.Nombre;
-                cmbCarrera.SelectedIndex = cmbCarrera.FindString(materia.Carrera.Nombre);
+                txtID.Text = Materia.Id.ToString();
+                txtNombre.Text = Materia.Nombre;
+                cmbCarrera.SelectedIndex = cmbCarrera.FindString(Materia.Carrera.ToString());
+            }
+            else
+            {
+                cmbAño.Enabled = false;
+                cmbCarrera.SelectedIndex = -1;
+                cmbAño.SelectedIndex = -1;
             }
         }
 
@@ -47,22 +53,22 @@ namespace View.Forms
             {
                 validarEntidad();
 
-                if (materia == null) materia = new Materia();
-                materia.Nombre = txtNombre.Text;
-                materia.Carrera = (Carrera)cmbCarrera.SelectedItem;
-                materia.Año = (byte)cmbAño.SelectedItem;
-                materia.Cuatrimestre = (byte)cmbCuatrimestre.SelectedItem;
+                if (Materia == null) Materia = new Materia();
+                Materia.Nombre = txtNombre.Text;
+                Materia.Carrera = (Carrera)cmbCarrera.SelectedItem;
+                Materia.Año = (byte)cmbAño.SelectedItem;
+                Materia.Cuatrimestre = (byte)cmbCuatrimestre.SelectedItem;
 
                 MateriaService s = new MateriaService();
-                if (this.materia.Id != 0)
-                    s.Update(materia);
+                if (this.Materia.Id != 0)
+                    s.Update(Materia);
                 else
-                    s.Insert(materia);
+                    s.Insert(Materia);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception ex)
+            catch (WarningException ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -74,9 +80,26 @@ namespace View.Forms
             this.Close();
         }
 
+        private void validarEntidad()
+        {
+            if (txtNombre.Text.Trim() == "")
+                throw new WarningException("Debe ingresar un nombre");
+
+            if (cmbCarrera.SelectedItem == null)
+                throw new WarningException("Debe seleccionar una carrera");
+
+            if (cmbAño.SelectedItem == null)
+                throw new WarningException("Debe seleccionar un año");
+
+            if (cmbCuatrimestre.SelectedItem == null)
+                cmbCuatrimestre.SelectedValue = 0;
+        }
+
         private void cmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
             Carrera aux = (Carrera)cmbCarrera.SelectedItem;
+            if (aux == null) return;
+
             byte length = aux.Duracion;
             List<byte> años = new List<byte>();
             for (byte i = 1; i <= length; i++)
@@ -84,12 +107,9 @@ namespace View.Forms
                 años.Add(i);
             }
             cmbAño.DataSource = años;
-        }
 
-        private void validarEntidad()
-        {
-            if (txtNombre.Text.Trim() == "")
-                throw new Exception("Debe ingresar un nombre");
+            cmbAño.Enabled = true;
+            cmbAño.SelectedIndex = -1;
         }
     }
 }
