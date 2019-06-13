@@ -1,5 +1,14 @@
 USE master
 GO
+DECLARE @dbname nvarchar(128)
+SET @dbname = N'GONZALEZ_JUAN_DB'
+
+IF (EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE ('[' + name + ']' = @dbname 
+OR name = @dbname)))
+DROP DATABASE GONZALEZ_JUAN_DB
+
+GO
+
 CREATE DATABASE GONZALEZ_JUAN_DB
 GO
 USE GONZALEZ_JUAN_DB

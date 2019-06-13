@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Entities;
 using AccesoDatos.Services;
 using View.Forms;
+using Entities.Helpers;
 
 namespace View.UserControls
 {
@@ -47,31 +48,44 @@ namespace View.UserControls
         {
             if (Carreras.Count < 1) return;
 
-            if (MessageBox.Show("¿Está seguro que desea eliminar el registro seleccionado?",
-                "Atención", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (!CommonHelper.Confirma())
                 return;
 
-
-            CarreraService s = new CarreraService();
-            Carrera c = (Carrera)dgvGrilla.SelectedRows[0].DataBoundItem;
-
-            MateriaService ms = new MateriaService();
-            if (ms.GetByCarreraId(c.Id).Count > 0)
+            try
             {
-                MessageBox.Show("No se puede eliminar esta carrera; posee materias asociadas.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                CarreraService s = new CarreraService();
+                Carrera c = (Carrera)dgvGrilla.SelectedRows[0].DataBoundItem;
 
-            s.Delete(c.Id);
-            cargarGrilla();
+                MateriaService ms = new MateriaService();
+                if (ms.GetByCarreraId(c.Id).Count > 0)
+                {
+                    MessageBox.Show("No se puede eliminar esta carrera; posee materias asociadas.",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                s.Delete(c.Id);
+                cargarGrilla();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cargarGrilla()
         {
             CarreraService s = new CarreraService();
-            Carreras = s.GetAll();
-            dgvGrilla.DataSource = Carreras;
+
+            try
+            {
+                Carreras = s.GetAll();
+                dgvGrilla.DataSource = Carreras;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

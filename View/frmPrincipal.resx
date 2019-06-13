@@ -118,6 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnHorarios.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAATBJREFUSEu1lcFtAkEQBC+EC4GQCIEQCIGnw+BJIATgEByCMzim1jfSutXNw4aT
+        Co1qe3sBoWXZtu2tWDlTz6G4BA5uz4yVDQUFwzOeHmJlUw/vkuFk1k772kXXZqxs2EyJ+oY1Mm6tsbJh
+        MyXqG9bIuLXm52VZjsXnvuEV0HXcu0c501fRv47+7u/FbXIKa2TIzp4uHN3jNMT666Ptm2bnIENW3FrQ
+        SbcvSl4hQzZ5BluUvEKGbPIMtih5hQzZ5BlsUfIKGbLJM9ii5BUyZJNnsEXJK2TIJs9gi5JXyJBNnsEW
+        Ja+QIZs8gy1KXiFDNnkGW5S8QoZs8gzfxdUE/nvAtaB7DJizBP58QD1nXEH3uJheeVU3dK7zqVytvJuG
+        q/hDnIOMXunjv2D09vAetuUBuzix/wZ/gaEAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="btnInicio.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL

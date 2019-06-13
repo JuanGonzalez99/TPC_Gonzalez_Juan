@@ -72,7 +72,7 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_CARRERA = @Id");
+                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_CARRERA = @CarreraId");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@CarreraId", carreraId);
                 accesoDatos.abrirConexion();

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Models\Alumno.cs" />
     <Compile Include="Models\Carrera.cs" />
+    <Compile Include="Models\Horario.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Profesor.cs" />

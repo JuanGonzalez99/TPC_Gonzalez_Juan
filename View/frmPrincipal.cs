@@ -16,15 +16,15 @@ namespace View
         public frmPrincipal()
         {
             InitializeComponent();
-            moveSidePanel(btnInicio);
+            moverPanelSelec(btnInicio);
         }
 
-        private void moveSidePanel(Control btn)
+        private void moverPanelSelec(Control btn)
         {
             pnlSelec.Top = btn.Top;
             pnlSelec.Height = btn.Height;
         }
-        private void fillMainDock(Control uc)
+        private void llenarPanelCont(Control uc)
         {
             uc.Dock = DockStyle.Fill;
             pnlContenido.Controls.Clear();
@@ -33,7 +33,7 @@ namespace View
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            moveSidePanel(btnInicio);
+            moverPanelSelec(btnInicio);
             pnlContenido.Controls.Clear();
         }
 
@@ -41,9 +41,9 @@ namespace View
         {
             try
             {
-                moveSidePanel(btnAlumnos);
+                moverPanelSelec(btnAlumnos);
                 ucGrillaAlumnos uc = new ucGrillaAlumnos();
-                fillMainDock(uc);
+                llenarPanelCont(uc);
             }
             catch (Exception ex)
             {
@@ -55,9 +55,9 @@ namespace View
         {
             try
             {
-                moveSidePanel(btnProfesores);
+                moverPanelSelec(btnProfesores);
                 ucGrillaProfesores uc = new ucGrillaProfesores();
-                fillMainDock(uc);
+                llenarPanelCont(uc);
             }
             catch (Exception ex)
             {
@@ -69,9 +69,9 @@ namespace View
         {
             try
             {
-                moveSidePanel(btnMaterias);
+                moverPanelSelec(btnMaterias);
                 ucGrillaMaterias uc = new ucGrillaMaterias();
-                fillMainDock(uc);
+                llenarPanelCont(uc);
             }
             catch (Exception ex)
             {
@@ -83,9 +83,23 @@ namespace View
         {
             try
             {
-                moveSidePanel(btnCarreras);
+                moverPanelSelec(btnCarreras);
                 ucGrillaCarreras uc = new ucGrillaCarreras();
-                fillMainDock(uc);
+                llenarPanelCont(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnHorarios_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                moverPanelSelec(btnHorarios);
+                ucGrillaHorarios uc = new ucGrillaHorarios();
+                llenarPanelCont(uc);
             }
             catch (Exception ex)
             {

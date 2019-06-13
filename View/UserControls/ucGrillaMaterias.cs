@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Entities;
 using AccesoDatos.Services;
 using View.Forms;
+using Entities.Helpers;
 
 namespace View.UserControls
 {
@@ -47,22 +48,37 @@ namespace View.UserControls
         {
             if (Materias.Count < 1) return;
             
-            if (MessageBox.Show("¿Está seguro que desea eliminar el registro seleccionado?",
-                "Atención", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (!CommonHelper.Confirma())
                 return;
 
-            MateriaService s = new MateriaService();
-            Materia m = new Materia();
-            m = (Materia)dgvGrilla.SelectedRows[0].DataBoundItem;
-            s.Delete(m.Id);
-            cargarGrilla();
+            try
+            {
+
+                MateriaService s = new MateriaService();
+                Materia m = new Materia();
+                m = (Materia)dgvGrilla.SelectedRows[0].DataBoundItem;
+                s.Delete(m.Id);
+                cargarGrilla();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cargarGrilla()
         {
             MateriaService s = new MateriaService();
-            Materias = s.GetAll();
-            dgvGrilla.DataSource = Materias;
+
+            try
+            {
+                Materias = s.GetAll();
+                dgvGrilla.DataSource = Materias;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

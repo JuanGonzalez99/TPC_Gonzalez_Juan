@@ -71,7 +71,11 @@ namespace AccesoDatos.Services
             try
             {
                 accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' INSERT INTO TB_ALUMNOS (APELLIDO, NOMBRE, FECHA_NAC) " +
-                    "values('" + nuevo.Apellido + "', '" + nuevo.Nombre + "', '" + nuevo.FechaNac.ToShortDateString() + "')");
+                    "values (@Apellido, @Nombre, @FechaNac)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Apellido", nuevo.Apellido);
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", nuevo.FechaNac.ToShortDateString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }

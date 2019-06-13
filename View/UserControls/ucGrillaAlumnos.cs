@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using AccesoDatos.Services;
+using Entities.Helpers;
 
 namespace View
 {
@@ -36,7 +37,7 @@ namespace View
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (Alumnos.Count < 1) return;
-
+            
             frmAlumno frm = new frmAlumno((Alumno)dgvGrilla.SelectedRows[0].DataBoundItem);
             if (frm.ShowDialog() == DialogResult.OK)
                 cargarGrilla();
@@ -46,22 +47,36 @@ namespace View
         {
             if (Alumnos.Count < 1) return;
 
-            if (MessageBox.Show("¿Está seguro que desea eliminar el registro seleccionado?",
-                "Atención", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (!CommonHelper.Confirma())
                 return;
 
-            AlumnoService s = new AlumnoService();
-            Alumno a = new Alumno();
-            a = (Alumno)dgvGrilla.SelectedRows[0].DataBoundItem;
-            s.Delete(a.Id);
-            cargarGrilla();
+            try
+            {
+                AlumnoService s = new AlumnoService();
+                Alumno a = new Alumno();
+                a = (Alumno)dgvGrilla.SelectedRows[0].DataBoundItem;
+                s.Delete(a.Id);
+                cargarGrilla();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cargarGrilla()
         {
             AlumnoService s = new AlumnoService();
-            Alumnos = s.GetAll();
-            dgvGrilla.DataSource = Alumnos;
+
+            try
+            {
+                Alumnos = s.GetAll();
+                dgvGrilla.DataSource = Alumnos;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

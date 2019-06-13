@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Entities;
 using AccesoDatos.Services;
 using View.Forms;
+using Entities.Helpers;
 
 namespace View
 {
@@ -47,22 +48,37 @@ namespace View
         {
             if (Profesores.Count < 1) return;
 
-            if (MessageBox.Show("¿Está seguro que desea eliminar el registro seleccionado?",
-                "Atención", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (!CommonHelper.Confirma())
                 return;
 
-            ProfesorService s = new ProfesorService();
-            Profesor p = new Profesor();
-            p = (Profesor)dgvGrilla.SelectedRows[0].DataBoundItem;
-            s.Delete(p.Id);
-            cargarGrilla();
+            try
+            {
+
+                ProfesorService s = new ProfesorService();
+                Profesor p = new Profesor();
+                p = (Profesor)dgvGrilla.SelectedRows[0].DataBoundItem;
+                s.Delete(p.Id);
+                cargarGrilla();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cargarGrilla()
         {
             ProfesorService s = new ProfesorService();
-            Profesores = s.GetAll();
-            dgvGrilla.DataSource = Profesores;
+
+            try
+            {
+                Profesores = s.GetAll();
+                dgvGrilla.DataSource = Profesores;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -30,20 +30,38 @@ namespace View.Forms
         private void frmMateria_Load(object sender, EventArgs e)
         {
             cmbCarrera.DataSource = new CarreraService().GetAll();
-            List<byte> cuatrimestres = new List<byte> { 0, 1, 2 };
-            cmbCuatrimestre.DataSource = cuatrimestres;
+
+            cmbCuatrimestre.DataSource = new List<byte> { 1, 2 };
+
+            cmbTipoCursada.DataSource = new List<string> { "Anual", "Cuatrimestral" };
 
             if (this.Materia != null)
             {
                 txtID.Text = Materia.Id.ToString();
                 txtNombre.Text = Materia.Nombre;
                 cmbCarrera.SelectedIndex = cmbCarrera.FindString(Materia.Carrera.ToString());
+                cmbAño.SelectedIndex = cmbAño.FindString(Materia.Año.ToString());
+
+                if (Materia.Cuatrimestre == 0)
+                {
+                    cmbTipoCursada.SelectedIndex = cmbTipoCursada.FindString("Anual");
+                    cmbCuatrimestre.SelectedIndex = -1;
+                }
+                else
+                {
+                    cmbTipoCursada.SelectedIndex = cmbTipoCursada.FindString("Cuatrimestral");
+                    cmbCuatrimestre.SelectedItem = Materia.Cuatrimestre;
+                }
             }
             else
             {
-                cmbAño.Enabled = false;
-                cmbCarrera.SelectedIndex = -1;
                 cmbAño.SelectedIndex = -1;
+                cmbCarrera.SelectedIndex = -1;
+                cmbCuatrimestre.SelectedIndex = -1;
+                cmbTipoCursada.SelectedIndex = -1;
+
+                cmbAño.Enabled = false;
+                cmbCuatrimestre.Enabled = false;
             }
         }
 
@@ -65,34 +83,46 @@ namespace View.Forms
                 else
                     s.Insert(Materia);
 
-                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (WarningException ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void validarEntidad()
         {
+            string errores = "";
+
             if (txtNombre.Text.Trim() == "")
-                throw new WarningException("Debe ingresar un nombre");
+                errores += "Debe ingresar un nombre" + Environment.NewLine;
 
             if (cmbCarrera.SelectedItem == null)
-                throw new WarningException("Debe seleccionar una carrera");
+                errores += "Debe seleccionar una carrera" + Environment.NewLine;
 
             if (cmbAño.SelectedItem == null)
-                throw new WarningException("Debe seleccionar un año");
+                errores += "Debe seleccionar un año" + Environment.NewLine;
 
-            if (cmbCuatrimestre.SelectedItem == null)
-                cmbCuatrimestre.SelectedValue = 0;
+            if (cmbCuatrimestre.SelectedItem == null && cmbTipoCursada.SelectedText == "Cuatrimestral")
+                errores += "Debe especificar el cuatrimestre" + Environment.NewLine;
+
+            else if (cmbCuatrimestre.SelectedItem == null)
+                cmbCuatrimestre.DataSource = new List<byte> { 0 };
+
+            if (errores != "")
+            {
+                throw new WarningException(errores);
+            }
         }
 
         private void cmbCarrera_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,6 +140,15 @@ namespace View.Forms
 
             cmbAño.Enabled = true;
             cmbAño.SelectedIndex = -1;
+        }
+
+        private void cmbTipoCursada_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string aux = (string)cmbTipoCursada.SelectedItem;
+            if (aux == null) return;
+            
+            cmbCuatrimestre.Enabled = aux == "Cuatrimestral";
+            if (aux == "Anual") cmbCuatrimestre.SelectedIndex = -1;
         }
     }
 }

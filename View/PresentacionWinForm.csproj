@@ -90,6 +90,12 @@
     <Compile Include="UserControls\ucGrillaCarreras.Designer.cs">
       <DependentUpon>ucGrillaCarreras.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucGrillaHorarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucGrillaHorarios.Designer.cs">
+      <DependentUpon>ucGrillaHorarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucGrillaMaterias.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucGrillaCarreras.resx">
       <DependentUpon>ucGrillaCarreras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucGrillaHorarios.resx">
+      <DependentUpon>ucGrillaHorarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucGrillaMaterias.resx">
       <DependentUpon>ucGrillaMaterias.cs</DependentUpon>

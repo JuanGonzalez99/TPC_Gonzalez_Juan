@@ -91,7 +91,8 @@
             this.dgvGrilla.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvGrilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGrilla.Size = new System.Drawing.Size(694, 267);
-            this.dgvGrilla.TabIndex = 4;
+            this.dgvGrilla.TabIndex = 0;
+            this.dgvGrilla.TabStop = false;
             // 
             // ucGrillaAlumnos
             // 
