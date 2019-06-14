@@ -371,3 +371,13 @@ ALTER TABLE [dbo].[TB_HORARIOS]  WITH CHECK ADD CHECK  (([DIA_SEMANA]>=(0) AND [
 GO
 ALTER TABLE [dbo].[TB_MATERIAS]  WITH CHECK ADD CHECK  (([CUATRIMESTRE]=(2) OR [CUATRIMESTRE]=(1) OR [CUATRIMESTRE]=(0)))
 GO
+
+SET DATEFORMAT 'DMY'
+GO
+INSERT INTO TB_ALUMNOS([APELLIDO],[NOMBRE],[FECHA_NAC]) 
+VALUES('Sanford','Camille','28/09/81'),('Sykes','Patience','13/10/83'),('Poole','Ocean','15/03/83'),('Woodward','Farrah','05/02/95'),('Murphy','Joy','04/06/84'),('Mcpherson','Orla','17/10/88'),('Morton','Veda','10/02/92'),('Mercer','Aline','17/03/98'),('Patterson','Kessie','02/11/81'),('Baxter','Halee','11/01/83');
+GO
+INSERT INTO TB_PROFESORES([APELLIDO],[NOMBRE],[FECHA_NAC],[FECHA_INGRESO]) 
+VALUES('Mann','Hedwig','30/12/85','20/02/11'),('Gates','Omar','30/10/80','09/10/08'),('Beard','Chaney','09/01/84','07/05/10'),('Goodman','Jessica','16/04/97','12/09/08'),('Wilkinson','Rhona','16/04/88','26/10/07'),('Mcintyre','Elaine','21/06/87','11/02/13'),('Chen','Jolie','01/02/83','13/03/15'),('Weaver','Blaze','26/01/82','29/12/11'),('Hull','Dennis','24/10/80','07/08/11'),('Puckett','Madeline','11/10/92','01/06/13');
+GO
+
