@@ -58,6 +58,18 @@
     <Compile Include="Forms\frmCarrera.Designer.cs">
       <DependentUpon>frmCarrera.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmComision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmComision.Designer.cs">
+      <DependentUpon>frmComision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmHorario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmHorario.Designer.cs">
+      <DependentUpon>frmHorario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMateria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +102,12 @@
     <Compile Include="UserControls\ucGrillaCarreras.Designer.cs">
       <DependentUpon>ucGrillaCarreras.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucGrillaComisiones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucGrillaComisiones.Designer.cs">
+      <DependentUpon>ucGrillaComisiones.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucGrillaHorarios.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +132,12 @@
     <EmbeddedResource Include="Forms\frmCarrera.resx">
       <DependentUpon>frmCarrera.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmComision.resx">
+      <DependentUpon>frmComision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmHorario.resx">
+      <DependentUpon>frmHorario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMateria.resx">
       <DependentUpon>frmMateria.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucGrillaCarreras.resx">
       <DependentUpon>ucGrillaCarreras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucGrillaComisiones.resx">
+      <DependentUpon>ucGrillaComisiones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucGrillaHorarios.resx">
       <DependentUpon>ucGrillaHorarios.cs</DependentUpon>

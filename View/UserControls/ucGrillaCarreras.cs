@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Entities;
+using Entities.Models;
 using AccesoDatos.Services;
 using View.Forms;
 using Entities.Helpers;
@@ -37,8 +37,9 @@ namespace View.UserControls
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (Carreras.Count < 1) return;
-            
+            if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
+                return;
+
             frmCarrera frm = new frmCarrera((Carrera)dgvGrilla.SelectedRows[0].DataBoundItem);
             if (frm.ShowDialog() == DialogResult.OK)
                 cargarGrilla();
@@ -46,7 +47,8 @@ namespace View.UserControls
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (Carreras.Count < 1) return;
+            if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
+                return;
 
             if (!CommonHelper.Confirma())
                 return;
@@ -81,10 +83,30 @@ namespace View.UserControls
             {
                 Carreras = s.GetAll();
                 dgvGrilla.DataSource = Carreras;
+                dgvGrilla.Columns["NombreCorto"].HeaderText = "Nombre corto";
+                dgvGrilla.Columns["Duracion"].HeaderText = "Duración";
+                dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == "")
+            {
+                dgvGrilla.DataSource = Carreras;
+            }
+            else
+            {
+                string busqueda = txtBuscar.Text.ToUpper();
+                List<Carrera> lista = Carreras.FindAll(x => x.Id.ToString().Contains(busqueda)
+                                                        || x.Nombre.ToUpper().Contains(busqueda)
+                                                        || x.NombreCorto.ToUpper().Contains(busqueda)
+                                                        || x.Duracion.ToString().Contains(busqueda));
+                dgvGrilla.DataSource = lista;
             }
         }
     }

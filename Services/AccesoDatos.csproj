@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlumnoService.cs" />
     <Compile Include="Services\CarreraService.cs" />
+    <Compile Include="Services\ComisionService.cs" />
     <Compile Include="Services\HorarioService.cs" />
     <Compile Include="Services\MateriaService.cs" />
     <Compile Include="Services\ProfesorService.cs" />

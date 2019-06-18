@@ -21,14 +21,28 @@ namespace View
 
         private void moverPanelSelec(Control btn)
         {
-            pnlSelec.Top = btn.Top;
-            pnlSelec.Height = btn.Height;
+            try
+            {
+                pnlSelec.Top = btn.Top;
+                pnlSelec.Height = btn.Height;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void llenarPanelCont(Control uc)
         {
-            uc.Dock = DockStyle.Fill;
-            pnlContenido.Controls.Clear();
-            pnlContenido.Controls.Add(uc);
+            try
+            {
+                uc.Dock = DockStyle.Fill;
+                pnlContenido.Controls.Clear();
+                pnlContenido.Controls.Add(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnInicio_Click(object sender, EventArgs e)
@@ -39,72 +53,42 @@ namespace View
 
         private void btnAlumnos_Click(object sender, EventArgs e)
         {
-            try
-            {
-                moverPanelSelec(btnAlumnos);
-                ucGrillaAlumnos uc = new ucGrillaAlumnos();
-                llenarPanelCont(uc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            moverPanelSelec(btnAlumnos);
+            ucGrillaAlumnos uc = new ucGrillaAlumnos();
+            llenarPanelCont(uc);
         }
 
         private void btnProfesores_Click(object sender, EventArgs e)
         {
-            try
-            {
-                moverPanelSelec(btnProfesores);
-                ucGrillaProfesores uc = new ucGrillaProfesores();
-                llenarPanelCont(uc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            moverPanelSelec(btnProfesores);
+            ucGrillaProfesores uc = new ucGrillaProfesores();
+            llenarPanelCont(uc);
         }
 
         private void btnMaterias_Click(object sender, EventArgs e)
         {
-            try
-            {
-                moverPanelSelec(btnMaterias);
-                ucGrillaMaterias uc = new ucGrillaMaterias();
-                llenarPanelCont(uc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            moverPanelSelec(btnMaterias);
+            ucGrillaMaterias uc = new ucGrillaMaterias();
+            llenarPanelCont(uc);
         }
 
         private void btnCarreras_Click(object sender, EventArgs e)
         {
-            try
-            {
-                moverPanelSelec(btnCarreras);
-                ucGrillaCarreras uc = new ucGrillaCarreras();
-                llenarPanelCont(uc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            moverPanelSelec(btnCarreras);
+            ucGrillaCarreras uc = new ucGrillaCarreras();
+            llenarPanelCont(uc);
         }
 
         private void btnHorarios_Click(object sender, EventArgs e)
         {
-            try
-            {
-                moverPanelSelec(btnHorarios);
-                ucGrillaHorarios uc = new ucGrillaHorarios();
-                llenarPanelCont(uc);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            moverPanelSelec(btnHorarios);
+            ucGrillaHorarios uc = new ucGrillaHorarios();
+            llenarPanelCont(uc);
+        }
+
+        private void btnComisiones_Click(object sender, EventArgs e)
+        {
+            moverPanelSelec(btnComisiones);
         }
     }
 }

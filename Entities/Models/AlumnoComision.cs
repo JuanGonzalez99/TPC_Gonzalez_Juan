@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class Persona
+    public class AlumnoComision : Alumno
     {
-        public string Apellido { get; set; }
-        public string Nombre { get; set; }
-        public DateTime FechaNac { get; set; }
+        public Nota Nota { get; set; }
     }
 }

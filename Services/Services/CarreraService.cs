@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
+using Entities.Models;
 
 namespace AccesoDatos.Services
 {
@@ -136,6 +136,7 @@ namespace AccesoDatos.Services
             entidad.Nombre = (string)lector["NOMBRE"];
             entidad.NombreCorto = (string)lector["NOMBRE_CORTO"];
             entidad.Duracion = (byte)lector["DURACION"];
+            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             if (complete) { }
 

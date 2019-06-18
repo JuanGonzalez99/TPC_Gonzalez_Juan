@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Entities.Models
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraFin { get; set; }
 
-        public List<DayOfWeek> DiasDeLaSemana { get; set; }
+        public DiaDeLaSemana DiaSemana { get; set; }
+        public bool Deshabilitado { get; set; }
     }
 }

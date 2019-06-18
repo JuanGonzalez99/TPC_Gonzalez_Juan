@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.pnlBotones = new System.Windows.Forms.Panel();
+            this.btnHorarios = new System.Windows.Forms.Button();
             this.pnlSelec = new System.Windows.Forms.Panel();
             this.btnInicio = new System.Windows.Forms.Button();
             this.pnlLogo = new System.Windows.Forms.Panel();
@@ -40,7 +41,7 @@
             this.pnlUsuario = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.pnlContenido = new System.Windows.Forms.Panel();
-            this.btnHorarios = new System.Windows.Forms.Button();
+            this.btnComisiones = new System.Windows.Forms.Button();
             this.pnlBotones.SuspendLayout();
             this.pnlUsuario.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +49,7 @@
             // pnlBotones
             // 
             this.pnlBotones.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlBotones.Controls.Add(this.btnComisiones);
             this.pnlBotones.Controls.Add(this.btnHorarios);
             this.pnlBotones.Controls.Add(this.pnlSelec);
             this.pnlBotones.Controls.Add(this.btnInicio);
@@ -61,6 +63,23 @@
             this.pnlBotones.Name = "pnlBotones";
             this.pnlBotones.Size = new System.Drawing.Size(125, 456);
             this.pnlBotones.TabIndex = 0;
+            // 
+            // btnHorarios
+            // 
+            this.btnHorarios.FlatAppearance.BorderSize = 0;
+            this.btnHorarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHorarios.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHorarios.Image = ((System.Drawing.Image)(resources.GetObject("btnHorarios.Image")));
+            this.btnHorarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHorarios.Location = new System.Drawing.Point(0, 286);
+            this.btnHorarios.Name = "btnHorarios";
+            this.btnHorarios.Size = new System.Drawing.Size(125, 30);
+            this.btnHorarios.TabIndex = 6;
+            this.btnHorarios.Text = "Horarios";
+            this.btnHorarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHorarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnHorarios.UseVisualStyleBackColor = true;
+            this.btnHorarios.Click += new System.EventHandler(this.btnHorarios_Click);
             // 
             // pnlSelec
             // 
@@ -195,22 +214,22 @@
             this.pnlContenido.Size = new System.Drawing.Size(694, 336);
             this.pnlContenido.TabIndex = 2;
             // 
-            // btnHorarios
+            // btnComisiones
             // 
-            this.btnHorarios.FlatAppearance.BorderSize = 0;
-            this.btnHorarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHorarios.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHorarios.Image = ((System.Drawing.Image)(resources.GetObject("btnHorarios.Image")));
-            this.btnHorarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHorarios.Location = new System.Drawing.Point(0, 288);
-            this.btnHorarios.Name = "btnHorarios";
-            this.btnHorarios.Size = new System.Drawing.Size(125, 30);
-            this.btnHorarios.TabIndex = 6;
-            this.btnHorarios.Text = "Horarios";
-            this.btnHorarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnHorarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnHorarios.UseVisualStyleBackColor = true;
-            this.btnHorarios.Click += new System.EventHandler(this.btnHorarios_Click);
+            this.btnComisiones.FlatAppearance.BorderSize = 0;
+            this.btnComisiones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnComisiones.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComisiones.Image = ((System.Drawing.Image)(resources.GetObject("btnComisiones.Image")));
+            this.btnComisiones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnComisiones.Location = new System.Drawing.Point(0, 319);
+            this.btnComisiones.Name = "btnComisiones";
+            this.btnComisiones.Size = new System.Drawing.Size(125, 30);
+            this.btnComisiones.TabIndex = 7;
+            this.btnComisiones.Text = "Comisiones";
+            this.btnComisiones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnComisiones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnComisiones.UseVisualStyleBackColor = true;
+            this.btnComisiones.Click += new System.EventHandler(this.btnComisiones_Click);
             // 
             // frmPrincipal
             // 
@@ -244,5 +263,6 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnInicio;
         private System.Windows.Forms.Button btnHorarios;
+        private System.Windows.Forms.Button btnComisiones;
     }
 }

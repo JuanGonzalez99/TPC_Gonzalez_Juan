@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
+using Entities.Models;
 
 namespace AccesoDatos.Services
 {
@@ -42,7 +42,7 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_ALUMNOS WHERE CD_PROFESOR = @Id");
+                accesoDatos.setearConsulta("SELECT * FROM TB_ALUMNOS WHERE CD_ALUMNO = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
@@ -139,6 +139,7 @@ namespace AccesoDatos.Services
             entidad.Apellido = (string)lector["APELLIDO"];
             entidad.Nombre = (string)lector["NOMBRE"];
             entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
+            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             if (complete) { }
 

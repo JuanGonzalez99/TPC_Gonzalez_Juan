@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
+using Entities.Models;
 
 namespace AccesoDatos.Services
 {
@@ -138,6 +138,7 @@ namespace AccesoDatos.Services
             entidad.Nombre = (string)lector["NOMBRE"];
             entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
             entidad.FechaIngreso = (DateTime)lector["FECHA_INGRESO"];
+            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             if (complete) { }
 

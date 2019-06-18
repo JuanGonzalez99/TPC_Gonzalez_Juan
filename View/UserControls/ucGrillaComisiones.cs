@@ -7,30 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using View.Forms;
+using Entities.Helpers;
 using Entities.Models;
 using Services.Services;
-using Entities.Helpers;
-using View.Forms;
 
 namespace View.UserControls
 {
-    public partial class ucGrillaHorarios : UserControl
+    public partial class ucGrillaComisiones : UserControl
     {
-        private List<Horario> Horarios { get; set; }
+        private List<Comision> Comisiones { get; set; }
 
-        public ucGrillaHorarios()
+        public ucGrillaComisiones()
         {
             InitializeComponent();
         }
 
-        private void ucGrillaHorarios_Load(object sender, EventArgs e)
+        private void ucGrillaComisiones_Load(object sender, EventArgs e)
         {
             cargarGrilla();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            frmHorario frm = new frmHorario();
+            frmComision frm = new frmComision();
             if (frm.ShowDialog() == DialogResult.OK)
                 cargarGrilla();
         }
@@ -40,7 +40,7 @@ namespace View.UserControls
             if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
                 return;
 
-            frmHorario frm = new frmHorario((Horario)dgvGrilla.SelectedRows[0].DataBoundItem);
+            frmComision frm = new frmComision((Comision)dgvGrilla.SelectedRows[0].DataBoundItem);
             if (frm.ShowDialog() == DialogResult.OK)
                 cargarGrilla();
         }
@@ -55,9 +55,9 @@ namespace View.UserControls
 
             try
             {
-                HorarioService s = new HorarioService();
-                Horario entidad = (Horario)dgvGrilla.SelectedRows[0].DataBoundItem;
-                s.Delete(entidad.Id);
+                ComisionService s = new ComisionService();
+                Comision a = (Comision)dgvGrilla.SelectedRows[0].DataBoundItem;
+                s.Delete(a.Id);
                 cargarGrilla();
             }
             catch (Exception ex)
@@ -68,12 +68,13 @@ namespace View.UserControls
 
         private void cargarGrilla()
         {
-            HorarioService s = new HorarioService();
+            ComisionService s = new ComisionService();
 
             try
             {
-                Horarios = s.GetAll();
-                dgvGrilla.DataSource = Horarios;
+                Comisiones = s.GetAll();
+                dgvGrilla.DataSource = Comisiones;
+                dgvGrilla.Columns["Id"].Visible = false;
                 dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
             }
             catch (Exception ex)
@@ -86,16 +87,16 @@ namespace View.UserControls
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Horarios;
+                dgvGrilla.DataSource = Comisiones;
             }
             else
             {
-                string busqueda = txtBuscar.Text.ToUpper();
-                List<Horario> lista = Horarios.FindAll(x => x.Id.ToString().Contains(busqueda)
-                                                        || x.HoraInicio.ToString().Contains(busqueda)
-                                                        || x.HoraFin.ToString().Contains(busqueda)
-                                                        || x.DiaSemana.ToString().ToUpper().Contains(busqueda));
-                dgvGrilla.DataSource = lista;
+                //string busqueda = txtBuscar.Text.ToUpper();
+                //List<Comision> lista = Comisiones.FindAll(x => x.Id.ToString().Contains(busqueda)
+                //                                        || x.Apellido.ToUpper().Contains(busqueda)
+                //                                        || x.Nombre.ToUpper().Contains(busqueda)
+                //                                        || x.FechaNac.ToShortDateString().Contains(busqueda));
+                //dgvGrilla.DataSource = lista;
             }
         }
     }

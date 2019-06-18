@@ -14,5 +14,18 @@ namespace Entities.Helpers
         {
             return MessageBox.Show(texto, titulo, MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK;
         }
+
+        public static bool SeleccionoRegistro(DataGridView dgv)
+        {
+            if (dgv.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registro", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

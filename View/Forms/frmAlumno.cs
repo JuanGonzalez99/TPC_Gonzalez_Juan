@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccesoDatos.Services;
-using Entities;
+using Entities.Models;
 
 namespace View
 {
@@ -60,7 +60,6 @@ namespace View
                     s.Insert(alumno);
 
                 this.DialogResult = DialogResult.OK;
-                this.Close();
             }
             catch (WarningException ex)
             {
@@ -72,19 +71,20 @@ namespace View
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
         private void validarEntidad()
         {
+            string errores = "";
+
             if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
-                throw new WarningException("Debe completar todos los campos");
+                errores += "Debe completar todos los campos" + Environment.NewLine;
 
             if (dtpNacimiento.Value.AddYears(16) > DateTime.Now)
-                throw new WarningException("No se pueden agregar alumnos menores de 16");
+                errores += "No se pueden agregar alumnos menores de 16" + Environment.NewLine;
+
+            if (errores != "")
+            {
+                throw new WarningException(errores);
+            }
         }
     }
 }

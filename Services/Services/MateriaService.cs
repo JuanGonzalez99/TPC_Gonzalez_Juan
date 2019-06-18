@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities;
+using Entities.Models;
 
 namespace AccesoDatos.Services
 {
@@ -43,7 +43,7 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA, C.DURACION FROM TB_MATERIAS M " +
+                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA, C.DURACION, C.DESHABILITADO AS C_DESHABILITADO,  FROM TB_MATERIAS M " +
                     "INNER JOIN TB_CARRERAS C ON M.CD_CARRERA = C.CD_CARRERA WHERE CD_Materias = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
@@ -168,6 +168,7 @@ namespace AccesoDatos.Services
             entidad.Año = (byte)lector["AÑO"];
             if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
                 entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
+            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             if (complete)
             {
@@ -176,6 +177,7 @@ namespace AccesoDatos.Services
                 entidad.Carrera.Nombre = (string)lector["NOMBRE_CARRERA"];
                 entidad.Carrera.NombreCorto = (string)lector["NM_CORTO_CARRERA"];
                 entidad.Carrera.Duracion = (byte)lector["DURACION"];
+                entidad.Carrera.Deshabilitado = (bool)lector["C_DESHABILITADO"];
             }
 
             return entidad;

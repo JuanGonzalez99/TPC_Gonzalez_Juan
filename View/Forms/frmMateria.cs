@@ -1,5 +1,5 @@
 ﻿using AccesoDatos.Services;
-using Entities;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,7 +83,7 @@ namespace View.Forms
                 else
                     s.Insert(Materia);
 
-                this.Close();
+                this.DialogResult = DialogResult.OK;
             }
             catch (WarningException ex)
             {

@@ -1,5 +1,4 @@
 ﻿using AccesoDatos;
-using Entities.Helpers;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Services.Services
 {
-    public class HorarioService
+    public class ComisionService
     {
-        public List<Horario> GetAll()
+        public List<Comision> GetAll()
         {
-            List<Horario> listado = new List<Horario>();
+            List<Comision> listado = new List<Comision>();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_HORARIOS");
+                accesoDatos.setearConsulta("SELECT * FROM TB_COMISIONES");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
@@ -38,23 +37,23 @@ namespace Services.Services
             }
         }
 
-        public Horario GetById(int id)
+        public Comision GetById(int id)
         {
-            Horario Horario = new Horario();
+            Comision comision = new Comision();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_HORARIOS WHERE CD_HORARIO = @Id");
+                accesoDatos.setearConsulta("SELECT * FROM TB_COMISIONES WHERE CD_COMISION = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    Horario = Make(accesoDatos.Lector, true);
+                    comision = Make(accesoDatos.Lector, true);
                 }
 
-                return Horario;
+                return comision;
             }
             catch (Exception ex)
             {
@@ -67,17 +66,17 @@ namespace Services.Services
         }
 
 
-        public void Insert(Horario nuevo)
+        public void Insert(Comision nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("INSERT INTO TB_HORARIOS (HORA_INICIO, HORA_FIN, DIA_SEMANA) " +
-                    "values (@HoraInicio, @HoraFin, @DiaSemana)");
+                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' INSERT INTO TB_ALUMNOS (APELLIDO, NOMBRE, FECHA_NAC) " +
+                    "values (@Apellido, @Nombre, @FechaNac)");
                 accesoDatos.Comando.Parameters.Clear();
-                accesoDatos.Comando.Parameters.AddWithValue("@HoraInicio", nuevo.HoraInicio);
-                accesoDatos.Comando.Parameters.AddWithValue("@HoraFin", nuevo.HoraFin);
-                accesoDatos.Comando.Parameters.AddWithValue("@DiaSemana", nuevo.DiaSemana);
+                //accesoDatos.Comando.Parameters.AddWithValue("@Apellido", nuevo.Apellido);
+                //accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
+                //accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", nuevo.FechaNac.ToShortDateString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -91,16 +90,16 @@ namespace Services.Services
             }
         }
 
-        public void Update(Horario modificar)
+        public void Update(Comision modificar)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("UPDATE TB_HORARIOS SET HORA_INICIO=@HoraInicio, HORA_FIN=@HoraFin, DIA_SEMANA=@DiaSemana Where CD_HORARIO=" + modificar.Id.ToString());
+                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' UPDATE TB_COMISIONES SET APELLIDO=@Apellido, NOMBRE=@Nombre, FECHA_NAC=@FechaNac Where CD_ALUMNO=" + modificar.Id.ToString());
                 accesoDatos.Comando.Parameters.Clear();
-                accesoDatos.Comando.Parameters.AddWithValue("@HoraInicio", modificar.HoraInicio);
-                accesoDatos.Comando.Parameters.AddWithValue("@HoraFin", modificar.HoraFin);
-                accesoDatos.Comando.Parameters.AddWithValue("@DiaSemana", modificar.DiaSemana);
+                //accesoDatos.Comando.Parameters.AddWithValue("@Apellido", modificar.Apellido);
+                //accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
+                //accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac.ToShortDateString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -114,12 +113,12 @@ namespace Services.Services
             }
         }
 
-        public void Delete(int id)
+        public void Delete(long id)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM TB_HORARIOS WHERE CD_HORARIO = " + id.ToString());
+                accesoDatos.setearConsulta("DELETE FROM TB_COMISIONES WHERE CD_COMISION = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -134,15 +133,13 @@ namespace Services.Services
         }
 
 
-        private Horario Make(SqlDataReader lector, bool complete)
+        private Comision Make(SqlDataReader lector, bool complete)
         {
-            Horario entidad = new Horario();
-            entidad.Id = (int)lector["CD_HORARIO"];
-            entidad.HoraInicio = (TimeSpan)lector["HORA_INICIO"];
-            entidad.HoraFin = (TimeSpan)lector["HORA_FIN"];
-            int aux = (byte)lector["DIA_SEMANA"];
-            entidad.DiaSemana = (DiaDeLaSemana)aux;
-
+            Comision entidad = new Comision();
+            entidad.Id = (int)lector["CD_COMISION"];
+            //entidad.Apellido = (string)lector["APELLIDO"];
+            //entidad.Nombre = (string)lector["NOMBRE"];
+            //entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
             entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             if (complete) { }

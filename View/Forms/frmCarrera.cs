@@ -1,5 +1,5 @@
 ﻿using AccesoDatos.Services;
-using Entities;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,6 +41,10 @@ namespace View.Forms
                 txtNombreCorto.Text = carrera.NombreCorto;
                 cmbDuracion.SelectedIndex = cmbDuracion.FindString(carrera.Duracion.ToString());
             }
+            else
+            {
+                cmbDuracion.SelectedIndex = -1;
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -61,30 +65,34 @@ namespace View.Forms
                     s.Insert(carrera);
             
                 this.DialogResult = DialogResult.OK;
-                this.Close();
             }
             catch (WarningException ex)
             {
                 MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void validarEntidad()
         {
+            string errores = "";
+
             if (txtNombre.Text.Trim() == "" || txtNombreCorto.Text.Trim() == "")
-                throw new WarningException("Debe completar todos los campos");
+                errores += "Debe completar todos los campos" + Environment.NewLine;
 
             if (txtNombre.Text.Length > 50)
-                throw new WarningException("Nombre demasiado largo");
+                errores += "Nombre demasiado largo" + Environment.NewLine;
             
             if (txtNombreCorto.Text.Length > 10)
-                throw new WarningException("Nombre corto demasiado largo");
+                errores += "Nombre corto demasiado largo" + Environment.NewLine;
+
+            if (errores != "")
+            {
+                throw new WarningException(errores);
+            }
         }
     }
 }

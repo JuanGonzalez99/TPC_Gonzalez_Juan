@@ -43,12 +43,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CommonHelper.cs" />
+    <Compile Include="Helpers\DiaDeLaSemana.cs" />
     <Compile Include="Models\Alumno.cs" />
+    <Compile Include="Models\AlumnoComision.cs" />
     <Compile Include="Models\Carrera.cs" />
+    <Compile Include="Models\Comision.cs" />
     <Compile Include="Models\Horario.cs" />
     <Compile Include="Models\Materia.cs" />
+    <Compile Include="Models\Modalidad.cs" />
+    <Compile Include="Models\Nota.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Profesor.cs" />
+    <Compile Include="Models\ProfesorComision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

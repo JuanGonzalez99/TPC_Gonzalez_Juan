@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Entities;
+using Entities.Models;
 using AccesoDatos.Services;
 using View.Forms;
 using Entities.Helpers;
@@ -37,7 +37,8 @@ namespace View.UserControls
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (Materias.Count < 1) return;
+            if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
+                return;
 
             frmMateria frm = new frmMateria((Materia)dgvGrilla.SelectedRows[0].DataBoundItem);
             if (frm.ShowDialog() == DialogResult.OK)
@@ -46,8 +47,9 @@ namespace View.UserControls
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (Materias.Count < 1) return;
-            
+            if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
+                return;
+
             if (!CommonHelper.Confirma())
                 return;
 
@@ -55,9 +57,8 @@ namespace View.UserControls
             {
 
                 MateriaService s = new MateriaService();
-                Materia m = new Materia();
-                m = (Materia)dgvGrilla.SelectedRows[0].DataBoundItem;
-                s.Delete(m.Id);
+                Materia entidad = (Materia)dgvGrilla.SelectedRows[0].DataBoundItem;
+                s.Delete(entidad.Id);
                 cargarGrilla();
             }
             catch (Exception ex)
@@ -74,10 +75,27 @@ namespace View.UserControls
             {
                 Materias = s.GetAll();
                 dgvGrilla.DataSource = Materias;
+                dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == "")
+            {
+                dgvGrilla.DataSource = Materias;
+            }
+            else
+            {
+                string busqueda = txtBuscar.Text.ToUpper();
+                List<Materia> lista = Materias.FindAll(x => x.Id.ToString().Contains(busqueda)
+                                                        || x.Nombre.ToUpper().Contains(busqueda)
+                                                        || x.Carrera.ToString().ToUpper().Contains(busqueda));
+                dgvGrilla.DataSource = lista;
             }
         }
     }
