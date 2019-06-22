@@ -1,5 +1,4 @@
-﻿using AccesoDatos;
-using Entities.Models;
+﻿using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Services
+namespace AccesoDatos.Services
 {
     public class ComisionService
     {
@@ -37,7 +36,7 @@ namespace Services.Services
             }
         }
 
-        public Comision GetById(int id)
+        public Comision GetById(int id, bool complete = false)
         {
             Comision comision = new Comision();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -50,7 +49,7 @@ namespace Services.Services
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    comision = Make(accesoDatos.Lector, true);
+                    comision = Make(accesoDatos.Lector, complete);
                 }
 
                 return comision;
@@ -71,12 +70,13 @@ namespace Services.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' INSERT INTO TB_ALUMNOS (APELLIDO, NOMBRE, FECHA_NAC) " +
-                    "values (@Apellido, @Nombre, @FechaNac)");
+                accesoDatos.setearSP("INSERT INTO TB_COMISIONES (CD_MATERIA, AÑO, CUATRIMESTRE, CD_MODALIDAD)" +
+                    "values (@IdMateria, @Año, @Cuatrimestre, @IdModalidad)");
                 accesoDatos.Comando.Parameters.Clear();
-                //accesoDatos.Comando.Parameters.AddWithValue("@Apellido", nuevo.Apellido);
-                //accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
-                //accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", nuevo.FechaNac.ToShortDateString());
+                accesoDatos.Comando.Parameters.AddWithValue("@IdMateria", nuevo.Materia.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@Año", nuevo.Año);
+                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", nuevo.Cuatrimestre);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdModalidad", nuevo.Modalidad.Id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -95,11 +95,18 @@ namespace Services.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' UPDATE TB_COMISIONES SET APELLIDO=@Apellido, NOMBRE=@Nombre, FECHA_NAC=@FechaNac Where CD_ALUMNO=" + modificar.Id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_COMISIONES SET " +
+                    "CD_MATERIA = @IdMateria, " +
+                    "AÑO = @Año, " +
+                    "CUATRIMESTRE = @Cuatrimestre, " +
+                    "CD_MODALIDAD = @IdModalidad " +
+                "Where CD_COMISION = @Id");
                 accesoDatos.Comando.Parameters.Clear();
-                //accesoDatos.Comando.Parameters.AddWithValue("@Apellido", modificar.Apellido);
-                //accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
-                //accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac.ToShortDateString());
+                accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdMateria", modificar.Materia.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@Año", modificar.Año);
+                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", modificar.Cuatrimestre);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdModalidad", modificar.Modalidad.Id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -118,7 +125,8 @@ namespace Services.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM TB_COMISIONES WHERE CD_COMISION = " + id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_COMISIONES " +
+                    "SET DESHABILITADO = 1 WHERE CD_COMISION = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -136,11 +144,13 @@ namespace Services.Services
         private Comision Make(SqlDataReader lector, bool complete)
         {
             Comision entidad = new Comision();
-            entidad.Id = (int)lector["CD_COMISION"];
-            //entidad.Apellido = (string)lector["APELLIDO"];
-            //entidad.Nombre = (string)lector["NOMBRE"];
-            //entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
+            entidad.Id = (long)lector["CD_COMISION"];
+            entidad.Año = (int)lector["AÑO"];
+            entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
             entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+
+            entidad.Materia = new MateriaService().GetById((int)lector["CD_MATERIA"]);
+            entidad.Modalidad = new ModalidadService().GetById((byte)lector["CD_MODALIDAD"]);
 
             if (complete) { }
 

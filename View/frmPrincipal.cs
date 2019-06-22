@@ -89,6 +89,15 @@ namespace View
         private void btnComisiones_Click(object sender, EventArgs e)
         {
             moverPanelSelec(btnComisiones);
+            ucGrillaComisiones uc = new ucGrillaComisiones();
+            llenarPanelCont(uc);
+        }
+
+        private void btnInscripciones_Click(object sender, EventArgs e)
+        {
+            moverPanelSelec(btnInscripciones);
+            //ucGrillaInscripciones uc = new ucGrillaInscripciones();
+            //llenarPanelCont(uc);
         }
     }
 }

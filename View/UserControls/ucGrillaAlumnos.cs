@@ -72,10 +72,11 @@ namespace View
             try
             {
                 Alumnos = s.GetAll();
-                dgvGrilla.DataSource = Alumnos;
+                dgvGrilla.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false);
                 dgvGrilla.Columns["Id"].HeaderText = "Legajo";
                 dgvGrilla.Columns["FechaNac"].HeaderText = "Fecha de nacimiento";
                 dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -87,7 +88,8 @@ namespace View
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Alumnos;
+                dgvGrilla.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             else
             {
@@ -97,6 +99,7 @@ namespace View
                                                         || x.Nombre.ToUpper().Contains(busqueda)
                                                         || x.FechaNac.ToShortDateString().Contains(busqueda));
                 dgvGrilla.DataSource = lista;
+                dgvGrilla.Columns["Deshabilitado"].Visible = true;
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using Entities.Models;
-using Services.Services;
+﻿using AccesoDatos.Services;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,12 +19,38 @@ namespace View.Forms
         public frmComision()
         {
             InitializeComponent();
+            dtpAño.CustomFormat = "yyyy";
         }
 
         public frmComision(Comision comision)
         {
             InitializeComponent();
+            dtpAño.CustomFormat = "yyyy";
             this.comision = comision;
+        }
+
+        private void frmComision_Load(object sender, EventArgs e)
+        {
+            cmbMateria.DataSource = new MateriaService().GetAll().FindAll(x => !x.Deshabilitado);
+
+            cmbCuatrimestre.DataSource = new List<byte> { 1, 2 };
+
+            cmbModalidad.DataSource = new ModalidadService().GetAll().FindAll(x => !x.Deshabilitado);
+
+            if (this.comision != null)
+            {
+                txtID.Text = comision.Id.ToString();
+                cmbMateria.SelectedIndex = cmbMateria.FindString(comision.Materia.ToString());
+                dtpAño.Value = new DateTime(comision.Año, DateTime.Today.Month, DateTime.Today.Day);
+                cmbCuatrimestre.SelectedIndex = comision.Cuatrimestre == 0 ? -1 : (byte)(comision.Cuatrimestre - 1);
+                cmbModalidad.SelectedItem = comision.Modalidad;
+            }
+            else
+            {
+                cmbMateria.SelectedIndex = -1;
+                cmbCuatrimestre.SelectedIndex = -1;
+                cmbModalidad.SelectedIndex = -1;
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -34,7 +60,10 @@ namespace View.Forms
                 validarEntidad();
 
                 if (comision == null) comision = new Comision();
-
+                comision.Materia = (Materia)cmbMateria.SelectedItem;
+                comision.Año = dtpAño.Value.Year;
+                comision.Cuatrimestre = (byte)(cmbCuatrimestre.SelectedItem ?? 0);
+                comision.Modalidad = (Modalidad)cmbModalidad.SelectedItem;
 
                 ComisionService s = new ComisionService();
 
@@ -59,10 +88,29 @@ namespace View.Forms
         {
             string errores = "";
 
+            if (cmbMateria.SelectedItem == null)
+                errores += "Debe seleccionar una materia. " + Environment.NewLine;
+
+            if (cmbCuatrimestre.SelectedItem == null && cmbCuatrimestre.Enabled)
+                errores += "Debe seleccionar un cuatrimestre. ";
+
+            if (cmbModalidad.SelectedItem == null)
+                errores += "Debe seleccionar una modalidad. " + Environment.NewLine;
+
             if (errores != "")
             {
                 throw new WarningException(errores);
             }
+        }
+
+        private void cmbMateria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbMateria.SelectedItem == null)
+                return;
+
+            Materia materia = (Materia)cmbMateria.SelectedItem;
+            
+            cmbCuatrimestre.Enabled = materia.Cuatrimestre != 0;
         }
     }
 }

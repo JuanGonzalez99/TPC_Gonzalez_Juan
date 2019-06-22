@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Services
+namespace AccesoDatos.Services
 {
     public class HorarioService
     {
@@ -38,7 +38,7 @@ namespace Services.Services
             }
         }
 
-        public Horario GetById(int id)
+        public Horario GetById(int id, bool complete = false)
         {
             Horario Horario = new Horario();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -51,7 +51,7 @@ namespace Services.Services
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    Horario = Make(accesoDatos.Lector, true);
+                    Horario = Make(accesoDatos.Lector, complete);
                 }
 
                 return Horario;
@@ -96,7 +96,11 @@ namespace Services.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("UPDATE TB_HORARIOS SET HORA_INICIO=@HoraInicio, HORA_FIN=@HoraFin, DIA_SEMANA=@DiaSemana Where CD_HORARIO=" + modificar.Id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_HORARIOS SET " +
+                    "HORA_INICIO = @HoraInicio, " +
+                    "HORA_FIN= @HoraFin, " +
+                    "DIA_SEMANA = @DiaSemana " +
+                "Where CD_HORARIO=" + modificar.Id.ToString());
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@HoraInicio", modificar.HoraInicio);
                 accesoDatos.Comando.Parameters.AddWithValue("@HoraFin", modificar.HoraFin);
@@ -119,7 +123,8 @@ namespace Services.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM TB_HORARIOS WHERE CD_HORARIO = " + id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_HORARIOS " +
+                    "SET DESHABILITADO = 1 WHERE CD_HORARIO = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }

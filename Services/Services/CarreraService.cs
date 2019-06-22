@@ -36,20 +36,20 @@ namespace AccesoDatos.Services
             }
         }
 
-        public Carrera GetById(short id)
+        public Carrera GetById(short id, bool complete = false)
         {
             Carrera carrera = new Carrera();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_CARRERAS WHERE CD_CARRERAS = @Id");
+                accesoDatos.setearConsulta("SELECT * FROM TB_CARRERAS WHERE CD_CARRERA = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    carrera = Make(accesoDatos.Lector, true);
+                    carrera = Make(accesoDatos.Lector, complete);
                 }
 
                 return carrera;
@@ -71,7 +71,11 @@ namespace AccesoDatos.Services
             try
             {
                 accesoDatos.setearConsulta("INSERT INTO TB_CARRERAS (NOMBRE, NOMBRE_CORTO, DURACION) " +
-                    "values('" + nuevo.Nombre + "', '" + nuevo.NombreCorto + "', " + nuevo.Duracion + ")");
+                    "values(@Nombre, @NombreCorto, @Duracion)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@NombreCorto", nuevo.NombreCorto);
+                accesoDatos.Comando.Parameters.AddWithValue("@Duracion", nuevo.Duracion);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -90,9 +94,13 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("UPDATE TB_CARRERAS SET NOMBRE=@Nombre, NOMBRE_CORTO=@NombreCorto, DURACION=@Duracion " +
-                    "WHERE CD_CARRERA=" + modificar.Id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_CARRERAS SET " +
+                    "NOMBRE = @Nombre, " +
+                    "NOMBRE_CORTO = @NombreCorto, " +
+                    "DURACION = @Duracion " +
+                "Where CD_CARRERA = @Id");
                 accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@NombreCorto", modificar.NombreCorto);
                 accesoDatos.Comando.Parameters.AddWithValue("@Duracion", modificar.Duracion);
@@ -114,7 +122,8 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM TB_CARRERAS WHERE CD_CARRERA = " + id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_CARRERAS " +
+                    "SET DESHABILITADO = 1 WHERE CD_CARRERA = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }

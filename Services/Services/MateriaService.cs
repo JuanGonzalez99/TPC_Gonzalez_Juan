@@ -16,13 +16,12 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA," +
-                    " C.DURACION FROM TB_MATERIAS M, TB_CARRERAS C WHERE M.CD_CARRERA = C.CD_CARRERA");
+                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    listado.Add(Make(accesoDatos.Lector, true));
+                    listado.Add(Make(accesoDatos.Lector, false));
                 }
 
                 return listado;
@@ -37,21 +36,20 @@ namespace AccesoDatos.Services
             }
         }
 
-        public Materia GetById(int id)
+        public Materia GetById(int id, bool complete = false)
         {
             Materia materia = new Materia();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT M.*, C.NOMBRE AS NOMBRE_CARRERA, C.NOMBRE_CORTO AS NM_CORTO_CARRERA, C.DURACION, C.DESHABILITADO AS C_DESHABILITADO,  FROM TB_MATERIAS M " +
-                    "INNER JOIN TB_CARRERAS C ON M.CD_CARRERA = C.CD_CARRERA WHERE CD_Materias = @Id");
+                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_MATERIA = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    materia = Make(accesoDatos.Lector, true);
+                    materia = Make(accesoDatos.Lector, complete);
                 }
 
                 return materia;
@@ -72,9 +70,9 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_CARRERA = @CarreraId");
+                accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS WHERE CD_CARRERA = @IdCarrera");
                 accesoDatos.Comando.Parameters.Clear();
-                accesoDatos.Comando.Parameters.AddWithValue("@CarreraId", carreraId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdCarrera", carreraId);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
@@ -101,7 +99,12 @@ namespace AccesoDatos.Services
             try
             {
                 accesoDatos.setearConsulta("INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, AÑO, CUATRIMESTRE) " +
-                    "values('" + nuevo.Nombre + "', " + nuevo.Carrera.Id + ", " + nuevo.Año + ", " + nuevo.Cuatrimestre + ")");
+                    "values(@Nombre, @IdCarrera, @Año, @Cuatrimestre)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdCarrera", nuevo.Carrera.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@Año", nuevo.Año);
+                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", nuevo.Cuatrimestre);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -121,10 +124,15 @@ namespace AccesoDatos.Services
             try
             {
                 accesoDatos.setearConsulta("UPDATE TB_MATERIAS SET " +
-                    "NOMBRE=@Nombre, CD_CARRERA=@Carrera, AÑO=@Año, CUATRIMESTRE=@Cuatrimestre WHERE CD_MATERIA=" + modificar.Id.ToString());
+                    "NOMBRE = @Nombre, " +
+                    "CD_CARRERA = @IdCarrera, " +
+                    "AÑO = @Año, " +
+                    "CUATRIMESTRE = @Cuatrimestre " +
+                "Where CD_MATERIA = @Id");
                 accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
-                accesoDatos.Comando.Parameters.AddWithValue("@Carrera", modificar.Carrera.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdCarrera", modificar.Carrera.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Año", modificar.Año);
                 accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", modificar.Cuatrimestre);
                 accesoDatos.abrirConexion();
@@ -145,7 +153,8 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM TB_MATERIAS WHERE CD_MATERIA = " + id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_MATERIAS " +
+                    "SET DESHABILITADO = 1 WHERE CD_MATERIA = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -166,19 +175,12 @@ namespace AccesoDatos.Services
             entidad.Id = (int)lector["CD_MATERIA"];
             entidad.Nombre = (string)lector["NOMBRE"];
             entidad.Año = (byte)lector["AÑO"];
-            if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
-                entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
+            entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
             entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
-            if (complete)
-            {
-                entidad.Carrera = new Carrera();
-                entidad.Carrera.Id = (short)lector["CD_CARRERA"];
-                entidad.Carrera.Nombre = (string)lector["NOMBRE_CARRERA"];
-                entidad.Carrera.NombreCorto = (string)lector["NM_CORTO_CARRERA"];
-                entidad.Carrera.Duracion = (byte)lector["DURACION"];
-                entidad.Carrera.Deshabilitado = (bool)lector["C_DESHABILITADO"];
-            }
+            entidad.Carrera = new CarreraService().GetById((short)lector["CD_CARRERA"]);
+
+            if (complete) { }
 
             return entidad;
         }

@@ -208,7 +208,7 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 367);
             this.Name = "frmMateria";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Materia";
             this.Load += new System.EventHandler(this.frmMateria_Load);
             this.ResumeLayout(false);

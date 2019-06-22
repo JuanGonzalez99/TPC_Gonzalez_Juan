@@ -49,6 +49,7 @@
     <Compile Include="Models\Carrera.cs" />
     <Compile Include="Models\Comision.cs" />
     <Compile Include="Models\Horario.cs" />
+    <Compile Include="Models\Inscripcion.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\Modalidad.cs" />
     <Compile Include="Models\Nota.cs" />

@@ -82,10 +82,10 @@ namespace View.UserControls
             try
             {
                 Carreras = s.GetAll();
-                dgvGrilla.DataSource = Carreras;
+                dgvGrilla.DataSource = Carreras.FindAll(x => x.Deshabilitado == false);
                 dgvGrilla.Columns["NombreCorto"].HeaderText = "Nombre corto";
                 dgvGrilla.Columns["Duracion"].HeaderText = "Duración";
-                dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -97,7 +97,8 @@ namespace View.UserControls
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Carreras;
+                dgvGrilla.DataSource = Carreras.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             else
             {
@@ -107,6 +108,7 @@ namespace View.UserControls
                                                         || x.NombreCorto.ToUpper().Contains(busqueda)
                                                         || x.Duracion.ToString().Contains(busqueda));
                 dgvGrilla.DataSource = lista;
+                dgvGrilla.Columns["Deshabilitado"].Visible = true;
             }
         }
     }

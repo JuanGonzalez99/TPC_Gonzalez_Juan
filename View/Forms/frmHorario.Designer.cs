@@ -64,7 +64,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(150, 283);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 33);
-            this.btnCancelar.TabIndex = 20;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -74,7 +74,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(40, 283);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(92, 33);
-            this.btnAceptar.TabIndex = 19;
+            this.btnAceptar.TabIndex = 3;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -86,7 +86,7 @@
             this.dtpHoraInicio.Name = "dtpHoraInicio";
             this.dtpHoraInicio.ShowUpDown = true;
             this.dtpHoraInicio.Size = new System.Drawing.Size(136, 20);
-            this.dtpHoraInicio.TabIndex = 21;
+            this.dtpHoraInicio.TabIndex = 0;
             this.dtpHoraInicio.UseWaitCursor = true;
             this.dtpHoraInicio.Value = new System.DateTime(2019, 6, 16, 13, 32, 32, 0);
             // 
@@ -97,7 +97,7 @@
             this.dtpHoraFin.Name = "dtpHoraFin";
             this.dtpHoraFin.ShowUpDown = true;
             this.dtpHoraFin.Size = new System.Drawing.Size(136, 20);
-            this.dtpHoraFin.TabIndex = 22;
+            this.dtpHoraFin.TabIndex = 1;
             this.dtpHoraFin.UseWaitCursor = true;
             this.dtpHoraFin.Value = new System.DateTime(2019, 6, 16, 13, 32, 32, 0);
             // 
@@ -125,7 +125,7 @@
             this.cmbDia.Location = new System.Drawing.Point(111, 203);
             this.cmbDia.Name = "cmbDia";
             this.cmbDia.Size = new System.Drawing.Size(136, 21);
-            this.cmbDia.TabIndex = 25;
+            this.cmbDia.TabIndex = 2;
             // 
             // label4
             // 
@@ -153,7 +153,7 @@
             this.Controls.Add(this.label3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmHorario";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Horario";
             this.Load += new System.EventHandler(this.frmHorario_Load);
             this.ResumeLayout(false);

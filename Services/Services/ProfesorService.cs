@@ -36,7 +36,7 @@ namespace AccesoDatos.Services
             }
         }
 
-        public Profesor GetById(long id)
+        public Profesor GetById(int id, bool complete = false)
         {
             Profesor profesor = new Profesor();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -49,7 +49,7 @@ namespace AccesoDatos.Services
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    profesor = Make(accesoDatos.Lector, true);
+                    profesor = Make(accesoDatos.Lector, complete);
                 }
 
                 return profesor;
@@ -70,8 +70,14 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' INSERT INTO TB_PROFESORES (APELLIDO, NOMBRE, FECHA_NAC, FECHA_INGRESO) " +
-                    "values('" + nuevo.Apellido + "', '" + nuevo.Nombre + "', '" + nuevo.FechaNac.ToShortDateString() + "', '" + nuevo.FechaIngreso.ToShortDateString() + "')");
+                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' " +
+                    "INSERT INTO TB_PROFESORES (APELLIDO, NOMBRE, FECHA_NAC, FECHA_INGRESO) " +
+                    "values(@Apellido, @Nombre, @FechaNac, @FechaIngreso)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Apellido", nuevo.Apellido);
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
+                accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", nuevo.FechaNac.ToShortDateString());
+                accesoDatos.Comando.Parameters.AddWithValue("@FechaIngreso", nuevo.FechaIngreso.ToShortDateString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -90,9 +96,15 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' UPDATE TB_PROFESORES SET APELLIDO=@Apellido, NOMBRE=@Nombre, " +
-                    "FECHA_NAC=@FechaNac, FECHA_INGRESO=@FechaIngreso WHERE CD_PROFESOR=" + modificar.Id.ToString());
+                accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' " +
+                    "UPDATE TB_PROFESORES SET " +
+                    "APELLIDO = @Apellido, " +
+                    "NOMBRE = @Nombre, " +
+                    "FECHA_NAC = @FechaNac, " +
+                    "FECHA_INGRESO = @FechaIngreso " +
+                "Where CD_PROFESOR = @Id");
                 accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Apellido", modificar.Apellido);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac.ToShortDateString());
@@ -115,7 +127,8 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("DELETE FROM TB_PROFESORES WHERE CD_PROFESOR = " + id.ToString());
+                accesoDatos.setearConsulta("UPDATE TB_PROFESORES " +
+                    "SET DESHABILITADO = 1 WHERE CD_PROFESOR = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }

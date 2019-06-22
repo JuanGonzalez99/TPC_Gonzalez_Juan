@@ -118,16 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnInscripciones.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAXNJREFUSEu1lcF1AjEMRCmBUlICJVACpXDkSAmUQAkpgVLoYDNfKxlZeLkQ+70J
+        smY0lhdl2S3LYtA6CQ+BzVO4Cfvgt4DGtdSQwOPU+CQ8uoCDfoS7gHjzEDjXoKWGWohj0ljSEh43gRaF
+        txBXwKHxuDWY9vi1xxLEVTh7TFdP4hHg0Hh8Fq4eR6N4r+b+ifmvYAe4WB/v5iBzWhxALR7Zc+1C4EqI
+        wMGLDsIjTCrg0HiMNurxstsLr+dYoYWIoE1F4qJDe0QD3r4/gm4SnKSbiMPoNXolp0UjcRPiNoFRMJrl
+        bNAMc1y4qMEDLxvv7loZWltGo5ztRxgmA9kgxZfK1bqMYTIjGTUzrUvef8IwmYGJm9XOwXcHJLO3zh2N
+        28IwCapB2o9ym4esf2aOKYEAOecfTYvTpr4quBJG0152sNHNlNd1/UL//QeHzbyfzCRuAqGbhNBUwLnG
+        JlDoGjRNEkPG4+pm+RPQuJYaEnj41C27P6DLv/5wLfxaAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="btnComisiones.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAFzSURBVEhLtZXBdQIxDEQpgVJSAiVQAqVw5EgJlEAJKYFS
-        6GAzXysZWXi5EPu9CbJmNJYXZdkty2LQOgkPgc1TuAn74LeAxrXUkMDj1PgkPLqAg36Eu4B48xA416Cl
-        hlqIY9JY0hIeN4EWhbcQV8Ch8bg1mPb4tccSxFU4e0xXT+IR4NB4fBauHkejeK/m/on5r2AHuFgf7+Yg
-        c1ocQC0e2XPtQuBKiMDBiw7CI0wq4NB4jDbq8bLbC6/nWKGFiKBNReKiQ3tEA96+P4JuEpykm4jD6DV6
-        JadFI3ET4jaBUTCa5WzQDHNcuKjBAy8b7+5aGVpbRqOc7UcYJgPZIMWXytW6jGEyIxk1M61L3n/CMJmB
-        iZvVzsF3BySzt84djdvCMAmqQdqPcpuHrH9mjimBADnnH02L06a+KrgSRtNedrDRzZTXdf1C//0Hh828
-        n8wkbgKhm4TQVMC5xiZQ6Bo0TRJDxuPqZvkT0LiWGhJ4+NQtuz+gy7/+cC38WgAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAXNJREFUSEu1lcF1AjEMRCmBUlICJVACpXDkSAmUQAkpgVLoYDNfKxlZeLkQ+70J
+        smY0lhdl2S3LYtA6CQ+BzVO4Cfvgt4DGtdSQwOPU+CQ8uoCDfoS7gHjzEDjXoKWGWohj0ljSEh43gRaF
+        txBXwKHxuDWY9vi1xxLEVTh7TFdP4hHg0Hh8Fq4eR6N4r+b+ifmvYAe4WB/v5iBzWhxALR7Zc+1C4EqI
+        wMGLDsIjTCrg0HiMNurxstsLr+dYoYWIoE1F4qJDe0QD3r4/gm4SnKSbiMPoNXolp0UjcRPiNoFRMJrl
+        bNAMc1y4qMEDLxvv7loZWltGo5ztRxgmA9kgxZfK1bqMYTIjGTUzrUvef8IwmYGJm9XOwXcHJLO3zh2N
+        28IwCapB2o9ym4esf2aOKYEAOecfTYvTpr4quBJG0152sNHNlNd1/UL//QeHzbyfzCRuAqGbhNBUwLnG
+        JlDoGjRNEkPG4+pm+RPQuJYaEnj41C27P6DLv/5wLfxaAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnHorarios.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

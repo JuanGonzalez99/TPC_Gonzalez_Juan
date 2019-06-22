@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.pnlBotones = new System.Windows.Forms.Panel();
+            this.btnComisiones = new System.Windows.Forms.Button();
             this.btnHorarios = new System.Windows.Forms.Button();
             this.pnlSelec = new System.Windows.Forms.Panel();
             this.btnInicio = new System.Windows.Forms.Button();
@@ -41,7 +42,7 @@
             this.pnlUsuario = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.pnlContenido = new System.Windows.Forms.Panel();
-            this.btnComisiones = new System.Windows.Forms.Button();
+            this.btnInscripciones = new System.Windows.Forms.Button();
             this.pnlBotones.SuspendLayout();
             this.pnlUsuario.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +50,7 @@
             // pnlBotones
             // 
             this.pnlBotones.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlBotones.Controls.Add(this.btnInscripciones);
             this.pnlBotones.Controls.Add(this.btnComisiones);
             this.pnlBotones.Controls.Add(this.btnHorarios);
             this.pnlBotones.Controls.Add(this.pnlSelec);
@@ -63,6 +65,23 @@
             this.pnlBotones.Name = "pnlBotones";
             this.pnlBotones.Size = new System.Drawing.Size(125, 456);
             this.pnlBotones.TabIndex = 0;
+            // 
+            // btnComisiones
+            // 
+            this.btnComisiones.FlatAppearance.BorderSize = 0;
+            this.btnComisiones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnComisiones.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnComisiones.Image = ((System.Drawing.Image)(resources.GetObject("btnComisiones.Image")));
+            this.btnComisiones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnComisiones.Location = new System.Drawing.Point(0, 319);
+            this.btnComisiones.Name = "btnComisiones";
+            this.btnComisiones.Size = new System.Drawing.Size(125, 30);
+            this.btnComisiones.TabIndex = 7;
+            this.btnComisiones.Text = "Comisiones";
+            this.btnComisiones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnComisiones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnComisiones.UseVisualStyleBackColor = true;
+            this.btnComisiones.Click += new System.EventHandler(this.btnComisiones_Click);
             // 
             // btnHorarios
             // 
@@ -214,22 +233,22 @@
             this.pnlContenido.Size = new System.Drawing.Size(694, 336);
             this.pnlContenido.TabIndex = 2;
             // 
-            // btnComisiones
+            // btnInscripciones
             // 
-            this.btnComisiones.FlatAppearance.BorderSize = 0;
-            this.btnComisiones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnComisiones.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnComisiones.Image = ((System.Drawing.Image)(resources.GetObject("btnComisiones.Image")));
-            this.btnComisiones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnComisiones.Location = new System.Drawing.Point(0, 319);
-            this.btnComisiones.Name = "btnComisiones";
-            this.btnComisiones.Size = new System.Drawing.Size(125, 30);
-            this.btnComisiones.TabIndex = 7;
-            this.btnComisiones.Text = "Comisiones";
-            this.btnComisiones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnComisiones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnComisiones.UseVisualStyleBackColor = true;
-            this.btnComisiones.Click += new System.EventHandler(this.btnComisiones_Click);
+            this.btnInscripciones.FlatAppearance.BorderSize = 0;
+            this.btnInscripciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInscripciones.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInscripciones.Image = ((System.Drawing.Image)(resources.GetObject("btnInscripciones.Image")));
+            this.btnInscripciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInscripciones.Location = new System.Drawing.Point(0, 355);
+            this.btnInscripciones.Name = "btnInscripciones";
+            this.btnInscripciones.Size = new System.Drawing.Size(125, 53);
+            this.btnInscripciones.TabIndex = 8;
+            this.btnInscripciones.Text = "Inscripciones";
+            this.btnInscripciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnInscripciones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnInscripciones.UseVisualStyleBackColor = true;
+            this.btnInscripciones.Click += new System.EventHandler(this.btnInscripciones_Click);
             // 
             // frmPrincipal
             // 
@@ -264,5 +283,6 @@
         private System.Windows.Forms.Button btnInicio;
         private System.Windows.Forms.Button btnHorarios;
         private System.Windows.Forms.Button btnComisiones;
+        private System.Windows.Forms.Button btnInscripciones;
     }
 }

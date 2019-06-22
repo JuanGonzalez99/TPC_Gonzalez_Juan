@@ -74,8 +74,9 @@ namespace View.UserControls
             try
             {
                 Materias = s.GetAll();
-                dgvGrilla.DataSource = Materias;
+                dgvGrilla.DataSource = Materias.FindAll(x => x.Deshabilitado == false);
                 dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -87,7 +88,8 @@ namespace View.UserControls
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Materias;
+                dgvGrilla.DataSource = Materias.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             else
             {
@@ -96,6 +98,7 @@ namespace View.UserControls
                                                         || x.Nombre.ToUpper().Contains(busqueda)
                                                         || x.Carrera.ToString().ToUpper().Contains(busqueda));
                 dgvGrilla.DataSource = lista;
+                dgvGrilla.Columns["Deshabilitado"].Visible = true;
             }
         }
     }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities.Models;
-using Services.Services;
+using AccesoDatos.Services;
 using Entities.Helpers;
 using View.Forms;
 
@@ -73,8 +73,8 @@ namespace View.UserControls
             try
             {
                 Horarios = s.GetAll();
-                dgvGrilla.DataSource = Horarios;
-                dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
+                dgvGrilla.DataSource = Horarios.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -86,7 +86,8 @@ namespace View.UserControls
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Horarios;
+                dgvGrilla.DataSource = Horarios.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             else
             {
@@ -96,6 +97,7 @@ namespace View.UserControls
                                                         || x.HoraFin.ToString().Contains(busqueda)
                                                         || x.DiaSemana.ToString().ToUpper().Contains(busqueda));
                 dgvGrilla.DataSource = lista;
+                dgvGrilla.Columns["Deshabilitado"].Visible = true;
             }
         }
     }

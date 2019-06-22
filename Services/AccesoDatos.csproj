@@ -48,6 +48,7 @@
     <Compile Include="Services\ComisionService.cs" />
     <Compile Include="Services\HorarioService.cs" />
     <Compile Include="Services\MateriaService.cs" />
+    <Compile Include="Services\ModalidadService.cs" />
     <Compile Include="Services\ProfesorService.cs" />
   </ItemGroup>
   <ItemGroup />

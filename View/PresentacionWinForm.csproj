@@ -90,6 +90,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\ucGrillaInscripciones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucGrillaInscripciones.Designer.cs">
+      <DependentUpon>ucGrillaInscripciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ucGrillaAlumnos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,6 +162,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControls\ucGrillaInscripciones.resx">
+      <DependentUpon>ucGrillaInscripciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucGrillaAlumnos.resx">
       <DependentUpon>ucGrillaAlumnos.cs</DependentUpon>
     </EmbeddedResource>

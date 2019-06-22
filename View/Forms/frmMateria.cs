@@ -75,7 +75,7 @@ namespace View.Forms
                 Materia.Nombre = txtNombre.Text;
                 Materia.Carrera = (Carrera)cmbCarrera.SelectedItem;
                 Materia.Año = (byte)cmbAño.SelectedItem;
-                Materia.Cuatrimestre = (byte)cmbCuatrimestre.SelectedItem;
+                Materia.Cuatrimestre = (byte)(cmbCuatrimestre.SelectedItem ?? 0);
 
                 MateriaService s = new MateriaService();
                 if (this.Materia.Id != 0)
@@ -115,9 +115,6 @@ namespace View.Forms
 
             if (cmbCuatrimestre.SelectedItem == null && cmbTipoCursada.SelectedText == "Cuatrimestral")
                 errores += "Debe especificar el cuatrimestre" + Environment.NewLine;
-
-            else if (cmbCuatrimestre.SelectedItem == null)
-                cmbCuatrimestre.DataSource = new List<byte> { 0 };
 
             if (errores != "")
             {

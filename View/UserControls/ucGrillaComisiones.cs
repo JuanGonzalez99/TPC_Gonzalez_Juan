@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using View.Forms;
 using Entities.Helpers;
 using Entities.Models;
-using Services.Services;
+using AccesoDatos.Services;
 
 namespace View.UserControls
 {
@@ -73,9 +73,9 @@ namespace View.UserControls
             try
             {
                 Comisiones = s.GetAll();
-                dgvGrilla.DataSource = Comisiones;
+                dgvGrilla.DataSource = Comisiones.FindAll(x => x.Deshabilitado == false);
                 dgvGrilla.Columns["Id"].Visible = false;
-                dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -87,16 +87,18 @@ namespace View.UserControls
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Comisiones;
+                dgvGrilla.DataSource = Comisiones.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             else
             {
-                //string busqueda = txtBuscar.Text.ToUpper();
-                //List<Comision> lista = Comisiones.FindAll(x => x.Id.ToString().Contains(busqueda)
-                //                                        || x.Apellido.ToUpper().Contains(busqueda)
-                //                                        || x.Nombre.ToUpper().Contains(busqueda)
-                //                                        || x.FechaNac.ToShortDateString().Contains(busqueda));
-                //dgvGrilla.DataSource = lista;
+                string busqueda = txtBuscar.Text.ToUpper();
+                List<Comision> lista = Comisiones.FindAll(x => x.Id.ToString().Contains(busqueda)
+                                                        || x.Materia.ToString().ToUpper().Contains(busqueda)
+                                                        || x.Año.ToString().Contains(busqueda)
+                                                        || x.Modalidad.ToString().Contains(busqueda));
+                dgvGrilla.DataSource = lista;
+                dgvGrilla.Columns["Deshabilitado"].Visible = true;
             }
         }
     }

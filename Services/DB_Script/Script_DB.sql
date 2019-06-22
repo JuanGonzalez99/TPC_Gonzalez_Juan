@@ -13,7 +13,7 @@ CREATE DATABASE GONZALEZ_JUAN_DB
 GO
 USE [GONZALEZ_JUAN_DB]
 GO
-/****** Object:  Table [dbo].[TB_ALUMNOS]    Script Date: 17/6/2019 23:18:02 ******/
+/****** Object:  Table [dbo].[TB_ALUMNOS]    Script Date: 22/6/2019 16:11:41 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -30,7 +30,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_ALUMNOS_COMISIONES]    Script Date: 17/6/2019 23:18:03 ******/
+/****** Object:  Table [dbo].[TB_ALUMNOS_COMISIONES]    Script Date: 22/6/2019 16:11:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -52,7 +52,7 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_CARRERAS]    Script Date: 17/6/2019 23:18:03 ******/
+/****** Object:  Table [dbo].[TB_CARRERAS]    Script Date: 22/6/2019 16:11:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -69,7 +69,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_COMISIONES]    Script Date: 17/6/2019 23:18:03 ******/
+/****** Object:  Table [dbo].[TB_COMISIONES]    Script Date: 22/6/2019 16:11:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +87,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_COMPETENCIAS]    Script Date: 17/6/2019 23:18:03 ******/
+/****** Object:  Table [dbo].[TB_COMPETENCIAS]    Script Date: 22/6/2019 16:11:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -102,7 +102,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_COMPETENCIAS_EXAMENES]    Script Date: 17/6/2019 23:18:03 ******/
+/****** Object:  Table [dbo].[TB_COMPETENCIAS_EXAMENES]    Script Date: 22/6/2019 16:11:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +118,21 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_EXAMENES]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_ESTADOS_MATERIA]    Script Date: 22/6/2019 16:11:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TB_ESTADOS_MATERIA](
+	[CD_ESTADO] [tinyint] IDENTITY(1,1) NOT NULL,
+	[DESCRIPCION] [varchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CD_ESTADO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TB_EXAMENES]    Script Date: 22/6/2019 16:11:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -135,7 +149,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_HORARIOS]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_HORARIOS]    Script Date: 22/6/2019 16:11:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -152,7 +166,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_HORARIOS_COMISIONES]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_HORARIOS_COMISIONES]    Script Date: 22/6/2019 16:11:43 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,7 +182,29 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_MATERIAS]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_INSCRIPCIONES]    Script Date: 22/6/2019 16:11:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TB_INSCRIPCIONES](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[AÑO] [int] NOT NULL,
+	[CUATRIMESTRE] [tinyint] NOT NULL,
+	[FECHA_APERTURA] [date] NOT NULL,
+	[FECHA_CIERRE] [date] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[AÑO] ASC,
+	[CUATRIMESTRE] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TB_MATERIAS]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -186,7 +222,24 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_MODALIDADES]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_MATERIAS_CORRELATIVAS]    Script Date: 22/6/2019 16:11:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TB_MATERIAS_CORRELATIVAS](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[CD_MATERIA] [int] NOT NULL,
+	[CD_MATERIA_REQUERIDA] [int] NOT NULL,
+	[CD_ESTADO_REQUERIDO] [tinyint] NOT NULL,
+	[DESHABILITADO] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TB_MODALIDADES]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -201,7 +254,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_NOTAS]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_NOTAS]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +271,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_PROFESORES]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_PROFESORES]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -236,7 +289,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_PROFESORES_COMISIONES]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_PROFESORES_COMISIONES]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -258,7 +311,7 @@ UNIQUE NONCLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_ROL_PROFESORES]    Script Date: 17/6/2019 23:18:04 ******/
+/****** Object:  Table [dbo].[TB_ROL_PROFESORES]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -273,7 +326,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TB_TIPO_EXAMEN]    Script Date: 17/6/2019 23:18:05 ******/
+/****** Object:  Table [dbo].[TB_TIPO_EXAMEN]    Script Date: 22/6/2019 16:11:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,6 +360,8 @@ GO
 ALTER TABLE [dbo].[TB_HORARIOS_COMISIONES] ADD  DEFAULT ((0)) FOR [DESHABILITADO]
 GO
 ALTER TABLE [dbo].[TB_MATERIAS] ADD  DEFAULT ((0)) FOR [DESHABILITADO]
+GO
+ALTER TABLE [dbo].[TB_MATERIAS_CORRELATIVAS] ADD  DEFAULT ((0)) FOR [DESHABILITADO]
 GO
 ALTER TABLE [dbo].[TB_MODALIDADES] ADD  DEFAULT ((0)) FOR [DESHABILITADO]
 GO
@@ -358,6 +413,15 @@ GO
 ALTER TABLE [dbo].[TB_MATERIAS]  WITH CHECK ADD FOREIGN KEY([CD_CARRERA])
 REFERENCES [dbo].[TB_CARRERAS] ([CD_CARRERA])
 GO
+ALTER TABLE [dbo].[TB_MATERIAS_CORRELATIVAS]  WITH CHECK ADD FOREIGN KEY([CD_ESTADO_REQUERIDO])
+REFERENCES [dbo].[TB_ESTADOS_MATERIA] ([CD_ESTADO])
+GO
+ALTER TABLE [dbo].[TB_MATERIAS_CORRELATIVAS]  WITH CHECK ADD FOREIGN KEY([CD_MATERIA])
+REFERENCES [dbo].[TB_MATERIAS] ([CD_MATERIA])
+GO
+ALTER TABLE [dbo].[TB_MATERIAS_CORRELATIVAS]  WITH CHECK ADD FOREIGN KEY([CD_MATERIA_REQUERIDA])
+REFERENCES [dbo].[TB_MATERIAS] ([CD_MATERIA])
+GO
 ALTER TABLE [dbo].[TB_PROFESORES_COMISIONES]  WITH CHECK ADD FOREIGN KEY([CD_COMISION])
 REFERENCES [dbo].[TB_COMISIONES] ([CD_COMISION])
 GO
@@ -369,206 +433,14 @@ REFERENCES [dbo].[TB_ROL_PROFESORES] ([CD_ROL_PROFESOR])
 GO
 ALTER TABLE [dbo].[TB_HORARIOS]  WITH CHECK ADD CHECK  (([DIA_SEMANA]>=(0) AND [DIA_SEMANA]<=(6)))
 GO
+ALTER TABLE [dbo].[TB_INSCRIPCIONES]  WITH CHECK ADD CHECK  (([cuatrimestre]=(2) OR [cuatrimestre]=(1) OR [cuatrimestre]=(0)))
+GO
+ALTER TABLE [dbo].[TB_INSCRIPCIONES]  WITH CHECK ADD CHECK  (([FECHA_APERTURA]<[FECHA_CIERRE]))
+GO
 ALTER TABLE [dbo].[TB_MATERIAS]  WITH CHECK ADD CHECK  (([CUATRIMESTRE]=(2) OR [CUATRIMESTRE]=(1) OR [CUATRIMESTRE]=(0)))
 GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_ALUMNOS] ON [dbo].[TB_ALUMNOS]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id int
-	Declare @Estado bit
-	Select @Id = CD_ALUMNO, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_ALUMNOS Set DESHABILITADO = 1
-		Where CD_ALUMNO = @Id
-	end
-	Else begin
-		Delete from TB_ALUMNOS
-		Where CD_ALUMNO = @Id
-	end
-END
-
+ALTER TABLE [dbo].[TB_MATERIAS_CORRELATIVAS]  WITH CHECK ADD CHECK  (([CD_MATERIA]<>[CD_MATERIA_REQUERIDA]))
 GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_CARRERAS] ON [dbo].[TB_CARRERAS]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id smallint
-	Declare @Estado bit
-	Select @Id = CD_CARRERA, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_CARRERAS Set DESHABILITADO = 1
-		Where CD_CARRERA = @Id
-	end
-	Else begin
-		Delete from TB_CARRERAS
-		Where CD_CARRERA = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_COMISIONES] ON [dbo].[TB_COMISIONES]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id bigint
-	Declare @Estado bit
-	Select @Id = CD_COMISION, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_COMISIONES Set DESHABILITADO = 1
-		Where CD_COMISION = @Id
-	end
-	Else begin
-		Delete from TB_COMISIONES
-		Where CD_COMISION = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_COMPETENCIAS] ON [dbo].[TB_COMPETENCIAS]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id int
-	Declare @Estado bit
-	Select @Id = CD_COMPETENCIA, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_COMPETENCIAS Set DESHABILITADO = 1
-		Where CD_COMPETENCIA = @Id
-	end
-	Else begin
-		Delete from TB_COMPETENCIAS
-		Where CD_COMPETENCIA = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_EXAMENES] ON [dbo].[TB_EXAMENES]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id bigint
-	Declare @Estado bit
-	Select @Id = CD_EXAMEN, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_EXAMENES Set DESHABILITADO = 1
-		Where CD_EXAMEN = @Id
-	end
-	Else begin
-		Delete from TB_EXAMENES
-		Where CD_EXAMEN = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_HORARIOS] ON [dbo].[TB_HORARIOS]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id int
-	Declare @Estado bit
-	Select @Id = CD_HORARIO, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_HORARIOS Set DESHABILITADO = 1
-		Where CD_HORARIO = @Id
-	end
-	Else begin
-		Delete from TB_HORARIOS
-		Where CD_HORARIO = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_MATERIAS] ON [dbo].[TB_MATERIAS]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id int
-	Declare @Estado bit
-	Select @Id = CD_MATERIA, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_MATERIAS Set DESHABILITADO = 1
-		Where CD_MATERIA = @Id
-	end
-	Else begin
-		Delete from TB_MATERIAS
-		Where CD_MATERIA = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_MODALIDADES] ON [dbo].[TB_MODALIDADES]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id tinyint
-	Declare @Estado bit
-	Select @Id = CD_MODALIDAD, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_MODALIDADES Set DESHABILITADO = 1
-		Where CD_MODALIDAD = @Id
-	end
-	Else begin
-		Delete from TB_MODALIDADES
-		Where CD_MODALIDAD = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_NOTAS] ON [dbo].[TB_NOTAS]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id bigint
-	Declare @Estado bit
-	Select @Id = ID, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_NOTAS Set DESHABILITADO = 1
-		Where ID = @Id
-	end
-	Else begin
-		Delete from TB_NOTAS
-		Where ID = @Id
-	end
-END
-
-GO
-
-CREATE   TRIGGER [dbo].[TRG_BAJA_PROFESORES] ON [dbo].[TB_PROFESORES]
-INSTEAD OF DELETE
-AS
-BEGIN
-	Declare @Id int
-	Declare @Estado bit
-	Select @Id = CD_PROFESOR, @Estado = DESHABILITADO From deleted
-
-	If @Estado = 0 begin
-		Update TB_PROFESORES Set DESHABILITADO = 1
-		Where CD_PROFESOR = @Id
-	end
-	Else begin
-		Delete from TB_PROFESORES
-		Where CD_PROFESOR = @Id
-	end
-END
 
 
 SET DATEFORMAT 'DMY'
@@ -580,3 +452,24 @@ INSERT INTO TB_PROFESORES([APELLIDO],[NOMBRE],[FECHA_NAC],[FECHA_INGRESO])
 VALUES('Mann','Hedwig','30/12/85','20/02/11'),('Gates','Omar','30/10/80','09/10/08'),('Beard','Chaney','09/01/84','07/05/10'),('Goodman','Jessica','16/04/97','12/09/08'),('Wilkinson','Rhona','16/04/88','26/10/07'),('Mcintyre','Elaine','21/06/87','11/02/13'),('Chen','Jolie','01/02/83','13/03/15'),('Weaver','Blaze','26/01/82','29/12/11'),('Hull','Dennis','24/10/80','07/08/11'),('Puckett','Madeline','11/10/92','01/06/13');
 GO
 
+INSERT INTO TB_CARRERAS (NOMBRE, NOMBRE_CORTO, DURACION)
+VALUES ('Tecnicatura Universitaria en Programación', 'TUP', 2), 
+	   ('Tecnicatura Universitaria en Sistemas Informáticos', 'TUSI', 1)
+GO
+
+INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, AÑO, CUATRIMESTRE)
+VALUES ('Sistemas de Procesamiento de Datos', 1, 1, 1), ('Programación I', 1, 1, 1), ('Matemática', 1, 1, 1), ('Inglés I', 1, 1, 1), ('Laboratorio de Computación I', 1, 1, 1), 
+	   ('Programación II', 1, 1, 2), ('Estadística', 1, 1, 2), ('Arquitectura y Sistemas Operativos', 1, 1, 2), ('Laboratorio de Computación II', 1, 1, 2), ('Inglés II', 1, 1, 2), ('Metodología de la Investigación', 1, 1, 2),
+	   ('Laboratorio de Computación III', 1, 2, 1), ('Organización Empresarial', 1, 2, 1), ('Organización Contable de la Empresa', 1, 2, 1), ('Elementos de Investigación Operativa', 1, 2, 1), ('Programación III', 1, 2, 1), ('Práctica Profesional', 1, 2, 1),
+	   ('Legislación', 1, 2, 2), ('Diseño y Administración de Bases de Datos', 1, 2, 2), ('Metodología de Sistemas I', 1, 2, 2), ('Laboratorio de Computación IV', 1, 2, 2)
+GO
+INSERT INTO TB_MATERIAS (NOMBRE, CD_CARRERA, AÑO, CUATRIMESTRE)
+VALUES ('Matemática II', 2, 1, 1), ('Inglés Avanzado I', 2, 1, 1), ('Base de Datos II', 2, 1, 1), ('Programación Avanzada I', 2, 1, 1), ('Laboratorio V', 2, 1, 1), ('Metodología de Sistemas II', 2, 1, 1), ('Redes', 2, 1, 1), ('Práctica Profesional', 2, 1, 1),
+	   ('Matemática III', 2, 1, 2), ('Inglés Avanzado II', 2, 1, 2), ('Investigación Operativa II', 2, 1, 2), ('Programación Avanzada II', 2, 1, 2), ('Metodología de Sistemas III', 2, 1, 2), ('Administración y Dirección de Proyectos', 2, 1, 2), ('Seminario', 2, 1, 2)
+GO
+
+INSERT INTO TB_ESTADOS_MATERIA (DESCRIPCION)
+VALUES ('Aprobada'), ('Regularizada'), ('Cursando'), ('Recursada'), ('Abandonada')
+GO
+INSERT INTO TB_MODALIDADES (DESCRIPCION)
+values ('Presencial'), ('Semi presencial'), ('A distancia')
