@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccesoDatos.Services;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace View
@@ -32,6 +33,7 @@ namespace View
             if (this.alumno != null)
             {
                 txtID.Text = alumno.Id.ToString();
+                txtDNI.Text = alumno.DNI;
                 txtApellido.Text = alumno.Apellido;
                 txtNombre.Text = alumno.Nombre;
                 dtpNacimiento.Value = alumno.FechaNac;
@@ -48,42 +50,64 @@ namespace View
             {
                 validarEntidad();
 
-                if (alumno == null) alumno = new Alumno();
-                alumno.Apellido = txtApellido.Text;
-                alumno.Nombre = txtNombre.Text;
-                alumno.FechaNac = dtpNacimiento.Value;
-
                 AlumnoService s = new AlumnoService();
+
                 if (this.alumno.Id != 0)
                     s.Update(alumno);
                 else
                     s.Insert(alumno);
 
+                CommonHelper.ShowInfo("Alumno guardado con éxito.");
                 this.DialogResult = DialogResult.OK;
             }
             catch (WarningException ex)
             {
-                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CommonHelper.ShowWarning(ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
         private void validarEntidad()
         {
             string errores = "";
+            int aux;
 
-            if (txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
-                errores += "Debe completar todos los campos" + Environment.NewLine;
+            if (txtDNI.Text.Trim() == "" || txtApellido.Text.Trim() == "" || txtNombre.Text.Trim() == "")
+                errores += "Debe completar todos los campos. " + Environment.NewLine;
+
+            if (txtDNI.Text != "" && !int.TryParse(txtDNI.Text, out aux))
+                errores += "Ingrese el DNI únicamente con caracteres numéricos. " + Environment.NewLine;
 
             if (dtpNacimiento.Value.AddYears(16) > DateTime.Now)
-                errores += "No se pueden agregar alumnos menores de 16" + Environment.NewLine;
+                errores += "No se pueden registrar alumnos menores de 16. " + Environment.NewLine;
 
             if (errores != "")
             {
                 throw new WarningException(errores);
+            }
+
+            if (alumno == null) alumno = new Alumno();
+            alumno.DNI = txtDNI.Text;
+            alumno.Apellido = txtApellido.Text;
+            alumno.Nombre = txtNombre.Text;
+            alumno.FechaNac = dtpNacimiento.Value;
+
+            AlumnoService s = new AlumnoService();
+
+            var alumnos = s.GetAll().FindAll(x => x.Deshabilitado == false);
+
+            foreach (var Alumno in alumnos)
+            {
+                if (Alumno.Id != alumno.Id) 
+                {
+                    if (Alumno.DNI == alumno.DNI)
+                    {
+                        throw new WarningException("Ya existe un alumno con el DNI " + Alumno.DNI + " .");
+                    }
+                }
             }
         }
     }

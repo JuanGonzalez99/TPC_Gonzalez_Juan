@@ -10,6 +10,7 @@ namespace Entities.Models
     {
         public int Id { get; set; }
         public int Año { get; set; }
+        public byte? Cuatrimestre { get; set; }
         public DateTime FechaApertura { get; set; }
         public DateTime FechaCierre { get; set; }
     }

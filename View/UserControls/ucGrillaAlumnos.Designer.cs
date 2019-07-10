@@ -34,6 +34,8 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.btnCarreras = new System.Windows.Forms.Button();
+            this.chbDeshabilitados = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,6 +102,9 @@
             this.dgvGrilla.AllowUserToOrderColumns = true;
             this.dgvGrilla.AllowUserToResizeColumns = false;
             this.dgvGrilla.AllowUserToResizeRows = false;
+            this.dgvGrilla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGrilla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvGrilla.BackgroundColor = System.Drawing.Color.White;
             this.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -107,16 +112,43 @@
             this.dgvGrilla.Location = new System.Drawing.Point(0, 54);
             this.dgvGrilla.MultiSelect = false;
             this.dgvGrilla.Name = "dgvGrilla";
-            this.dgvGrilla.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvGrilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrilla.Size = new System.Drawing.Size(694, 213);
+            this.dgvGrilla.Size = new System.Drawing.Size(668, 213);
             this.dgvGrilla.TabIndex = 23;
+            this.dgvGrilla.SelectionChanged += new System.EventHandler(this.dgvGrilla_SelectionChanged);
+            // 
+            // btnCarreras
+            // 
+            this.btnCarreras.BackColor = System.Drawing.Color.SlateGray;
+            this.btnCarreras.FlatAppearance.BorderSize = 0;
+            this.btnCarreras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCarreras.Location = new System.Drawing.Point(293, 12);
+            this.btnCarreras.Name = "btnCarreras";
+            this.btnCarreras.Size = new System.Drawing.Size(102, 32);
+            this.btnCarreras.TabIndex = 26;
+            this.btnCarreras.Text = "Carreras";
+            this.btnCarreras.UseVisualStyleBackColor = false;
+            this.btnCarreras.Click += new System.EventHandler(this.btnCarreras_Click);
+            // 
+            // chbDeshabilitados
+            // 
+            this.chbDeshabilitados.AutoSize = true;
+            this.chbDeshabilitados.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbDeshabilitados.Location = new System.Drawing.Point(526, 20);
+            this.chbDeshabilitados.Name = "chbDeshabilitados";
+            this.chbDeshabilitados.Size = new System.Drawing.Size(131, 17);
+            this.chbDeshabilitados.TabIndex = 27;
+            this.chbDeshabilitados.Text = "Mostrar deshabilitados";
+            this.chbDeshabilitados.UseVisualStyleBackColor = true;
+            this.chbDeshabilitados.CheckedChanged += new System.EventHandler(this.chbDeshabilitados_CheckedChanged);
             // 
             // ucGrillaAlumnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Controls.Add(this.chbDeshabilitados);
+            this.Controls.Add(this.btnCarreras);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.dgvGrilla);
@@ -124,7 +156,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Name = "ucGrillaAlumnos";
-            this.Size = new System.Drawing.Size(694, 336);
+            this.Size = new System.Drawing.Size(668, 346);
             this.Load += new System.EventHandler(this.ucGrillaAlumnos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).EndInit();
             this.ResumeLayout(false);
@@ -140,5 +172,7 @@
         private System.Windows.Forms.Label lblBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.DataGridView dgvGrilla;
+        private System.Windows.Forms.Button btnCarreras;
+        private System.Windows.Forms.CheckBox chbDeshabilitados;
     }
 }

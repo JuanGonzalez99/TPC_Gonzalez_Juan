@@ -64,19 +64,21 @@ namespace AccesoDatos.Services
             }
         }
 
-
         public void Insert(Comision nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearSP("INSERT INTO TB_COMISIONES (CD_MATERIA, AÑO, CUATRIMESTRE, CD_MODALIDAD)" +
-                    "values (@IdMateria, @Año, @Cuatrimestre, @IdModalidad)");
+                accesoDatos.setearConsulta("INSERT INTO TB_COMISIONES(CD_MATERIA, AÑO, CUATRIMESTRE, CD_TURNO, CD_MODALIDAD, CD_PROFESOR, CD_AYUDANTE)" +
+                    "values (@IdMateria, @Año, @Cuatrimestre, @IdTurno, @IdModalidad, @IdProfesor, @IdAyudante)");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@IdMateria", nuevo.Materia.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Año", nuevo.Año);
-                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", nuevo.Cuatrimestre);
+                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", nuevo.Cuatrimestre == null ? (object)DBNull.Value : nuevo.Cuatrimestre);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdTurno", nuevo.Turno.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@IdModalidad", nuevo.Modalidad.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdProfesor", nuevo.Profesor.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdAyudante", nuevo.Ayudante == null ? (object)DBNull.Value : nuevo.Ayudante.Id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -99,15 +101,20 @@ namespace AccesoDatos.Services
                     "CD_MATERIA = @IdMateria, " +
                     "AÑO = @Año, " +
                     "CUATRIMESTRE = @Cuatrimestre, " +
+                    "CD_TURNO = @IdTurno " +
                     "CD_MODALIDAD = @IdModalidad " +
+                    "CD_PROFESOR = @IdProfesor " +
+                    "CD_AYUDANTE = @IdAyudante " +
                 "Where CD_COMISION = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@IdMateria", modificar.Materia.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Año", modificar.Año);
-                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", modificar.Cuatrimestre);
+                accesoDatos.Comando.Parameters.AddWithValue("@Cuatrimestre", modificar.Cuatrimestre == null ? (object)DBNull.Value : modificar.Cuatrimestre);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdTurno", modificar.Turno.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@IdModalidad", modificar.Modalidad.Id);
-                accesoDatos.abrirConexion();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdProfesor", modificar.Profesor.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdAyudante", modificar.Ayudante == null ? (object)DBNull.Value : modificar.Ayudante.Id); accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -146,11 +153,21 @@ namespace AccesoDatos.Services
             Comision entidad = new Comision();
             entidad.Id = (long)lector["CD_COMISION"];
             entidad.Año = (int)lector["AÑO"];
-            entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
+
+            if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
+                entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
+
             entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             entidad.Materia = new MateriaService().GetById((int)lector["CD_MATERIA"]);
+            entidad.Turno = new TurnoService().GetById((byte)lector["CD_TURNO"]);
             entidad.Modalidad = new ModalidadService().GetById((byte)lector["CD_MODALIDAD"]);
+
+            ProfesorService profesorService = new ProfesorService();
+            entidad.Profesor = profesorService.GetById((int)lector["CD_PROFESOR"]);
+
+            if (!Convert.IsDBNull(lector["CD_AYUDANTE"]))
+                entidad.Ayudante = profesorService.GetById((int)lector["CD_AYUDANTE"]);
 
             if (complete) { }
 

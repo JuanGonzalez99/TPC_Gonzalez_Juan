@@ -46,11 +46,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmAlumno.Designer.cs">
       <DependentUpon>frmAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAlumnosCarreras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAlumnosCarreras.Designer.cs">
+      <DependentUpon>frmAlumnosCarreras.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCarrera.cs">
       <SubType>Form</SubType>
@@ -70,11 +82,35 @@
     <Compile Include="Forms\frmHorario.Designer.cs">
       <DependentUpon>frmHorario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmInscripcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmInscripcion.Designer.cs">
+      <DependentUpon>frmInscripcion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMateria.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmMateria.Designer.cs">
       <DependentUpon>frmMateria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMateriasCorrelativas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMateriasCorrelativas.Designer.cs">
+      <DependentUpon>frmMateriasCorrelativas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUsuario.Designer.cs">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
@@ -132,8 +168,20 @@
     <Compile Include="UserControls\ucGrillaProfesores.Designer.cs">
       <DependentUpon>ucGrillaProfesores.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ucGrillaUsuarios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucGrillaUsuarios.Designer.cs">
+      <DependentUpon>ucGrillaUsuarios.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmAlumno.resx">
       <DependentUpon>frmAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAlumnosCarreras.resx">
+      <DependentUpon>frmAlumnosCarreras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCarrera.resx">
       <DependentUpon>frmCarrera.cs</DependentUpon>
@@ -144,8 +192,20 @@
     <EmbeddedResource Include="Forms\frmHorario.resx">
       <DependentUpon>frmHorario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmInscripcion.resx">
+      <DependentUpon>frmInscripcion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMateria.resx">
       <DependentUpon>frmMateria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMateriasCorrelativas.resx">
+      <DependentUpon>frmMateriasCorrelativas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUsuario.resx">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
@@ -182,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucGrillaProfesores.resx">
       <DependentUpon>ucGrillaProfesores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucGrillaUsuarios.resx">
+      <DependentUpon>ucGrillaUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

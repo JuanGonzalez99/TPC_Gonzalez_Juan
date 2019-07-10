@@ -55,32 +55,24 @@ namespace View.Forms
             {
                 validarEntidad();
 
-                if (horario == null) horario = new Horario();
-                horario.HoraInicio = dtpHoraInicio.Value.TimeOfDay;
-                horario.HoraFin = dtpHoraFin.Value.TimeOfDay;
-                horario.DiaSemana = (DiaDeLaSemana)cmbDia.SelectedItem;
-
                 HorarioService s = new HorarioService();
+
                 if (this.horario.Id != 0)
                     s.Update(horario);
                 else
                     s.Insert(horario);
 
+                CommonHelper.ShowInfo("Horario guardado con éxito.");
                 this.DialogResult = DialogResult.OK;
             }
             catch (WarningException ex)
             {
-                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CommonHelper.ShowWarning(ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void validarEntidad()
@@ -97,6 +89,29 @@ namespace View.Forms
             {
                 throw new WarningException(errores);
             }
+
+            if (horario == null) horario = new Horario();
+            horario.HoraInicio = dtpHoraInicio.Value.TimeOfDay;
+            horario.HoraFin = dtpHoraFin.Value.TimeOfDay;
+            horario.DiaSemana = (DiaDeLaSemana)cmbDia.SelectedItem;
+
+            HorarioService s = new HorarioService();
+
+            var horarios = s.GetAll().FindAll(x => x.Deshabilitado == false);
+
+            foreach (var Horario in horarios)
+            {
+                if (Horario.Id != horario.Id)
+                {
+                    if (Horario.HoraInicio == horario.HoraInicio
+                        && Horario.HoraFin == horario.HoraFin
+                        && Horario.DiaSemana == horario.DiaSemana)
+                    {
+                        throw new WarningException("Ya existe un horario con los mismos datos.");
+                    }
+                }
+            }
+
         }
     }
 }

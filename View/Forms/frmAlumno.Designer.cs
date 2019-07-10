@@ -38,12 +38,14 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.txtDNI = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 110);
+            this.label1.Location = new System.Drawing.Point(37, 141);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
@@ -51,14 +53,16 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(104, 107);
+            this.txtNombre.Location = new System.Drawing.Point(104, 138);
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(138, 20);
             this.txtNombre.TabIndex = 1;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(104, 144);
+            this.txtApellido.Location = new System.Drawing.Point(104, 175);
+            this.txtApellido.MaxLength = 50;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(138, 20);
             this.txtApellido.TabIndex = 2;
@@ -66,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 147);
+            this.label2.Location = new System.Drawing.Point(37, 178);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 2;
@@ -74,7 +78,7 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(104, 70);
+            this.txtID.Location = new System.Drawing.Point(104, 59);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(138, 20);
@@ -84,11 +88,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 73);
+            this.label3.Location = new System.Drawing.Point(37, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "ID:";
+            this.label3.Text = "Legajo:";
             // 
             // btnAceptar
             // 
@@ -113,7 +117,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 184);
+            this.label5.Location = new System.Drawing.Point(37, 215);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 10;
@@ -121,10 +125,28 @@
             // 
             // dtpNacimiento
             // 
-            this.dtpNacimiento.Location = new System.Drawing.Point(104, 181);
+            this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpNacimiento.Location = new System.Drawing.Point(104, 212);
             this.dtpNacimiento.Name = "dtpNacimiento";
             this.dtpNacimiento.Size = new System.Drawing.Size(138, 20);
             this.dtpNacimiento.TabIndex = 3;
+            // 
+            // txtDNI
+            // 
+            this.txtDNI.Location = new System.Drawing.Point(104, 98);
+            this.txtDNI.MaxLength = 10;
+            this.txtDNI.Name = "txtDNI";
+            this.txtDNI.Size = new System.Drawing.Size(138, 20);
+            this.txtDNI.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(37, 101);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "DNI:";
             // 
             // frmAlumno
             // 
@@ -133,6 +155,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(284, 328);
+            this.Controls.Add(this.txtDNI);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpNacimiento);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCancelar);
@@ -165,5 +189,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpNacimiento;
+        private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.Label label4;
     }
 }

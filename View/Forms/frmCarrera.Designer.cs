@@ -71,9 +71,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(35, 81);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
+            this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 23;
-            this.label3.Text = "ID:";
+            this.label3.Text = "Código:";
             // 
             // btnCancelar
             // 
@@ -98,6 +98,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(115, 118);
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(138, 20);
             this.txtNombre.TabIndex = 1;
@@ -114,6 +115,7 @@
             // txtNombreCorto
             // 
             this.txtNombreCorto.Location = new System.Drawing.Point(115, 155);
+            this.txtNombreCorto.MaxLength = 10;
             this.txtNombreCorto.Name = "txtNombreCorto";
             this.txtNombreCorto.Size = new System.Drawing.Size(138, 20);
             this.txtNombreCorto.TabIndex = 2;

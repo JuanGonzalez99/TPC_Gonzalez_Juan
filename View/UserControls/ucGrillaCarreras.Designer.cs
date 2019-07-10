@@ -100,6 +100,9 @@
             this.dgvGrilla.AllowUserToOrderColumns = true;
             this.dgvGrilla.AllowUserToResizeColumns = false;
             this.dgvGrilla.AllowUserToResizeRows = false;
+            this.dgvGrilla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGrilla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvGrilla.BackgroundColor = System.Drawing.Color.White;
             this.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -109,7 +112,7 @@
             this.dgvGrilla.Name = "dgvGrilla";
             this.dgvGrilla.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvGrilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrilla.Size = new System.Drawing.Size(694, 213);
+            this.dgvGrilla.Size = new System.Drawing.Size(668, 213);
             this.dgvGrilla.TabIndex = 20;
             // 
             // ucGrillaCarreras
@@ -124,7 +127,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Name = "ucGrillaCarreras";
-            this.Size = new System.Drawing.Size(694, 336);
+            this.Size = new System.Drawing.Size(668, 346);
             this.Load += new System.EventHandler(this.ucGrillaCarreras_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).EndInit();
             this.ResumeLayout(false);

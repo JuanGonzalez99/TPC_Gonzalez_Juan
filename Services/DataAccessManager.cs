@@ -9,7 +9,7 @@ namespace AccesoDatos
 {
     public class DataAccessManager
     {
-        public static string cadenaConexion = "data source=(local); initial catalog=GONZALEZ_JUAN_DB; integrated security=sspi";
+        public static string cadenaConexion = "data source=(local); initial catalog=TPC_PRUEBAS; integrated security=sspi";
 
         private SqlCommand comando;
         private SqlConnection conexion;

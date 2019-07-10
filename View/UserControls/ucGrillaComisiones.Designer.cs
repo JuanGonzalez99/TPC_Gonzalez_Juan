@@ -34,6 +34,7 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.chbDeshabilitados = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,19 +60,23 @@
             this.dgvGrilla.AllowUserToAddRows = false;
             this.dgvGrilla.AllowUserToDeleteRows = false;
             this.dgvGrilla.AllowUserToOrderColumns = true;
-            this.dgvGrilla.AllowUserToResizeColumns = false;
             this.dgvGrilla.AllowUserToResizeRows = false;
-            this.dgvGrilla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGrilla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvGrilla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvGrilla.BackgroundColor = System.Drawing.Color.White;
             this.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvGrilla.Location = new System.Drawing.Point(0, 54);
             this.dgvGrilla.MultiSelect = false;
             this.dgvGrilla.Name = "dgvGrilla";
-            this.dgvGrilla.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvGrilla.RowHeadersVisible = false;
             this.dgvGrilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrilla.Size = new System.Drawing.Size(694, 213);
+            this.dgvGrilla.Size = new System.Drawing.Size(668, 213);
             this.dgvGrilla.TabIndex = 29;
+            this.dgvGrilla.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGrilla_CellFormatting);
+            this.dgvGrilla.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvGrilla_DataBindingComplete);
             // 
             // btnEliminar
             // 
@@ -112,11 +117,24 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
+            // chbDeshabilitados
+            // 
+            this.chbDeshabilitados.AutoSize = true;
+            this.chbDeshabilitados.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbDeshabilitados.Location = new System.Drawing.Point(526, 20);
+            this.chbDeshabilitados.Name = "chbDeshabilitados";
+            this.chbDeshabilitados.Size = new System.Drawing.Size(131, 17);
+            this.chbDeshabilitados.TabIndex = 32;
+            this.chbDeshabilitados.Text = "Mostrar deshabilitados";
+            this.chbDeshabilitados.UseVisualStyleBackColor = true;
+            this.chbDeshabilitados.CheckedChanged += new System.EventHandler(this.chbDeshabilitados_CheckedChanged);
+            // 
             // ucGrillaComisiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Controls.Add(this.chbDeshabilitados);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.dgvGrilla);
@@ -124,7 +142,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Name = "ucGrillaComisiones";
-            this.Size = new System.Drawing.Size(694, 336);
+            this.Size = new System.Drawing.Size(668, 346);
             this.Load += new System.EventHandler(this.ucGrillaComisiones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).EndInit();
             this.ResumeLayout(false);
@@ -140,5 +158,6 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.CheckBox chbDeshabilitados;
     }
 }

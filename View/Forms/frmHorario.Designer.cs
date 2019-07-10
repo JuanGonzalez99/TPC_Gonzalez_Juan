@@ -54,9 +54,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(44, 80);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
+            this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 17;
-            this.label3.Text = "ID:";
+            this.label3.Text = "Código:";
             // 
             // btnCancelar
             // 
@@ -67,7 +67,6 @@
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -81,6 +80,7 @@
             // 
             // dtpHoraInicio
             // 
+            this.dtpHoraInicio.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpHoraInicio.Location = new System.Drawing.Point(111, 124);
             this.dtpHoraInicio.Name = "dtpHoraInicio";
@@ -92,6 +92,7 @@
             // 
             // dtpHoraFin
             // 
+            this.dtpHoraFin.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpHoraFin.Location = new System.Drawing.Point(111, 163);
             this.dtpHoraFin.Name = "dtpHoraFin";

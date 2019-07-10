@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AccesoDatos.Services;
 using Entities.Models;
 using Entities.Helpers;
+using View.Forms;
 
 namespace View
 {
@@ -49,14 +50,21 @@ namespace View
             if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
                 return;
 
-            if (!CommonHelper.Confirma())
-                return;
+            if (btnEliminar.Text == "Eliminar")
+            {
+                if (!CommonHelper.Confirma())
+                    return;
+            }
 
             try
             {
                 AlumnoService s = new AlumnoService();
                 Alumno entidad = (Alumno)dgvGrilla.SelectedRows[0].DataBoundItem;
-                s.Delete(entidad.Id);
+
+                if (btnEliminar.Text == "Eliminar")
+                    s.Delete(entidad.Id);
+                else
+                    s.Restaurar(entidad.Id);
                 cargarGrilla();
             }
             catch (Exception ex)
@@ -72,11 +80,12 @@ namespace View
             try
             {
                 Alumnos = s.GetAll();
-                dgvGrilla.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false);
+                if (txtBuscar.Text != "") txtBuscar.Text = "";
+                dgvGrilla.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false || chbDeshabilitados.Checked);
                 dgvGrilla.Columns["Id"].HeaderText = "Legajo";
                 dgvGrilla.Columns["FechaNac"].HeaderText = "Fecha de nacimiento";
                 dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
-                dgvGrilla.Columns["Deshabilitado"].Visible = false;
+                dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
             }
             catch (Exception ex)
             {
@@ -86,20 +95,51 @@ namespace View
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text == "")
-            {
-                dgvGrilla.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false);
-                dgvGrilla.Columns["Deshabilitado"].Visible = false;
-            }
-            else
+            List<Alumno> lista = Alumnos.FindAll(x => x.Deshabilitado == false || chbDeshabilitados.Checked);
+
+            if (txtBuscar.Text != "")
             {
                 string busqueda = txtBuscar.Text.ToUpper();
-                List<Alumno> lista = Alumnos.FindAll(x => x.Id.ToString().Contains(busqueda)
+                lista = lista.FindAll(x => x.Id.ToString().Contains(busqueda)
+                                                        || x.DNI.ToString().Contains(busqueda)
                                                         || x.Apellido.ToUpper().Contains(busqueda)
                                                         || x.Nombre.ToUpper().Contains(busqueda)
                                                         || x.FechaNac.ToShortDateString().Contains(busqueda));
-                dgvGrilla.DataSource = lista;
-                dgvGrilla.Columns["Deshabilitado"].Visible = true;
+            }
+
+            dgvGrilla.DataSource = lista;
+
+            dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
+        }
+
+        private void btnCarreras_Click(object sender, EventArgs e)
+        {
+            if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
+                return;
+
+            frmAlumnosCarreras frm = new frmAlumnosCarreras((Alumno)dgvGrilla.SelectedRows[0].DataBoundItem);
+            frm.ShowDialog();
+        }
+
+        private void chbDeshabilitados_CheckedChanged(object sender, EventArgs e)
+        {
+            txtBuscar_TextChanged(sender, e);
+        }
+
+        private void dgvGrilla_SelectionChanged(object sender, EventArgs e)
+        {
+            var rows = dgvGrilla.SelectedRows;
+            if (rows != null && rows.Count > 0)
+            {
+                Alumno alumno = (Alumno)dgvGrilla.SelectedRows[0].DataBoundItem;
+                if (alumno.Deshabilitado)
+                {
+                    btnEliminar.Text = "Restaurar";
+                }
+                else
+                {
+                    btnEliminar.Text = "Eliminar";
+                }
             }
         }
     }

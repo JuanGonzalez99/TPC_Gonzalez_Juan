@@ -12,9 +12,12 @@ namespace Entities.Models
         public Materia Materia { get; set; }
         public int Año { get; set; }
         public byte? Cuatrimestre { get; set; }
+        public Turno Turno { get; set; }
         public Modalidad Modalidad { get; set; }
-        public List<AlumnoComision> Alumnos { get; set; }
-        public List<ProfesorComision> Profesores { get; set; }
+        public Profesor Profesor { get; set; }
+        public Profesor Ayudante { get; set; }
+        //public List<AlumnoComision> Alumnos { get; set; }
+        //public List<ProfesorComision> Profesores { get; set; }
         public bool Deshabilitado { get; set; }
 
         public override string ToString()

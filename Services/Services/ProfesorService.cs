@@ -71,9 +71,10 @@ namespace AccesoDatos.Services
             try
             {
                 accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' " +
-                    "INSERT INTO TB_PROFESORES (APELLIDO, NOMBRE, FECHA_NAC, FECHA_INGRESO) " +
-                    "values(@Apellido, @Nombre, @FechaNac, @FechaIngreso)");
+                    "INSERT INTO TB_PROFESORES (DNI, APELLIDO, NOMBRE, FECHA_NAC, FECHA_INGRESO) " +
+                    "values(@DNI, @Apellido, @Nombre, @FechaNac, @FechaIngreso)");
                 accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@DNI", nuevo.DNI);
                 accesoDatos.Comando.Parameters.AddWithValue("@Apellido", nuevo.Apellido);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", nuevo.FechaNac.ToShortDateString());
@@ -98,6 +99,7 @@ namespace AccesoDatos.Services
             {
                 accesoDatos.setearConsulta("SET DATEFORMAT 'DMY' " +
                     "UPDATE TB_PROFESORES SET " +
+                    "DNI = @DNI, " +
                     "APELLIDO = @Apellido, " +
                     "NOMBRE = @Nombre, " +
                     "FECHA_NAC = @FechaNac, " +
@@ -105,6 +107,7 @@ namespace AccesoDatos.Services
                 "Where CD_PROFESOR = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@DNI", modificar.DNI);
                 accesoDatos.Comando.Parameters.AddWithValue("@Apellido", modificar.Apellido);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@FechaNac", modificar.FechaNac.ToShortDateString());
@@ -147,6 +150,7 @@ namespace AccesoDatos.Services
         {
             Profesor entidad = new Profesor();
             entidad.Id = (int)lector["CD_PROFESOR"];
+            entidad.DNI = (string)lector["DNI"];
             entidad.Apellido = (string)lector["APELLIDO"];
             entidad.Nombre = (string)lector["NOMBRE"];
             entidad.FechaNac = (DateTime)lector["FECHA_NAC"];

@@ -20,6 +20,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[TB_ALUMNOS](
 	[CD_ALUMNO] [int] IDENTITY(1,1) NOT NULL,
+	[DNI] [varchar](10) NOT NULL,
 	[APELLIDO] [varchar](50) NOT NULL,
 	[NOMBRE] [varchar](50) NOT NULL,
 	[FECHA_NAC] [date] NOT NULL,
@@ -39,7 +40,8 @@ CREATE TABLE [dbo].[TB_ALUMNOS_COMISIONES](
 	[ID] [bigint] IDENTITY(1,1) NOT NULL,
 	[CD_COMISION] [bigint] NOT NULL,
 	[CD_ALUMNO] [int] NOT NULL,
-	[NOTA_ID] [bigint] NULL,
+	[CD_ESTADO] [tinyint] NOT NULL,
+	[NOTA] [tinyint] NULL,
 	[DESHABILITADO] [bit] NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
@@ -278,6 +280,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[TB_PROFESORES](
 	[CD_PROFESOR] [int] IDENTITY(1,1) NOT NULL,
+	[DNI] [varchar](10) NOT NULL,
 	[APELLIDO] [varchar](50) NOT NULL,
 	[NOMBRE] [varchar](50) NOT NULL,
 	[FECHA_NAC] [date] NOT NULL,
@@ -383,8 +386,8 @@ GO
 ALTER TABLE [dbo].[TB_ALUMNOS_COMISIONES]  WITH CHECK ADD FOREIGN KEY([CD_COMISION])
 REFERENCES [dbo].[TB_COMISIONES] ([CD_COMISION])
 GO
-ALTER TABLE [dbo].[TB_ALUMNOS_COMISIONES]  WITH CHECK ADD FOREIGN KEY([NOTA_ID])
-REFERENCES [dbo].[TB_NOTAS] ([ID])
+ALTER TABLE [dbo].[TB_ALUMNOS_COMISIONES]  WITH CHECK ADD FOREIGN KEY([CD_ESTADO])
+REFERENCES [dbo].[TB_ESTADOS_MATERIA] ([CD_ESTADO])
 GO
 ALTER TABLE [dbo].[TB_COMISIONES]  WITH CHECK ADD FOREIGN KEY([CD_MATERIA])
 REFERENCES [dbo].[TB_MATERIAS] ([CD_MATERIA])
@@ -445,11 +448,11 @@ GO
 
 SET DATEFORMAT 'DMY'
 GO
-INSERT INTO TB_ALUMNOS([APELLIDO],[NOMBRE],[FECHA_NAC]) 
-VALUES('Sanford','Camille','28/09/81'),('Sykes','Patience','13/10/83'),('Poole','Ocean','15/03/83'),('Woodward','Farrah','05/02/95'),('Murphy','Joy','04/06/84'),('Mcpherson','Orla','17/10/88'),('Morton','Veda','10/02/92'),('Mercer','Aline','17/03/98'),('Patterson','Kessie','02/11/81'),('Baxter','Halee','11/01/83');
+INSERT INTO TB_ALUMNOS([DNI],[APELLIDO],[NOMBRE],[FECHA_NAC]) 
+VALUES('21038082','Cortés','Barbara','28/10/2002'),('27359796','Díaz','Valery','26/10/1986'),('26652880','Campos','Byron','20/11/2002'),('31716175','Aravena','Carola','18/05/1976'),('46801494','Campos','Lisandro','22/08/1986'),('19500090','Zúñiga','Valentino','02/10/1999'),('9956302','Pérez','Jeremias','02/09/1987'),('28881980','Ortiz','Apolo','12/02/1986'),('34256892','Godoy','Tiare','10/01/1984'),('14450247','Gutiérrez','Johao','14/03/1982');
 GO
-INSERT INTO TB_PROFESORES([APELLIDO],[NOMBRE],[FECHA_NAC],[FECHA_INGRESO]) 
-VALUES('Mann','Hedwig','30/12/85','20/02/11'),('Gates','Omar','30/10/80','09/10/08'),('Beard','Chaney','09/01/84','07/05/10'),('Goodman','Jessica','16/04/97','12/09/08'),('Wilkinson','Rhona','16/04/88','26/10/07'),('Mcintyre','Elaine','21/06/87','11/02/13'),('Chen','Jolie','01/02/83','13/03/15'),('Weaver','Blaze','26/01/82','29/12/11'),('Hull','Dennis','24/10/80','07/08/11'),('Puckett','Madeline','11/10/92','01/06/13');
+INSERT INTO TB_PROFESORES([DNI],[APELLIDO],[NOMBRE],[FECHA_NAC],[FECHA_INGRESO]) 
+VALUES('33356640','Reyes','Leslie','06/10/1978','08/02/2010'),('36781528','Araya','José','09/03/2002','18/12/2016'),('13589075','Vergara','Eileen','04/04/1981','03/06/2019'),('19994302','Herrera','Nathalia','17/06/2002','18/05/2017'),('49159926','Venegas','Luis','25/11/1983','26/12/2000'),('23103885','Venegas','Leyla','26/02/1990','31/03/2005'),('32317618','Maldonado','Nabih','16/01/2000','23/04/2002'),('20361392','García','Johann','14/03/1990','29/02/2004'),('18061646','Salazar','Adrián','17/01/1986','04/06/2009'),('36637574','Bravo','Monserrath','01/07/1971','27/05/2018');
 GO
 
 INSERT INTO TB_CARRERAS (NOMBRE, NOMBRE_CORTO, DURACION)

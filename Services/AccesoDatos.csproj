@@ -7,7 +7,7 @@
     <ProjectGuid>{195D936B-3D2C-4B50-97A3-8945CB511E68}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Services</RootNamespace>
+    <RootNamespace>AccesoDatos</RootNamespace>
     <AssemblyName>Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,9 +47,12 @@
     <Compile Include="Services\CarreraService.cs" />
     <Compile Include="Services\ComisionService.cs" />
     <Compile Include="Services\HorarioService.cs" />
+    <Compile Include="Services\InscripcionService.cs" />
     <Compile Include="Services\MateriaService.cs" />
     <Compile Include="Services\ModalidadService.cs" />
     <Compile Include="Services\ProfesorService.cs" />
+    <Compile Include="Services\TurnoService.cs" />
+    <Compile Include="Services\UsuarioService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

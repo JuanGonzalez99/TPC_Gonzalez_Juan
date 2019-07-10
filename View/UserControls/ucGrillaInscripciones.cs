@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AccesoDatos.Services;
 using Entities.Models;
 using Entities.Helpers;
+using View.Forms;
 
 namespace View.UserControls
 {
@@ -29,19 +30,19 @@ namespace View.UserControls
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //frmInscripcion frm = new frmInscripcion();
-            //if (frm.ShowDialog() == DialogResult.OK)
-            //    cargarGrilla();
+            frmInscripcion frm = new frmInscripcion();
+            if (frm.ShowDialog() == DialogResult.OK)
+                cargarGrilla();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
                 return;
-            
-            //frmInscripcion frm = new frmInscripcion((Inscripcion)dgvGrilla.SelectedRows[0].DataBoundItem);
-            //if (frm.ShowDialog() == DialogResult.OK)
-            //    cargarGrilla();
+
+            frmInscripcion frm = new frmInscripcion((Inscripcion)dgvGrilla.SelectedRows[0].DataBoundItem);
+            if (frm.ShowDialog() == DialogResult.OK)
+                cargarGrilla();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -51,12 +52,15 @@ namespace View.UserControls
 
         private void cargarGrilla()
         {
-            //InscripcionService s = new InscripcionService();
+            InscripcionService s = new InscripcionService();
 
             try
             {
-                //Inscripciones = s.GetAll();
-                dgvGrilla.DataSource = Inscripciones;
+                Inscripciones = s.GetAll();
+                dgvGrilla.DataSource = Inscripciones
+                    .OrderByDescending(x => x.Año)
+                    .ThenBy(x => x.Cuatrimestre).ToList();
+                dgvGrilla.Columns["Id"].Visible = false;
                 dgvGrilla.Columns["FechaApertura"].HeaderText = "Fecha de apertura";
                 dgvGrilla.Columns["FechaCierre"].HeaderText = "Fecha de cierre";
             }
@@ -68,18 +72,31 @@ namespace View.UserControls
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text == "")
-            {
-                dgvGrilla.DataSource = Inscripciones;
-            }
-            else
+            List<Inscripcion> lista = Inscripciones;
+
+            if (txtBuscar.Text != "")
             {
                 string busqueda = txtBuscar.Text.ToUpper();
-                List<Inscripcion> lista = Inscripciones.FindAll(x => x.Id.ToString().Contains(busqueda)
-                                                        || x.Año.ToString().Contains(busqueda)
-                                                        || x.FechaApertura.ToShortDateString().Contains(busqueda)
-                                                        || x.FechaCierre.ToShortDateString().Contains(busqueda));
-                dgvGrilla.DataSource = lista;
+                lista = lista.FindAll(x => x.Año.ToString().Contains(busqueda)
+                                    || (x.Cuatrimestre == null ? ("ANUAL").Contains(busqueda) : x.Cuatrimestre.ToString().Contains(busqueda))
+                                    || x.FechaApertura.ToShortDateString().Contains(busqueda)
+                                    || x.FechaCierre.ToShortDateString().Contains(busqueda));
+            }
+
+            dgvGrilla.DataSource = lista
+                    .OrderByDescending(x => x.Año)
+                    .ThenBy(x => x.Cuatrimestre).ToList();
+        }
+
+        private void dgvGrilla_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.Value == null)
+            {
+                if (e.ColumnIndex == dgvGrilla.Columns["Cuatrimestre"].Index)
+                {
+                    e.Value = "Anual";
+                    e.FormattingApplied = true;
+                }
             }
         }
     }

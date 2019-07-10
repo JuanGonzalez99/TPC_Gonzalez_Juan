@@ -83,6 +83,7 @@ namespace View.UserControls
             {
                 Carreras = s.GetAll();
                 dgvGrilla.DataSource = Carreras.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Id"].HeaderText = "Código";
                 dgvGrilla.Columns["NombreCorto"].HeaderText = "Nombre corto";
                 dgvGrilla.Columns["Duracion"].HeaderText = "Duración";
                 dgvGrilla.Columns["Deshabilitado"].Visible = false;

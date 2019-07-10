@@ -17,7 +17,7 @@ namespace Entities.Models
 
         public override string ToString()
         {
-            return NombreCorto;
+            return Nombre;
         }
     }
 }

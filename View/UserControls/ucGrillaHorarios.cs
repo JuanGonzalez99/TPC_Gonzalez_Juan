@@ -74,6 +74,10 @@ namespace View.UserControls
             {
                 Horarios = s.GetAll();
                 dgvGrilla.DataSource = Horarios.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Id"].HeaderText = "Código";
+                dgvGrilla.Columns["HoraInicio"].HeaderText = "Hora de inicio";
+                dgvGrilla.Columns["HoraFin"].HeaderText = "Hora de fin";
+                dgvGrilla.Columns["DiaSemana"].HeaderText = "Día de la semana";
                 dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
@@ -87,6 +91,7 @@ namespace View.UserControls
             if (txtBuscar.Text == "")
             {
                 dgvGrilla.DataSource = Horarios.FindAll(x => x.Deshabilitado == false);
+                dgvGrilla.Columns["Id"].HeaderText = "Código";
                 dgvGrilla.Columns["Deshabilitado"].Visible = false;
             }
             else

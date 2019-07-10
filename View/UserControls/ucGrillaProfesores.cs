@@ -99,6 +99,7 @@ namespace View
             {
                 string busqueda = txtBuscar.Text.ToUpper();
                 List<Profesor> lista = Profesores.FindAll(x => x.Id.ToString().Contains(busqueda)
+                                                        || x.DNI.ToString().Contains(busqueda)
                                                         || x.Apellido.ToUpper().Contains(busqueda)
                                                         || x.Nombre.ToUpper().Contains(busqueda)
                                                         || x.FechaNac.ToShortDateString().Contains(busqueda)

@@ -34,17 +34,20 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.dtpFechaIngreso = new System.Windows.Forms.DateTimePicker();
+            this.lblIngreso = new System.Windows.Forms.Label();
+            this.txtDNI = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtpFechaIngreso = new System.Windows.Forms.DateTimePicker();
-            this.lblIngreso = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dtpNacimiento
             // 
-            this.dtpNacimiento.Location = new System.Drawing.Point(104, 157);
+            this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpNacimiento.Location = new System.Drawing.Point(104, 185);
             this.dtpNacimiento.Name = "dtpNacimiento";
             this.dtpNacimiento.Size = new System.Drawing.Size(138, 20);
             this.dtpNacimiento.TabIndex = 3;
@@ -52,7 +55,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 160);
+            this.label5.Location = new System.Drawing.Point(37, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 20;
@@ -80,7 +83,7 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(104, 58);
+            this.txtID.Location = new System.Drawing.Point(104, 41);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
             this.txtID.Size = new System.Drawing.Size(138, 20);
@@ -90,47 +93,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 61);
+            this.label3.Location = new System.Drawing.Point(37, 44);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
+            this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 18;
-            this.label3.Text = "ID:";
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(104, 124);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(138, 20);
-            this.txtApellido.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 127);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Apellido:";
-            // 
-            // txtNombre
-            // 
-            this.txtNombre.Location = new System.Drawing.Point(104, 91);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(138, 20);
-            this.txtNombre.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 94);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Nombre:";
+            this.label3.Text = "Legajo:";
             // 
             // dtpFechaIngreso
             // 
-            this.dtpFechaIngreso.Location = new System.Drawing.Point(104, 190);
+            this.dtpFechaIngreso.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaIngreso.Location = new System.Drawing.Point(104, 218);
             this.dtpFechaIngreso.Name = "dtpFechaIngreso";
             this.dtpFechaIngreso.Size = new System.Drawing.Size(138, 20);
             this.dtpFechaIngreso.TabIndex = 4;
@@ -138,11 +110,62 @@
             // lblIngreso
             // 
             this.lblIngreso.AutoSize = true;
-            this.lblIngreso.Location = new System.Drawing.Point(37, 193);
+            this.lblIngreso.Location = new System.Drawing.Point(37, 221);
             this.lblIngreso.Name = "lblIngreso";
             this.lblIngreso.Size = new System.Drawing.Size(45, 13);
             this.lblIngreso.TabIndex = 22;
             this.lblIngreso.Text = "Ingreso:";
+            // 
+            // txtDNI
+            // 
+            this.txtDNI.Location = new System.Drawing.Point(104, 77);
+            this.txtDNI.MaxLength = 10;
+            this.txtDNI.Name = "txtDNI";
+            this.txtDNI.Size = new System.Drawing.Size(138, 20);
+            this.txtDNI.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(37, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "DNI:";
+            // 
+            // txtApellido
+            // 
+            this.txtApellido.Location = new System.Drawing.Point(104, 150);
+            this.txtApellido.MaxLength = 50;
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(138, 20);
+            this.txtApellido.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(37, 153);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Apellido:";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(104, 114);
+            this.txtNombre.MaxLength = 50;
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(138, 20);
+            this.txtNombre.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(37, 117);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "Nombre:";
             // 
             // frmProfesor
             // 
@@ -151,6 +174,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(284, 328);
+            this.Controls.Add(this.txtDNI);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtApellido);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpFechaIngreso);
             this.Controls.Add(this.lblIngreso);
             this.Controls.Add(this.dtpNacimiento);
@@ -159,10 +188,6 @@
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmProfesor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -181,11 +206,13 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtpFechaIngreso;
+        private System.Windows.Forms.Label lblIngreso;
+        private System.Windows.Forms.TextBox txtDNI;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dtpFechaIngreso;
-        private System.Windows.Forms.Label lblIngreso;
     }
 }

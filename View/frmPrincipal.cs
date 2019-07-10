@@ -96,8 +96,15 @@ namespace View
         private void btnInscripciones_Click(object sender, EventArgs e)
         {
             moverPanelSelec(btnInscripciones);
-            //ucGrillaInscripciones uc = new ucGrillaInscripciones();
-            //llenarPanelCont(uc);
+            ucGrillaInscripciones uc = new ucGrillaInscripciones();
+            llenarPanelCont(uc);
+        }
+
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            moverPanelSelec(btnUsuarios);
+            ucGrillaUsuarios uc = new ucGrillaUsuarios();
+            llenarPanelCont(uc);
         }
     }
 }

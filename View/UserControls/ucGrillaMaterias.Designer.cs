@@ -34,6 +34,7 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.btnCorrelativas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,23 +101,43 @@
             this.dgvGrilla.AllowUserToOrderColumns = true;
             this.dgvGrilla.AllowUserToResizeColumns = false;
             this.dgvGrilla.AllowUserToResizeRows = false;
-            this.dgvGrilla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvGrilla.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvGrilla.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvGrilla.BackgroundColor = System.Drawing.Color.White;
             this.dgvGrilla.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrilla.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvGrilla.Location = new System.Drawing.Point(0, 54);
             this.dgvGrilla.MultiSelect = false;
             this.dgvGrilla.Name = "dgvGrilla";
+            this.dgvGrilla.RowHeadersWidth = 20;
             this.dgvGrilla.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvGrilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrilla.Size = new System.Drawing.Size(694, 213);
+            this.dgvGrilla.Size = new System.Drawing.Size(668, 213);
             this.dgvGrilla.TabIndex = 23;
+            this.dgvGrilla.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGrilla_CellFormatting);
+            this.dgvGrilla.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvGrilla_DataBindingComplete);
+            // 
+            // btnCorrelativas
+            // 
+            this.btnCorrelativas.BackColor = System.Drawing.Color.SlateGray;
+            this.btnCorrelativas.FlatAppearance.BorderSize = 0;
+            this.btnCorrelativas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCorrelativas.Location = new System.Drawing.Point(295, 11);
+            this.btnCorrelativas.Name = "btnCorrelativas";
+            this.btnCorrelativas.Size = new System.Drawing.Size(102, 32);
+            this.btnCorrelativas.TabIndex = 26;
+            this.btnCorrelativas.Text = "Correlativas";
+            this.btnCorrelativas.UseVisualStyleBackColor = false;
+            this.btnCorrelativas.Click += new System.EventHandler(this.btnCorrelativas_Click);
             // 
             // ucGrillaMaterias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Controls.Add(this.btnCorrelativas);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.dgvGrilla);
@@ -124,7 +145,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Name = "ucGrillaMaterias";
-            this.Size = new System.Drawing.Size(694, 336);
+            this.Size = new System.Drawing.Size(668, 346);
             this.Load += new System.EventHandler(this.ucGrillaMaterias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).EndInit();
             this.ResumeLayout(false);
@@ -140,5 +161,6 @@
         private System.Windows.Forms.Label lblBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.DataGridView dgvGrilla;
+        private System.Windows.Forms.Button btnCorrelativas;
     }
 }

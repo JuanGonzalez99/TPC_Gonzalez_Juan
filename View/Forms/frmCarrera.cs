@@ -1,4 +1,5 @@
 ﻿using AccesoDatos.Services;
+using Entities.Helpers;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -53,26 +54,23 @@ namespace View.Forms
             {
                 validarEntidad();
 
-                if (carrera == null) carrera = new Carrera();
-                carrera.Nombre = txtNombre.Text;
-                carrera.NombreCorto = txtNombreCorto.Text;
-                carrera.Duracion = (byte)cmbDuracion.SelectedItem;
-
                 CarreraService s = new CarreraService();
+
                 if (this.carrera.Id != 0)
                     s.Update(carrera);
                 else
                     s.Insert(carrera);
-            
+
+                CommonHelper.ShowInfo("Carrera guardada con éxito. ");
                 this.DialogResult = DialogResult.OK;
             }
             catch (WarningException ex)
             {
-                MessageBox.Show(ex.Message, "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CommonHelper.ShowWarning(ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
@@ -92,6 +90,30 @@ namespace View.Forms
             if (errores != "")
             {
                 throw new WarningException(errores);
+            }
+
+            if (carrera == null) carrera = new Carrera();
+            carrera.Nombre = txtNombre.Text;
+            carrera.NombreCorto = txtNombreCorto.Text;
+            carrera.Duracion = (byte)cmbDuracion.SelectedItem;
+
+            CarreraService s = new CarreraService();
+
+            var carreras = s.GetAll().FindAll(x => x.Deshabilitado == false);
+
+            foreach (var Carrera in carreras)
+            {
+                if (Carrera.Id != carrera.Id)
+                {
+                    if (Carrera.Nombre == carrera.Nombre)
+                    {
+                        throw new WarningException("Ya existe una carrera con el nombre \"" + Carrera.Nombre + "\".");
+                    }
+                    if (Carrera.NombreCorto == carrera.NombreCorto)
+                    {
+                        throw new WarningException("Ya existe una carrera con el nombre corto \"" + Carrera.NombreCorto + "\".");
+                    }
+                }
             }
         }
     }

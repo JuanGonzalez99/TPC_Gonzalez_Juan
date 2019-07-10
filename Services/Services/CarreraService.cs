@@ -64,6 +64,37 @@ namespace AccesoDatos.Services
             }
         }
 
+        public List<Carrera> GetByAlumnoId(int alumnoId)
+        {
+            List<Carrera> listado = new List<Carrera>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_ALUMNOS_CARRERAS " +
+                    "WHERE CD_ALUMNO = @IdAlumno " +
+                    "AND DESHABILITADO = 0");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdAlumno", alumnoId);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    var id = (short)accesoDatos.Lector["CD_CARRERA"];
+                    listado.Add(GetById(id));
+                }
+
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
 
         public void Insert(Carrera nuevo)
         {
