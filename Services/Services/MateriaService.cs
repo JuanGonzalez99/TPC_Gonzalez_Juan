@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace AccesoDatos.Services
@@ -92,22 +93,21 @@ namespace AccesoDatos.Services
             }
         }
 
-        public List<Materia> GetCorrelativasById(int id)
+        public List<MateriaCorrelativa> GetCorrelativasById(int id)
         {
-            List<Materia> listado = new List<Materia>();
+            List<MateriaCorrelativa> listado = new List<MateriaCorrelativa>();
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
                 accesoDatos.setearConsulta("SELECT * FROM TB_MATERIAS_CORRELATIVAS " +
-                    "WHERE CD_MATERIA = @Id " +
-                    "AND DESHABILITADO = 0");
+                    "WHERE CD_MATERIA = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    listado.Add(GetById((int)accesoDatos.Lector["CD_MATERIA_REQUERIDA"]));
+                    listado.Add(MakeCorrelativa(accesoDatos.Lector, false));
                 }
 
                 return listado;
@@ -162,7 +162,7 @@ namespace AccesoDatos.Services
             try
             {
                 accesoDatos.setearConsulta("SELECT * FROM TB_ESTADOS_MATERIA " +
-                    "WHERE CD_MATERIA = @Id");
+                    "WHERE CD_ESTADO = @Id");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.abrirConexion();
@@ -325,6 +325,20 @@ namespace AccesoDatos.Services
             entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
 
             entidad.Carrera = new CarreraService().GetById((short)lector["CD_CARRERA"]);
+
+            if (complete) { }
+
+            return entidad;
+        }
+
+        private MateriaCorrelativa MakeCorrelativa(SqlDataReader lector, bool complete)
+        {
+            MateriaCorrelativa entidad = new MateriaCorrelativa();
+            entidad.Id = Converter.ToLong(lector["ID"]);
+            entidad.Materia = GetById(Converter.ToInt(lector["CD_MATERIA"]));
+            entidad.Correlativa = GetById(Converter.ToInt(lector["CD_MATERIA_REQUERIDA"]));
+            entidad.EstadoRequerido = GetEstadoById(Converter.ToByte(lector["CD_ESTADO_REQUERIDO"]));
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\CommonHelper.cs" />
+    <Compile Include="Helpers\Converter.cs" />
     <Compile Include="Helpers\DiaDeLaSemana.cs" />
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="Models\Alumno.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Models\Horario.cs" />
     <Compile Include="Models\Inscripcion.cs" />
     <Compile Include="Models\Materia.cs" />
+    <Compile Include="Models\MateriaCorrelativa.cs" />
     <Compile Include="Models\Modalidad.cs" />
     <Compile Include="Models\Nota.cs" />
     <Compile Include="Models\Persona.cs" />

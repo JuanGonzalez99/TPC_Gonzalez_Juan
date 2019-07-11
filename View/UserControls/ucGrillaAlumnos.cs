@@ -65,11 +65,12 @@ namespace View
                     s.Delete(entidad.Id);
                 else
                     s.Restaurar(entidad.Id);
+
                 cargarGrilla();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
@@ -80,7 +81,7 @@ namespace View
             try
             {
                 Alumnos = s.GetAll();
-                if (txtBuscar.Text != "") txtBuscar.Text = "";
+                txtBuscar.Text = "";
                 dgvGrilla.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false || chbDeshabilitados.Checked);
                 dgvGrilla.Columns["Id"].HeaderText = "Legajo";
                 dgvGrilla.Columns["FechaNac"].HeaderText = "Fecha de nacimiento";
@@ -89,7 +90,7 @@ namespace View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
@@ -101,10 +102,10 @@ namespace View
             {
                 string busqueda = txtBuscar.Text.ToUpper();
                 lista = lista.FindAll(x => x.Id.ToString().Contains(busqueda)
-                                                        || x.DNI.ToString().Contains(busqueda)
-                                                        || x.Apellido.ToUpper().Contains(busqueda)
-                                                        || x.Nombre.ToUpper().Contains(busqueda)
-                                                        || x.FechaNac.ToShortDateString().Contains(busqueda));
+                                    || x.DNI.ToString().Contains(busqueda)
+                                    || x.Apellido.ToUpper().Contains(busqueda)
+                                    || x.Nombre.ToUpper().Contains(busqueda)
+                                    || x.FechaNac.ToShortDateString().Contains(busqueda));
             }
 
             dgvGrilla.DataSource = lista;
@@ -132,14 +133,8 @@ namespace View
             if (rows != null && rows.Count > 0)
             {
                 Alumno alumno = (Alumno)dgvGrilla.SelectedRows[0].DataBoundItem;
-                if (alumno.Deshabilitado)
-                {
-                    btnEliminar.Text = "Restaurar";
-                }
-                else
-                {
-                    btnEliminar.Text = "Eliminar";
-                }
+
+                btnEliminar.Text = alumno.Deshabilitado ? "Restaurar" : "Eliminar";
             }
         }
     }

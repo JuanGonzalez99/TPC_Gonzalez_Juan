@@ -34,6 +34,7 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.chbDeshabilitados = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,11 +116,24 @@
             this.dgvGrilla.Size = new System.Drawing.Size(668, 213);
             this.dgvGrilla.TabIndex = 20;
             // 
+            // chbDeshabilitados
+            // 
+            this.chbDeshabilitados.AutoSize = true;
+            this.chbDeshabilitados.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbDeshabilitados.Location = new System.Drawing.Point(525, 20);
+            this.chbDeshabilitados.Name = "chbDeshabilitados";
+            this.chbDeshabilitados.Size = new System.Drawing.Size(131, 17);
+            this.chbDeshabilitados.TabIndex = 28;
+            this.chbDeshabilitados.Text = "Mostrar deshabilitados";
+            this.chbDeshabilitados.UseVisualStyleBackColor = true;
+            this.chbDeshabilitados.CheckedChanged += new System.EventHandler(this.chbDeshabilitados_CheckedChanged);
+            // 
             // ucGrillaCarreras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Controls.Add(this.chbDeshabilitados);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.dgvGrilla);
@@ -143,5 +157,6 @@
         private System.Windows.Forms.Label lblBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.DataGridView dgvGrilla;
+        private System.Windows.Forms.CheckBox chbDeshabilitados;
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.pnlUsuario = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlSelec = new System.Windows.Forms.Panel();
             this.btnInicio = new System.Windows.Forms.Button();
@@ -41,11 +42,10 @@
             this.btnComisiones = new System.Windows.Forms.Button();
             this.btnHorarios = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlContenido = new System.Windows.Forms.Panel();
             this.pnlUsuario.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlUsuario
@@ -58,6 +58,17 @@
             this.pnlUsuario.Name = "pnlUsuario";
             this.pnlUsuario.Size = new System.Drawing.Size(819, 120);
             this.pnlUsuario.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(17, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(931, 120);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -148,9 +159,9 @@
             this.btnProfesores.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnProfesores.Image = ((System.Drawing.Image)(resources.GetObject("btnProfesores.Image")));
             this.btnProfesores.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnProfesores.Location = new System.Drawing.Point(3, 75);
+            this.btnProfesores.Location = new System.Drawing.Point(0, 75);
             this.btnProfesores.Name = "btnProfesores";
-            this.btnProfesores.Size = new System.Drawing.Size(146, 30);
+            this.btnProfesores.Size = new System.Drawing.Size(149, 30);
             this.btnProfesores.TabIndex = 23;
             this.btnProfesores.Text = " Profesores";
             this.btnProfesores.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -166,9 +177,9 @@
             this.btnAlumnos.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAlumnos.Image = ((System.Drawing.Image)(resources.GetObject("btnAlumnos.Image")));
             this.btnAlumnos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAlumnos.Location = new System.Drawing.Point(3, 39);
+            this.btnAlumnos.Location = new System.Drawing.Point(0, 39);
             this.btnAlumnos.Name = "btnAlumnos";
-            this.btnAlumnos.Size = new System.Drawing.Size(146, 30);
+            this.btnAlumnos.Size = new System.Drawing.Size(149, 30);
             this.btnAlumnos.TabIndex = 22;
             this.btnAlumnos.Text = " Alumnos";
             this.btnAlumnos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -248,17 +259,6 @@
             this.btnUsuarios.UseVisualStyleBackColor = true;
             this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(17, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(931, 120);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // pnlContenido
             // 
             this.pnlContenido.BackColor = System.Drawing.Color.LightSkyBlue;
@@ -281,8 +281,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Aplicación";
             this.pnlUsuario.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

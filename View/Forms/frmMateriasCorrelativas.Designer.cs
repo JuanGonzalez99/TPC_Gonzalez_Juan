@@ -73,26 +73,26 @@
             // 
             this.cmbMaterias.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbMaterias.FormattingEnabled = true;
-            this.cmbMaterias.Location = new System.Drawing.Point(67, 333);
+            this.cmbMaterias.Location = new System.Drawing.Point(109, 307);
             this.cmbMaterias.Name = "cmbMaterias";
-            this.cmbMaterias.Size = new System.Drawing.Size(126, 21);
+            this.cmbMaterias.Size = new System.Drawing.Size(223, 21);
             this.cmbMaterias.TabIndex = 11;
             // 
             // lblCarreras
             // 
             this.lblCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCarreras.AutoSize = true;
-            this.lblCarreras.Location = new System.Drawing.Point(12, 336);
+            this.lblCarreras.Location = new System.Drawing.Point(54, 310);
             this.lblCarreras.Name = "lblCarreras";
-            this.lblCarreras.Size = new System.Drawing.Size(50, 13);
+            this.lblCarreras.Size = new System.Drawing.Size(45, 13);
             this.lblCarreras.TabIndex = 13;
-            this.lblCarreras.Text = "Materias:";
+            this.lblCarreras.Text = "Materia:";
             // 
             // dgvMaterias
             // 
             this.dgvMaterias.AllowUserToAddRows = false;
             this.dgvMaterias.AllowUserToDeleteRows = false;
-            this.dgvMaterias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvMaterias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMaterias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMaterias.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvMaterias.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -107,16 +107,16 @@
             // 
             this.cmbEstado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(267, 333);
+            this.cmbEstado.Location = new System.Drawing.Point(109, 352);
             this.cmbEstado.Name = "cmbEstado";
-            this.cmbEstado.Size = new System.Drawing.Size(126, 21);
+            this.cmbEstado.Size = new System.Drawing.Size(223, 21);
             this.cmbEstado.TabIndex = 16;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(212, 336);
+            this.label1.Location = new System.Drawing.Point(54, 355);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 17;

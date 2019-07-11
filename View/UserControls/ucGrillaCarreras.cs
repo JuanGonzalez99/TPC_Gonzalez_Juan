@@ -61,8 +61,7 @@ namespace View.UserControls
                 MateriaService ms = new MateriaService();
                 if (ms.GetByCarreraId(c.Id).Count > 0)
                 {
-                    MessageBox.Show("No se puede eliminar esta carrera; posee materias asociadas.",
-                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    CommonHelper.ShowWarning("No se puede eliminar esta carrera; posee materias asociadas.");
                     return;
                 }
 
@@ -71,7 +70,7 @@ namespace View.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
@@ -82,35 +81,40 @@ namespace View.UserControls
             try
             {
                 Carreras = s.GetAll();
-                dgvGrilla.DataSource = Carreras.FindAll(x => x.Deshabilitado == false);
+                txtBuscar.Text = "";
+                dgvGrilla.DataSource = Carreras.FindAll(x => x.Deshabilitado == false || chbDeshabilitados.Checked);
                 dgvGrilla.Columns["Id"].HeaderText = "Código";
                 dgvGrilla.Columns["NombreCorto"].HeaderText = "Nombre corto";
                 dgvGrilla.Columns["Duracion"].HeaderText = "Duración";
-                dgvGrilla.Columns["Deshabilitado"].Visible = false;
+                dgvGrilla.Columns["Deshabilitado"].DisplayIndex = dgvGrilla.Columns.Count - 1;
+                dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            if (txtBuscar.Text == "")
-            {
-                dgvGrilla.DataSource = Carreras.FindAll(x => x.Deshabilitado == false);
-                dgvGrilla.Columns["Deshabilitado"].Visible = false;
-            }
-            else
+            List<Carrera> lista = Carreras.FindAll(x => x.Deshabilitado == false || chbDeshabilitados.Checked);
+
+            if (txtBuscar.Text != "")
             {
                 string busqueda = txtBuscar.Text.ToUpper();
-                List<Carrera> lista = Carreras.FindAll(x => x.Id.ToString().Contains(busqueda)
-                                                        || x.Nombre.ToUpper().Contains(busqueda)
-                                                        || x.NombreCorto.ToUpper().Contains(busqueda)
-                                                        || x.Duracion.ToString().Contains(busqueda));
-                dgvGrilla.DataSource = lista;
-                dgvGrilla.Columns["Deshabilitado"].Visible = true;
+                lista = lista.FindAll(x => x.Id.ToString().Contains(busqueda)
+                                    || x.Nombre.ToUpper().Contains(busqueda)
+                                    || x.NombreCorto.ToUpper().Contains(busqueda)
+                                    || x.Duracion.ToString().Contains(busqueda));
             }
+
+            dgvGrilla.DataSource = lista;
+            dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
+        }
+
+        private void chbDeshabilitados_CheckedChanged(object sender, EventArgs e)
+        {
+            txtBuscar_TextChanged(sender, e);
         }
     }
 }

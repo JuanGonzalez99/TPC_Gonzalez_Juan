@@ -42,34 +42,54 @@ namespace View.Forms
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (cmbMaterias.SelectedItem == null)
+            try
             {
-                MessageBox.Show("Debe seleccionar una materia", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                validar();
+
+                Materia correlativa = (Materia)cmbMaterias.SelectedItem;
+                MateriaService s = new MateriaService();
+                s.InsertCorrelativa(materia.Id, correlativa.Id, (EstadoMateria)cmbEstado.SelectedItem);
+
+                cargarGrilla();
+
             }
-            if (cmbEstado.SelectedItem == null)
+            catch (WarningException ex)
             {
-                MessageBox.Show("Debe seleccionar un estado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                CommonHelper.ShowWarning(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                CommonHelper.ShowError(ex.Message);
+            }
+        }
+
+        private void validar()
+        {
+            string errores = "";
+
+            if (cmbMaterias.SelectedItem == null)
+                errores += "Debe seleccionar una materia" + Environment.NewLine;
+
+            if (cmbEstado.SelectedItem == null)
+                errores += "Debe seleccionar un estado" + Environment.NewLine;
+
+            if (errores != "")
+            {
+                throw new WarningException(errores);
             }
 
             Materia correlativa = (Materia)cmbMaterias.SelectedItem;
             MateriaService s = new MateriaService();
 
-            if (s.GetCorrelativasById(materia.Id).Any(x => x.Id == correlativa.Id))
+            if (s.GetCorrelativasById(materia.Id).Any(x => x.Correlativa.Id == correlativa.Id && x.Deshabilitado == false))
             {
-                MessageBox.Show("La materia ya tiene asociada esa correlativa", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                throw new WarningException("La materia ya tiene asociada esa correlativa");
             }
-
-            s.InsertCorrelativa(materia.Id, correlativa.Id, (EstadoMateria)cmbEstado.SelectedItem);
-
-            cargarGrilla();
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
         {
-            if (!CommonHelper.SeleccionoRegistro(dgvMaterias, "Debe seleccionar una materia. "))
+            if (!CommonHelper.SeleccionoRegistro(dgvMaterias, "Debe seleccionar una materia de la grilla. "))
                 return;
 
             if (!CommonHelper.Confirma("¿Está seguro que desea quitar esta correlativa?"))
@@ -77,15 +97,15 @@ namespace View.Forms
 
             try
             {
-                var correlativa = (Materia)dgvMaterias.SelectedRows[0].DataBoundItem;
+                var correlativa = (MateriaCorrelativa)dgvMaterias.SelectedRows[0].DataBoundItem;
 
-                new MateriaService().DeleteCorrelativa(this.materia.Id, correlativa.Id);
+                new MateriaService().DeleteCorrelativa(correlativa.Materia.Id, correlativa.Correlativa.Id);
 
                 cargarGrilla();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
@@ -94,13 +114,14 @@ namespace View.Forms
             try
             {
                 dgvMaterias.DataSource = new MateriaService().GetCorrelativasById(materia.Id).FindAll(x => x.Deshabilitado == false);
-                dgvMaterias.Columns["Id"].HeaderText = "Código";
-
+                dgvMaterias.Columns["Id"].Visible = false;
+                dgvMaterias.Columns["Materia"].Visible = false;
+                dgvMaterias.Columns["EstadoRequerido"].HeaderText = "Estado requerido";
                 dgvMaterias.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
     }

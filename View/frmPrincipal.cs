@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +29,7 @@ namespace View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
         private void llenarPanelCont(Control uc)
@@ -41,7 +42,7 @@ namespace View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                CommonHelper.ShowError(ex.Message);
             }
         }
 
