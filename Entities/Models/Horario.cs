@@ -16,5 +16,10 @@ namespace Entities.Models
 
         public DiaDeLaSemana DiaSemana { get; set; }
         public bool Deshabilitado { get; set; }
+
+        public override string ToString()
+        {
+            return DiaSemana.ToString() + " - " + HoraInicio.ToString() + " a " + HoraFin.ToString();
+        }
     }
 }

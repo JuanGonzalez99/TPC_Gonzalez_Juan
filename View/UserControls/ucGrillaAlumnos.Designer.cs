@@ -134,7 +134,7 @@
             // 
             this.chbDeshabilitados.AutoSize = true;
             this.chbDeshabilitados.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chbDeshabilitados.Location = new System.Drawing.Point(525, 20);
+            this.chbDeshabilitados.Location = new System.Drawing.Point(525, 21);
             this.chbDeshabilitados.Name = "chbDeshabilitados";
             this.chbDeshabilitados.Size = new System.Drawing.Size(131, 17);
             this.chbDeshabilitados.TabIndex = 27;

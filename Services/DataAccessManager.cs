@@ -76,12 +76,13 @@ namespace AccesoDatos
             }
         }
 
-        public int ejecutarAccionReturn()
+        public T ejecutarAccionReturn<T>()
         {
             try
             {
                 comando.Connection = conexion;
-                return (int)comando.ExecuteScalar();
+                object result = comando.ExecuteScalar();
+                return (T)Convert.ChangeType(result, typeof(T));
             }
             catch (Exception ex)
             {

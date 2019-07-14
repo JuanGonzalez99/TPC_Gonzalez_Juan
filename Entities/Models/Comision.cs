@@ -22,7 +22,7 @@ namespace Entities.Models
 
         public override string ToString()
         {
-            return Materia.Nombre + " " + Año.ToString() + (Cuatrimestre == 0 ? "" : " " + Cuatrimestre.ToString() + "C");
+            return Materia.Nombre + " " + Año.ToString() + (Cuatrimestre == null ? "" : " " + Cuatrimestre.ToString() + "C");
         }
     }
 }

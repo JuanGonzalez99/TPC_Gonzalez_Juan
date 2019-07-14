@@ -35,6 +35,7 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.chbDeshabilitados = new System.Windows.Forms.CheckBox();
+            this.btnHorarios = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,7 +122,7 @@
             // 
             this.chbDeshabilitados.AutoSize = true;
             this.chbDeshabilitados.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chbDeshabilitados.Location = new System.Drawing.Point(526, 20);
+            this.chbDeshabilitados.Location = new System.Drawing.Point(525, 21);
             this.chbDeshabilitados.Name = "chbDeshabilitados";
             this.chbDeshabilitados.Size = new System.Drawing.Size(131, 17);
             this.chbDeshabilitados.TabIndex = 32;
@@ -129,11 +130,25 @@
             this.chbDeshabilitados.UseVisualStyleBackColor = true;
             this.chbDeshabilitados.CheckedChanged += new System.EventHandler(this.chbDeshabilitados_CheckedChanged);
             // 
+            // btnHorarios
+            // 
+            this.btnHorarios.BackColor = System.Drawing.Color.SlateGray;
+            this.btnHorarios.FlatAppearance.BorderSize = 0;
+            this.btnHorarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHorarios.Location = new System.Drawing.Point(293, 12);
+            this.btnHorarios.Name = "btnHorarios";
+            this.btnHorarios.Size = new System.Drawing.Size(102, 32);
+            this.btnHorarios.TabIndex = 33;
+            this.btnHorarios.Text = "Horarios";
+            this.btnHorarios.UseVisualStyleBackColor = false;
+            this.btnHorarios.Click += new System.EventHandler(this.btnHorarios_Click);
+            // 
             // ucGrillaComisiones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Controls.Add(this.btnHorarios);
             this.Controls.Add(this.chbDeshabilitados);
             this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.txtBuscar);
@@ -159,5 +174,6 @@
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.CheckBox chbDeshabilitados;
+        private System.Windows.Forms.Button btnHorarios;
     }
 }

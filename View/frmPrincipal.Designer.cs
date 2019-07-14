@@ -195,7 +195,7 @@
             this.btnInscripciones.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnInscripciones.Image = ((System.Drawing.Image)(resources.GetObject("btnInscripciones.Image")));
             this.btnInscripciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInscripciones.Location = new System.Drawing.Point(3, 255);
+            this.btnInscripciones.Location = new System.Drawing.Point(3, 219);
             this.btnInscripciones.Name = "btnInscripciones";
             this.btnInscripciones.Size = new System.Drawing.Size(146, 30);
             this.btnInscripciones.TabIndex = 28;
@@ -213,11 +213,11 @@
             this.btnComisiones.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnComisiones.Image = ((System.Drawing.Image)(resources.GetObject("btnComisiones.Image")));
             this.btnComisiones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnComisiones.Location = new System.Drawing.Point(3, 219);
+            this.btnComisiones.Location = new System.Drawing.Point(3, 183);
             this.btnComisiones.Name = "btnComisiones";
             this.btnComisiones.Size = new System.Drawing.Size(146, 30);
             this.btnComisiones.TabIndex = 27;
-            this.btnComisiones.Text = " Comisiones";
+            this.btnComisiones.Text = "  Comisiones";
             this.btnComisiones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnComisiones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnComisiones.UseVisualStyleBackColor = true;
@@ -231,7 +231,7 @@
             this.btnHorarios.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnHorarios.Image = ((System.Drawing.Image)(resources.GetObject("btnHorarios.Image")));
             this.btnHorarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHorarios.Location = new System.Drawing.Point(3, 183);
+            this.btnHorarios.Location = new System.Drawing.Point(3, 291);
             this.btnHorarios.Name = "btnHorarios";
             this.btnHorarios.Size = new System.Drawing.Size(146, 30);
             this.btnHorarios.TabIndex = 26;
@@ -239,6 +239,7 @@
             this.btnHorarios.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnHorarios.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHorarios.UseVisualStyleBackColor = true;
+            this.btnHorarios.Visible = false;
             this.btnHorarios.Click += new System.EventHandler(this.btnHorarios_Click);
             // 
             // btnUsuarios
@@ -249,7 +250,7 @@
             this.btnUsuarios.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnUsuarios.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuarios.Image")));
             this.btnUsuarios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuarios.Location = new System.Drawing.Point(3, 291);
+            this.btnUsuarios.Location = new System.Drawing.Point(3, 255);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(146, 30);
             this.btnUsuarios.TabIndex = 29;

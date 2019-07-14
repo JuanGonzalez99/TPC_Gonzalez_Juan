@@ -67,19 +67,20 @@ namespace AccesoDatos.Services
         }
 
 
-        public void Insert(Horario nuevo)
+        public int Insert(Horario nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
                 accesoDatos.setearConsulta("INSERT INTO TB_HORARIOS (HORA_INICIO, HORA_FIN, DIA_SEMANA) " +
-                    "values (@HoraInicio, @HoraFin, @DiaSemana)");
+                    "values (@HoraInicio, @HoraFin, @DiaSemana) " +
+                    "select IDENT_CURRENT('TB_HORARIOS')");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@HoraInicio", nuevo.HoraInicio);
                 accesoDatos.Comando.Parameters.AddWithValue("@HoraFin", nuevo.HoraFin);
                 accesoDatos.Comando.Parameters.AddWithValue("@DiaSemana", nuevo.DiaSemana);
                 accesoDatos.abrirConexion();
-                accesoDatos.ejecutarAccion();
+                return accesoDatos.ejecutarAccionReturn<int>();
             }
             catch (Exception ex)
             {

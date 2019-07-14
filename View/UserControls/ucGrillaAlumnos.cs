@@ -118,7 +118,7 @@ namespace View
             if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
                 return;
 
-            frmAlumnosCarreras frm = new frmAlumnosCarreras((Alumno)dgvGrilla.SelectedRows[0].DataBoundItem);
+            frmCarrerasAlumno frm = new frmCarrerasAlumno((Alumno)dgvGrilla.SelectedRows[0].DataBoundItem);
             frm.ShowDialog();
         }
 

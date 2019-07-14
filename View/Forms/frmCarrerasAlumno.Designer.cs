@@ -1,6 +1,6 @@
 ﻿namespace View.Forms
 {
-    partial class frmAlumnosCarreras
+    partial class frmCarrerasAlumno
     {
         /// <summary>
         /// Required designer variable.
@@ -39,8 +39,9 @@
             // 
             // btnVolver
             // 
+            this.btnVolver.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnVolver.Location = new System.Drawing.Point(268, 396);
+            this.btnVolver.Location = new System.Drawing.Point(272, 238);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 33);
             this.btnVolver.TabIndex = 8;
@@ -49,7 +50,8 @@
             // 
             // btnAsignarCarrera
             // 
-            this.btnAsignarCarrera.Location = new System.Drawing.Point(28, 396);
+            this.btnAsignarCarrera.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnAsignarCarrera.Location = new System.Drawing.Point(32, 238);
             this.btnAsignarCarrera.Name = "btnAsignarCarrera";
             this.btnAsignarCarrera.Size = new System.Drawing.Size(100, 33);
             this.btnAsignarCarrera.TabIndex = 6;
@@ -59,18 +61,20 @@
             // 
             // cmbCarreras
             // 
-            this.cmbCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cmbCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbCarreras.FormattingEnabled = true;
-            this.cmbCarreras.Location = new System.Drawing.Point(80, 322);
+            this.cmbCarreras.Location = new System.Drawing.Point(84, 164);
             this.cmbCarreras.Name = "cmbCarreras";
             this.cmbCarreras.Size = new System.Drawing.Size(288, 21);
             this.cmbCarreras.TabIndex = 5;
             // 
             // lblCarreras
             // 
-            this.lblCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCarreras.AutoSize = true;
-            this.lblCarreras.Location = new System.Drawing.Point(25, 325);
+            this.lblCarreras.Location = new System.Drawing.Point(29, 167);
             this.lblCarreras.Name = "lblCarreras";
             this.lblCarreras.Size = new System.Drawing.Size(49, 13);
             this.lblCarreras.TabIndex = 7;
@@ -80,20 +84,23 @@
             // 
             this.dgvCarreras.AllowUserToAddRows = false;
             this.dgvCarreras.AllowUserToDeleteRows = false;
+            this.dgvCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCarreras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCarreras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCarreras.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvCarreras.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvCarreras.Location = new System.Drawing.Point(0, 0);
             this.dgvCarreras.Name = "dgvCarreras";
             this.dgvCarreras.RowHeadersVisible = false;
             this.dgvCarreras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCarreras.Size = new System.Drawing.Size(403, 269);
+            this.dgvCarreras.Size = new System.Drawing.Size(410, 111);
             this.dgvCarreras.TabIndex = 4;
             // 
             // btnQuitar
             // 
-            this.btnQuitar.Location = new System.Drawing.Point(150, 396);
+            this.btnQuitar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnQuitar.Location = new System.Drawing.Point(154, 238);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(96, 33);
             this.btnQuitar.TabIndex = 9;
@@ -105,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 450);
+            this.ClientSize = new System.Drawing.Size(410, 292);
             this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAsignarCarrera);

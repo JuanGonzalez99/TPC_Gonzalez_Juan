@@ -144,5 +144,14 @@ namespace View.UserControls
             dgvGrilla.Columns["Profesor"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvGrilla.Columns["Ayudante"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
+
+        private void btnHorarios_Click(object sender, EventArgs e)
+        {
+            if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
+                return;
+
+            frmHorariosComision frm = new frmHorariosComision((Comision)dgvGrilla.SelectedRows[0].DataBoundItem);
+            frm.ShowDialog();
+        }
     }
 }

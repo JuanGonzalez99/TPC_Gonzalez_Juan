@@ -58,11 +58,11 @@
     <Compile Include="Forms\frmAlumno.Designer.cs">
       <DependentUpon>frmAlumno.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmAlumnosCarreras.cs">
+    <Compile Include="Forms\frmCarrerasAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmAlumnosCarreras.Designer.cs">
-      <DependentUpon>frmAlumnosCarreras.cs</DependentUpon>
+    <Compile Include="Forms\frmCarrerasAlumno.Designer.cs">
+      <DependentUpon>frmCarrerasAlumno.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmCarrera.cs">
       <SubType>Form</SubType>
@@ -81,6 +81,12 @@
     </Compile>
     <Compile Include="Forms\frmHorario.Designer.cs">
       <DependentUpon>frmHorario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmHorariosComision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmHorariosComision.Designer.cs">
+      <DependentUpon>frmHorariosComision.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmInscripcion.cs">
       <SubType>Form</SubType>
@@ -180,8 +186,8 @@
     <EmbeddedResource Include="Forms\frmAlumno.resx">
       <DependentUpon>frmAlumno.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmAlumnosCarreras.resx">
-      <DependentUpon>frmAlumnosCarreras.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmCarrerasAlumno.resx">
+      <DependentUpon>frmCarrerasAlumno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCarrera.resx">
       <DependentUpon>frmCarrera.cs</DependentUpon>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmHorario.resx">
       <DependentUpon>frmHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmHorariosComision.resx">
+      <DependentUpon>frmHorariosComision.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmInscripcion.resx">
       <DependentUpon>frmInscripcion.cs</DependentUpon>

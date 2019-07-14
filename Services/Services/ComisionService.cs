@@ -149,6 +149,88 @@ namespace AccesoDatos.Services
         }
 
 
+        public List<Horario> GetHorariosById(long id)
+        {
+            List<Horario> listado = new List<Horario>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            Horario horario;
+            HorarioService horarioService = new HorarioService();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_HORARIOS_COMISIONES " +
+                    "WHERE CD_COMISION = @IdComision " +
+                    "AND DESHABILITADO = 0");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdComision", id);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    horario = horarioService.GetById(Converter.ToInt(accesoDatos.Lector["CD_HORARIO"]));
+                    listado.Add(horario);
+                }
+
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void AsignarHorario(long comisionId, int horarioId)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("INSERT INTO TB_HORARIOS_COMISIONES(CD_COMISION, CD_HORARIO)" +
+                    "values (@IdComision, @IdHorario)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdComision", comisionId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdHorario", horarioId);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void QuitarHorario(long comisionId, int horarioId)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE TB_HORARIOS_COMISIONES " +
+                    "SET DESHABILITADO = 1 " +
+                    "WHERE CD_COMISION = @IdComision " +
+                    "AND CD_HORARIO = @IdHorario");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdComision", comisionId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdHorario", horarioId);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+
         private Comision Make(SqlDataReader lector, bool complete)
         {
             Comision entidad = new Comision();
@@ -164,8 +246,9 @@ namespace AccesoDatos.Services
             ProfesorService profesorService = new ProfesorService();
             entidad.Profesor = profesorService.GetById(Converter.ToInt(lector["CD_PROFESOR"]));
 
-            if (!Convert.IsDBNull(lector["CD_AYUDANTE"]))
-                entidad.Ayudante = profesorService.GetById(Converter.ToInt(lector["CD_AYUDANTE"]));
+            var ayudanteId = Converter.ToInt(lector["CD_AYUDANTE"]);
+            if (ayudanteId != 0)
+                entidad.Ayudante = profesorService.GetById(ayudanteId);
 
             if (complete) { }
 
