@@ -10,6 +10,6 @@
 namespace PresentacionWeb {
     
     
-    public partial class About {
+    public partial class InscripcionComision {
     }
 }

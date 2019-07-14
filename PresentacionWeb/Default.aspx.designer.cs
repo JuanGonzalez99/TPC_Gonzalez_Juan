@@ -40,13 +40,22 @@ namespace PresentacionWeb {
         protected global::System.Web.UI.WebControls.Button btnLogin;
         
         /// <summary>
-        /// Control btnGetLegajo.
+        /// Control txtDNI.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGetLegajo;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDNI;
+        
+        /// <summary>
+        /// Control btnGetUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetUsuario;
         
         /// <summary>
         /// Control upModal.

@@ -10,24 +10,24 @@
 namespace PresentacionWeb {
     
     
-    public partial class Inscripciones {
+    public partial class Docente {
         
         /// <summary>
-        /// Control dgvMaterias.
+        /// Control txtProfesor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvMaterias;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtProfesor;
         
         /// <summary>
-        /// Control btnVolver.
+        /// Control btnComisiones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVolver;
+        protected global::System.Web.UI.WebControls.Button btnComisiones;
     }
 }

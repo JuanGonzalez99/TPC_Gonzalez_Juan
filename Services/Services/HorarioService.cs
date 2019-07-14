@@ -142,13 +142,13 @@ namespace AccesoDatos.Services
         private Horario Make(SqlDataReader lector, bool complete)
         {
             Horario entidad = new Horario();
-            entidad.Id = (int)lector["CD_HORARIO"];
-            entidad.HoraInicio = (TimeSpan)lector["HORA_INICIO"];
-            entidad.HoraFin = (TimeSpan)lector["HORA_FIN"];
-            int aux = (byte)lector["DIA_SEMANA"];
+            entidad.Id = Converter.ToInt(lector["CD_HORARIO"]);
+            entidad.HoraInicio = Converter.ToTimeSpan(lector["HORA_INICIO"]);
+            entidad.HoraFin = Converter.ToTimeSpan(lector["HORA_FIN"]);
+            int aux = Converter.ToByte(lector["DIA_SEMANA"]);
             entidad.DiaSemana = (DiaDeLaSemana)aux;
 
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

@@ -13,9 +13,33 @@ namespace PresentacionWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UserName"] != null)
+            if (Session["Usuario"] != null)
             {
-                Response.Redirect("~/Estudiante.aspx");
+                Usuario usuario = (Usuario)Session["Usuario"];
+
+                if (usuario.TipoUsuario.Nombre.ToLower() == "estudiante")
+                    Response.Redirect("~/Estudiante.aspx");
+
+                else
+                    Response.Redirect("~/Docente.aspx");
+            }
+
+            ImageButton btnLogout = (ImageButton)Master.FindControl("btnLogout");
+            btnLogout.Visible = false;
+        }
+
+        protected void btnGetUsuario_Click(object sender, EventArgs e)
+        {
+            UsuarioService s = new UsuarioService();
+            Usuario usuario = s.GetByDNI(txtDNI.Value);
+
+            if (usuario == null)
+            {
+                CrearModal("Atención", "El DNI ingresado no tiene ningún usuario asociado. ");
+            }
+            else
+            {
+                txtUsuario.Value = usuario.Nombre;
             }
         }
 
@@ -35,8 +59,16 @@ namespace PresentacionWeb
             }
             else
             {
-                Session.Add("UserName", txtUsuario.Value);
-                Response.Redirect("~/Estudiante.aspx");
+                Session.Add("Usuario", usuario);
+
+                ImageButton btnLogout = (ImageButton)Master.FindControl("btnLogout");
+                btnLogout.Visible = true;
+
+                if (usuario.TipoUsuario.Nombre.ToLower() == "estudiante")
+                    Response.Redirect("~/Estudiante.aspx");
+
+                else
+                    Response.Redirect("~/Docente.aspx");
             }
         }
 

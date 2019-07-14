@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace AccesoDatos.Services
@@ -180,12 +181,11 @@ namespace AccesoDatos.Services
         private Inscripcion Make(SqlDataReader lector, bool complete)
         {
             Inscripcion entidad = new Inscripcion();
-            entidad.Id = (int)lector["ID"];
-            entidad.Año = (int)lector["AÑO"];
-            if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
-                entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
-            entidad.FechaApertura = (DateTime)lector["FECHA_APERTURA"];
-            entidad.FechaCierre = (DateTime)lector["FECHA_CIERRE"];
+            entidad.Id = Converter.ToInt(lector["ID"]);
+            entidad.Año = Converter.ToInt(lector["AÑO"]);
+            entidad.Cuatrimestre = Converter.ToNulleableByte(lector["CUATRIMESTRE"]);
+            entidad.FechaApertura = Converter.ToDateTime(lector["FECHA_APERTURA"]);
+            entidad.FechaCierre = Converter.ToDateTime(lector["FECHA_CIERRE"]);
 
             if (complete) { }
 

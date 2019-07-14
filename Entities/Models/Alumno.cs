@@ -9,7 +9,6 @@ namespace Entities.Models
     public class Alumno : Persona
     {
         public int Id { get; set; }
-        public List<Materia> Materias { get; set; }
         public bool Deshabilitado { get; set; }
 
         public override string ToString()

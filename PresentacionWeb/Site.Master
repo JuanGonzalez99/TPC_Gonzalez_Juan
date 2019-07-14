@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <title><%: Page.Title %> - SYSACAD 2.0</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -69,17 +69,25 @@
         }
     </style>
 
-    <script type="text/javascript">
+    <script>
+        function ready()
+        {
+            var usuario = '<%= Session["Usuario"] %>';
+            
+            var btn = $('<%= btnLogout.ClientID %>');
 
-        function alumno() {
-            $('#linkInscripciones').removeClass('hidden');
-        }
+            if (usuario == '') {
+                btn.hide();
+            }
+            else {
+                btn.show();
+            }
 
-
+        } 
     </script>
 
 </head>
-<body>
+<body onload="ready()">
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -116,7 +124,15 @@
                         <li><a runat="server" href="~/">Inicio</a></li>
                         <li><a runat="server" href="~/About">Acerca de</a></li>
                         <li><a runat="server" href="~/Contact">Contacto</a></li>
-                        <li><a id="linkInscripciones" class="hidden" runat="server" href="~/Inscripciones">Inscripciones</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li style="margin-top:8px;">
+                            <%--<asp:LinkButton ID="SubmitBtn" runat="server" CssClass="btn btn-small">
+                                <i class="material-icons">power_settings_new</i>
+                            </asp:LinkButton>--%>
+                            <asp:ImageButton ID="btnLogout" ClientIDMode="Inherit" runat="server" ImageUrl="https://cdn2.iconfinder.com/data/icons/electronics/512/Power_Button-512.png" 
+                                BackColor="Transparent" Height="40" OnClick="btnLogout_Click" ToolTip="Cerrar sesión" />
+                        </li>
                     </ul>
                 </div>
             </div>

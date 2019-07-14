@@ -10,7 +10,6 @@ namespace Entities.Models
     {
         public int Id { get; set; }
         public DateTime FechaIngreso { get; set; }
-        public List<Materia> Materias { get; set; }
         public bool Deshabilitado { get; set; }
 
         public override string ToString()

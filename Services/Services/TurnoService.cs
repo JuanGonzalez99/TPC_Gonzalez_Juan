@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 
 namespace AccesoDatos.Services
 {
@@ -67,8 +68,8 @@ namespace AccesoDatos.Services
         public Turno Make(SqlDataReader lector, bool complete)
         {
             Turno entidad = new Turno();
-            entidad.Id = (byte)lector["CD_TURNO"];
-            entidad.Descripcion = (string)lector["DESCRIPCION"];
+            entidad.Id = Converter.ToByte(lector["CD_TURNO"]);
+            entidad.Descripcion = Converter.ToString(lector["DESCRIPCION"]);
 
             if (complete) { }
 

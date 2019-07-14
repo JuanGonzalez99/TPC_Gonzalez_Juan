@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Helpers;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -36,7 +37,7 @@ namespace AccesoDatos.Services
             }
         }
 
-        public Comision GetById(int id, bool complete = false)
+        public Comision GetById(long id, bool complete = false)
         {
             Comision comision = new Comision();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -151,23 +152,20 @@ namespace AccesoDatos.Services
         private Comision Make(SqlDataReader lector, bool complete)
         {
             Comision entidad = new Comision();
-            entidad.Id = (long)lector["CD_COMISION"];
-            entidad.Año = (int)lector["AÑO"];
+            entidad.Id = Converter.ToLong(lector["CD_COMISION"]);
+            entidad.Año = Converter.ToInt(lector["AÑO"]);
+            entidad.Cuatrimestre = Converter.ToNulleableByte(lector["CUATRIMESTRE"]);
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
-            if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
-                entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
-
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
-
-            entidad.Materia = new MateriaService().GetById((int)lector["CD_MATERIA"]);
-            entidad.Turno = new TurnoService().GetById((byte)lector["CD_TURNO"]);
-            entidad.Modalidad = new ModalidadService().GetById((byte)lector["CD_MODALIDAD"]);
+            entidad.Materia = new MateriaService().GetById(Converter.ToInt(lector["CD_MATERIA"]));
+            entidad.Turno = new TurnoService().GetById(Converter.ToByte(lector["CD_TURNO"]));
+            entidad.Modalidad = new ModalidadService().GetById(Converter.ToByte(lector["CD_MODALIDAD"]));
 
             ProfesorService profesorService = new ProfesorService();
-            entidad.Profesor = profesorService.GetById((int)lector["CD_PROFESOR"]);
+            entidad.Profesor = profesorService.GetById(Converter.ToInt(lector["CD_PROFESOR"]));
 
             if (!Convert.IsDBNull(lector["CD_AYUDANTE"]))
-                entidad.Ayudante = profesorService.GetById((int)lector["CD_AYUDANTE"]);
+                entidad.Ayudante = profesorService.GetById(Converter.ToInt(lector["CD_AYUDANTE"]));
 
             if (complete) { }
 

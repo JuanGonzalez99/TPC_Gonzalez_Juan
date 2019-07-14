@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace AccesoDatos.Services
@@ -64,6 +65,36 @@ namespace AccesoDatos.Services
             }
         }
 
+        public Profesor GetProfesorByUserName(string nombreUsuario, bool complete = false)
+        {
+            Profesor profesor = new Profesor();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_USUARIOS_PROFESORES " +
+                    "INNER JOIN TB_USUARIOS ON TB_USUARIOS_PROFESORES.CD_USUARIO = TB_USUARIOS.CD_USUARIO " +
+                    "WHERE NOMBRE_USUARIO = @Nombre");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nombreUsuario);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    var id = Converter.ToInt(accesoDatos.Lector["CD_PROFESOR"]);
+                    profesor = GetById(id, complete);
+                }
+
+                return profesor;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
 
         public void Insert(Profesor nuevo)
         {
@@ -149,13 +180,13 @@ namespace AccesoDatos.Services
         private Profesor Make(SqlDataReader lector, bool complete)
         {
             Profesor entidad = new Profesor();
-            entidad.Id = (int)lector["CD_PROFESOR"];
-            entidad.DNI = (string)lector["DNI"];
-            entidad.Apellido = (string)lector["APELLIDO"];
-            entidad.Nombre = (string)lector["NOMBRE"];
-            entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
-            entidad.FechaIngreso = (DateTime)lector["FECHA_INGRESO"];
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Id = Converter.ToInt(lector["CD_PROFESOR"]);
+            entidad.DNI = Converter.ToString(lector["DNI"]);
+            entidad.Apellido = Converter.ToString(lector["APELLIDO"]);
+            entidad.Nombre = Converter.ToString(lector["NOMBRE"]);
+            entidad.FechaNac = Converter.ToDateTime(lector["FECHA_NAC"]);
+            entidad.FechaIngreso = Converter.ToDateTime(lector["FECHA_INGRESO"]);
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace AccesoDatos.Services
@@ -79,7 +80,7 @@ namespace AccesoDatos.Services
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    var id = (short)accesoDatos.Lector["CD_CARRERA"];
+                    var id = Converter.ToShort(accesoDatos.Lector["CD_CARRERA"]);
                     listado.Add(GetById(id));
                 }
 
@@ -172,11 +173,11 @@ namespace AccesoDatos.Services
         private Carrera Make(SqlDataReader lector, bool complete)
         {
             Carrera entidad = new Carrera();
-            entidad.Id = (short)lector["CD_CARRERA"];
-            entidad.Nombre = (string)lector["NOMBRE"];
-            entidad.NombreCorto = (string)lector["NOMBRE_CORTO"];
-            entidad.Duracion = (byte)lector["DURACION"];
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Id = Converter.ToShort(lector["CD_CARRERA"]);
+            entidad.Nombre = Converter.ToString(lector["NOMBRE"]);
+            entidad.NombreCorto = Converter.ToString(lector["NOMBRE_CORTO"]);
+            entidad.Duracion = Converter.ToByte(lector["DURACION"]);
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

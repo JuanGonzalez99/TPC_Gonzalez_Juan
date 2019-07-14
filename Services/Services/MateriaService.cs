@@ -317,14 +317,13 @@ namespace AccesoDatos.Services
         private Materia Make(SqlDataReader lector, bool complete)
         {
             Materia entidad = new Materia();
-            entidad.Id = (int)lector["CD_MATERIA"];
-            entidad.Nombre = (string)lector["NOMBRE"];
-            entidad.Año = (byte)lector["AÑO"];
-            if (!Convert.IsDBNull(lector["CUATRIMESTRE"]))
-                entidad.Cuatrimestre = (byte)lector["CUATRIMESTRE"];
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Id = Converter.ToInt(lector["CD_MATERIA"]);
+            entidad.Nombre = Converter.ToString(lector["NOMBRE"]);
+            entidad.Año = Converter.ToByte(lector["AÑO"]);
+            entidad.Cuatrimestre = Converter.ToNulleableByte(lector["CUATRIMESTRE"]);
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
-            entidad.Carrera = new CarreraService().GetById((short)lector["CD_CARRERA"]);
+            entidad.Carrera = new CarreraService().GetById(Converter.ToShort(lector["CD_CARRERA"]));
 
             if (complete) { }
 

@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace PresentacionWeb
 {
-    public partial class Estudiante : System.Web.UI.Page
+    public partial class Docente : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,23 +21,20 @@ namespace PresentacionWeb
 
             Usuario usuario = (Usuario)Session["Usuario"];
 
-            if (usuario.TipoUsuario.Nombre.ToLower() != "estudiante")
+            if (usuario.TipoUsuario.Nombre.ToLower() != "docente")
             {
-                Response.Redirect("~/Docente.aspx");
+                Response.Redirect("~/Estudiante.aspx");
                 return;
             }
 
-            if (IsPostBack)
-                return;
+            Profesor profesor = new ProfesorService().GetProfesorByUserName(usuario.Nombre);
 
-            Alumno alumno = new AlumnoService().GetAlumnoByUserName(usuario.Nombre);
-
-            txtAlumno.InnerText = "Bienvenide, " + alumno.Nombre + " " + alumno.Apellido;
+            txtProfesor.InnerText = "Bienvenide, " + profesor.Nombre + " " + profesor.Apellido;
         }
 
-        protected void btnInscripciones_Click(object sender, EventArgs e)
+        protected void btnComisiones_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Inscripciones.aspx");
+            Response.Redirect("~/Comisiones.aspx");
         }
     }
 }

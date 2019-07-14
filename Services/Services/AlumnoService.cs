@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace AccesoDatos.Services
@@ -79,7 +80,7 @@ namespace AccesoDatos.Services
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    var id = (int)accesoDatos.Lector["CD_ALUMNO"];
+                    var id = Converter.ToInt(accesoDatos.Lector["CD_ALUMNO"]);
                     alumno = GetById(id, complete);
                 }
 
@@ -95,6 +96,39 @@ namespace AccesoDatos.Services
             }
         }
 
+        public List<AlumnoComision> GetAlumnosComision()
+        {
+            List<AlumnoComision> listado = new List<AlumnoComision>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            AlumnoComision alumno;
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * FROM TB_ALUMNOS_COMISIONES");
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    int alumnoId = Converter.ToInt(accesoDatos.Lector["CD_ALUMNO"]);
+                    long comisionId = Converter.ToLong(accesoDatos.Lector["CD_COMISION"]);
+                    byte estadoId = Converter.ToByte(accesoDatos.Lector["CD_ESTADO"]);
+
+                    alumno = new AlumnoComision();
+                    alumno.Alumno = GetById(alumnoId);
+                    alumno.Comision = new ComisionService().GetById(comisionId);
+                    alumno.Estado = new MateriaService().GetEstadoById(estadoId);
+                    alumno.Nota = Converter.ToNulleableByte(accesoDatos.Lector["NOTA"]);
+                    alumno.Deshabilitado = Converter.ToBoolean(accesoDatos.Lector["DESHABILITADO"]);
+
+                    listado.Add(alumno);
+                }
+
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public void Insert(Alumno nuevo)
         {
@@ -245,12 +279,12 @@ namespace AccesoDatos.Services
         private Alumno Make(SqlDataReader lector, bool complete)
         {
             Alumno entidad = new Alumno();
-            entidad.Id = (int)lector["CD_ALUMNO"];
-            entidad.DNI = (string)lector["DNI"];
-            entidad.Apellido = (string)lector["APELLIDO"];
-            entidad.Nombre = (string)lector["NOMBRE"];
-            entidad.FechaNac = (DateTime)lector["FECHA_NAC"];
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Id = Converter.ToInt(lector["CD_ALUMNO"]);
+            entidad.DNI = Converter.ToString(lector["DNI"]);
+            entidad.Apellido = Converter.ToString(lector["APELLIDO"]);
+            entidad.Nombre = Converter.ToString(lector["NOMBRE"]);
+            entidad.FechaNac = Converter.ToDateTime(lector["FECHA_NAC"]);
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

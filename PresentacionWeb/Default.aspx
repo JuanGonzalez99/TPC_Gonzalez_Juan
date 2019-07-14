@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PresentacionWeb._Default" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PresentacionWeb._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <%--<div class="imgcontainer">
@@ -76,8 +76,8 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class="textoTabla">Si no recuerda su usuario, ingrese su DNI:&nbsp;
-                                                                    <input type="text" id="dni" size="8" placeholder="Ingrese DNI">&nbsp;&nbsp;
-                                                                    <asp:Button ID="btnGetLegajo" runat="server" Text="Buscar" />
+                                                                    <input type="text" id="txtDNI" runat="server" size="8" placeholder="Ingrese DNI">&nbsp;&nbsp;
+                                                                    <asp:Button ID="btnGetUsuario" runat="server" Text="Buscar" OnClick="btnGetUsuario_Click" />
 
                                                                 </td>
                                                             </tr>

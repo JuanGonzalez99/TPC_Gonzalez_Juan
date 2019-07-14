@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Helpers;
 using Entities.Models;
 
 namespace AccesoDatos.Services
@@ -94,6 +95,34 @@ namespace AccesoDatos.Services
             }
         }
 
+        public Usuario GetByDNI(string DNI)
+        {
+            List<Usuario> listado = new List<Usuario>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearSP("SP_GET_USUARIOS_BY_DNI");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@p_DNI", DNI);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    listado.Add(Make(accesoDatos.Lector, false));
+                }
+
+                return listado.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
         public List<TipoUsuario> GetAllTipoUsuarios()
         {
             List<TipoUsuario> listado = new List<TipoUsuario>();
@@ -107,9 +136,8 @@ namespace AccesoDatos.Services
                 while (accesoDatos.Lector.Read())
                 {
                     tipoUsuario = new TipoUsuario();
-                    tipoUsuario.Id = (byte)accesoDatos.Lector["CD_TIPO"];
-                    tipoUsuario.Nombre = (string)accesoDatos.Lector["NOMBRE"];
-                    tipoUsuario.Deshabilitado = (bool)accesoDatos.Lector["DESHABILITADO"];
+                    tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
+                    tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
 
                     listado.Add(tipoUsuario);
                 }
@@ -140,8 +168,8 @@ namespace AccesoDatos.Services
                 while (accesoDatos.Lector.Read())
                 {
                     tipoUsuario = new TipoUsuario();
-                    tipoUsuario.Id = (byte)accesoDatos.Lector["CD_TIPO"];
-                    tipoUsuario.Nombre = (string)accesoDatos.Lector["NOMBRE"];
+                    tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
+                    tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
                 }
 
                 return tipoUsuario;
@@ -227,11 +255,11 @@ namespace AccesoDatos.Services
         {
             Usuario entidad = new Usuario();
 
-            entidad.Id = (long)lector["CD_USUARIO"];
-            entidad.Nombre = (string)lector["NOMBRE_USUARIO"];
-            entidad.Contraseña = (string)lector["CONTRASEÑA"];
-            entidad.TipoUsuario = GetTipoUsuarioById((byte)lector["TIPO_USUARIO"]);
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Id = Converter.ToLong(lector["CD_USUARIO"]);
+            entidad.Nombre = Converter.ToString(lector["NOMBRE_USUARIO"]);
+            entidad.Contraseña = Converter.ToString(lector["CONTRASEÑA"]);
+            entidad.TipoUsuario = GetTipoUsuarioById(Converter.ToByte(lector["TIPO_USUARIO"]));
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

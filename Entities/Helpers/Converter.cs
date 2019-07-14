@@ -124,5 +124,18 @@ namespace Entities.Helpers
                 return null;
             }
         }
+
+        public static TimeSpan ToTimeSpan(object parameter)
+        {
+            try
+            {
+                TimeSpan result = (TimeSpan)parameter;
+                return result;
+            }
+            catch (Exception)
+            {
+                return TimeSpan.MinValue;
+            }
+        }
     }
 }

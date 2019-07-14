@@ -58,10 +58,8 @@
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\MateriaCorrelativa.cs" />
     <Compile Include="Models\Modalidad.cs" />
-    <Compile Include="Models\Nota.cs" />
     <Compile Include="Models\Persona.cs" />
     <Compile Include="Models\Profesor.cs" />
-    <Compile Include="Models\ProfesorComision.cs" />
     <Compile Include="Models\TipoUsuario.cs" />
     <Compile Include="Models\Turno.cs" />
     <Compile Include="Models\Usuario.cs" />

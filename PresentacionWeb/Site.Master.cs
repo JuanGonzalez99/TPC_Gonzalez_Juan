@@ -13,5 +13,14 @@ namespace PresentacionWeb
         {
 
         }
+
+        protected void btnLogout_Click(object sender, ImageClickEventArgs e)
+        {
+            if (Session["Usuario"] != null)
+            {
+                Session.Remove("Usuario");
+                Response.Redirect("~/Default.aspx");
+            }
+        }
     }
 }

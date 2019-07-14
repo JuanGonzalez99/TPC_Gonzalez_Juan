@@ -1,4 +1,5 @@
 ﻿using AccesoDatos;
+using Entities.Helpers;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -68,9 +69,9 @@ namespace AccesoDatos.Services
         private Modalidad Make(SqlDataReader lector, bool complete)
         {
             Modalidad entidad = new Modalidad();
-            entidad.Id = (byte)lector["CD_MODALIDAD"];
-            entidad.Descripcion = (string)lector["DESCRIPCION"];
-            entidad.Deshabilitado = (bool)lector["DESHABILITADO"];
+            entidad.Id = Converter.ToByte(lector["CD_MODALIDAD"]);
+            entidad.Descripcion = Converter.ToString(lector["DESCRIPCION"]);
+            entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }
 

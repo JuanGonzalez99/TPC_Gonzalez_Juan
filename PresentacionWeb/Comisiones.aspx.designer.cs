@@ -10,16 +10,25 @@
 namespace PresentacionWeb {
     
     
-    public partial class Inscripciones {
+    public partial class Comisiones {
         
         /// <summary>
-        /// Control dgvMaterias.
+        /// Control divSinRegistros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvMaterias;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSinRegistros;
+        
+        /// <summary>
+        /// Control dgvComisiones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvComisiones;
         
         /// <summary>
         /// Control btnVolver.
