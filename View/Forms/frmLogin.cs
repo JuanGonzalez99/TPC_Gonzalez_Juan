@@ -1,4 +1,5 @@
 ﻿using AccesoDatos.Services;
+using Entities.Helpers;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -21,36 +22,51 @@ namespace View.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text.Trim() == "")
+            try
             {
-                MessageBox.Show("Debe ingresar un nombre de usuario.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                validar();
+
+                this.Hide();
+                var frm = new frmPrincipal();
+                frm.Closed += (s, args) => this.Close();
+                frm.Show();
             }
+            catch (WarningException ex)
+            {
+                CommonHelper.ShowWarning(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                CommonHelper.ShowError(ex.Message);
+            }
+        }
+
+        private void validar()
+        {
+            string errores = "";
+
+            if (txtUsuario.Text.Trim() == "")
+                errores += "Debe ingresar un nombre de usuario." + Environment.NewLine;
 
             if (txtContraseña.Text.Trim() == "")
+                errores += "Debe ingresar una contraseña." + Environment.NewLine;
+
+            if (errores != "")
             {
-                MessageBox.Show("Debe ingresar una contraseña.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                throw new WarningException(errores);
             }
-            
+
             Usuario usuario = new UsuarioService().GetByUsername(txtUsuario.Text);
 
-            if (usuario.Id == 0 || (usuario.TipoUsuario != null && usuario.TipoUsuario.Id != 3))
+            if (usuario.Id == 0 || (usuario.TipoUsuario != TipoUsuario.Administrador))
             {
-                MessageBox.Show("El nombre de usuario ingresado no es válido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                throw new WarningException("El nombre de usuario ingresado no es válido.");
             }
 
             if (txtContraseña.Text != usuario.Contraseña)
             {
-                MessageBox.Show("Contraseña incorrecta. Intente nuevamente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                throw new WarningException("Contraseña incorrecta. Intente nuevamente.");
             }
-            
-            this.Hide();
-            var frm = new frmPrincipal();
-            frm.Closed += (s, args) => this.Close();
-            frm.Show();
         }
     }
 }

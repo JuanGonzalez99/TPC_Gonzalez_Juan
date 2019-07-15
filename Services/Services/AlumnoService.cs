@@ -110,12 +110,11 @@ namespace AccesoDatos.Services
                 {
                     int alumnoId = Converter.ToInt(accesoDatos.Lector["CD_ALUMNO"]);
                     long comisionId = Converter.ToLong(accesoDatos.Lector["CD_COMISION"]);
-                    byte estadoId = Converter.ToByte(accesoDatos.Lector["CD_ESTADO"]);
 
                     alumno = new AlumnoComision();
                     alumno.Alumno = GetById(alumnoId);
                     alumno.Comision = new ComisionService().GetById(comisionId);
-                    alumno.Estado = new MateriaService().GetEstadoById(estadoId);
+                    alumno.Estado = (EstadoMateria)Converter.ToByte(accesoDatos.Lector["CD_ESTADO"]);
                     alumno.Nota = Converter.ToNulleableByte(accesoDatos.Lector["NOTA"]);
                     alumno.Deshabilitado = Converter.ToBoolean(accesoDatos.Lector["DESHABILITADO"]);
 

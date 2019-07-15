@@ -123,23 +123,87 @@ namespace AccesoDatos.Services
             }
         }
 
-        public List<TipoUsuario> GetAllTipoUsuarios()
+        //public List<TipoUsuario> GetAllTipoUsuarios()
+        //{
+        //    List<TipoUsuario> listado = new List<TipoUsuario>();
+        //    DataAccessManager accesoDatos = new DataAccessManager();
+        //    TipoUsuario tipoUsuario;
+        //    try
+        //    {
+        //        accesoDatos.setearConsulta("SELECT * FROM TB_TIPOS_USUARIO");
+        //        accesoDatos.abrirConexion();
+        //        accesoDatos.ejecutarConsulta();
+        //        while (accesoDatos.Lector.Read())
+        //        {
+        //            tipoUsuario = new TipoUsuario();
+        //            tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
+        //            tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
+
+        //            listado.Add(tipoUsuario);
+        //        }
+
+        //        return listado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        accesoDatos.cerrarConexion();
+        //    }
+        //}
+
+        //public TipoUsuario GetTipoUsuarioById(byte id)
+        //{
+        //    DataAccessManager accesoDatos = new DataAccessManager();
+        //    TipoUsuario tipoUsuario = new TipoUsuario();
+        //    try
+        //    {
+        //        accesoDatos.setearConsulta("SELECT * FROM TB_TIPOS_USUARIO WHERE CD_TIPO = @Id");
+        //        accesoDatos.Comando.Parameters.Clear();
+        //        accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
+        //        accesoDatos.abrirConexion();
+        //        accesoDatos.ejecutarConsulta();
+        //        while (accesoDatos.Lector.Read())
+        //        {
+        //            tipoUsuario = new TipoUsuario();
+        //            tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
+        //            tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
+        //        }
+
+        //        return tipoUsuario;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        accesoDatos.cerrarConexion();
+        //    }
+        //}
+
+        public List<UsuarioAlumno> GetAllAlumnos()
         {
-            List<TipoUsuario> listado = new List<TipoUsuario>();
             DataAccessManager accesoDatos = new DataAccessManager();
-            TipoUsuario tipoUsuario;
+            List<UsuarioAlumno> listado = new List<UsuarioAlumno>();
+            UsuarioAlumno usuarioAlumno;
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_TIPOS_USUARIO");
+                accesoDatos.setearConsulta("SELECT * FROM TB_USUARIOS_ALUMNOS");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    tipoUsuario = new TipoUsuario();
-                    tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
-                    tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
+                    long usuarioId = Converter.ToLong(accesoDatos.Lector["CD_USUARIO"]);
+                    int alumnoId = Converter.ToInt(accesoDatos.Lector["CD_ALUMNO"]);
 
-                    listado.Add(tipoUsuario);
+                    usuarioAlumno = new UsuarioAlumno();
+                    usuarioAlumno.Usuario = GetById(usuarioId);
+                    usuarioAlumno.Alumno = new AlumnoService().GetById(alumnoId);
+
+                    listado.Add(usuarioAlumno);
                 }
 
                 return listado;
@@ -154,25 +218,29 @@ namespace AccesoDatos.Services
             }
         }
 
-        public TipoUsuario GetTipoUsuarioById(byte id)
+        public List<UsuarioProfesor> GetAllProfesores()
         {
             DataAccessManager accesoDatos = new DataAccessManager();
-            TipoUsuario tipoUsuario = new TipoUsuario();
+            List<UsuarioProfesor> listado = new List<UsuarioProfesor>();
+            UsuarioProfesor usuarioProfesor;
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_TIPOS_USUARIO WHERE CD_TIPO = @Id");
-                accesoDatos.Comando.Parameters.Clear();
-                accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
+                accesoDatos.setearConsulta("SELECT * FROM TB_USUARIOS_PROFESORES");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();
                 while (accesoDatos.Lector.Read())
                 {
-                    tipoUsuario = new TipoUsuario();
-                    tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
-                    tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
+                    long usuarioId = Converter.ToLong(accesoDatos.Lector["CD_USUARIO"]);
+                    int profesorId = Converter.ToInt(accesoDatos.Lector["CD_PROFESOR"]);
+
+                    usuarioProfesor = new UsuarioProfesor();
+                    usuarioProfesor.Usuario = GetById(usuarioId);
+                    usuarioProfesor.Profesor = new ProfesorService().GetById(profesorId);
+
+                    listado.Add(usuarioProfesor);
                 }
 
-                return tipoUsuario;
+                return listado;
             }
             catch (Exception ex)
             {
@@ -195,7 +263,7 @@ namespace AccesoDatos.Services
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@Contraseña", nuevo.Contraseña);
-                accesoDatos.Comando.Parameters.AddWithValue("@IdTipo", nuevo.TipoUsuario.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdTipo", nuevo.TipoUsuario);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -220,7 +288,7 @@ namespace AccesoDatos.Services
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", modificar.Id);
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", modificar.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@Contraseña", modificar.Contraseña);
-                accesoDatos.Comando.Parameters.AddWithValue("@IdTipo", modificar.TipoUsuario.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdTipo", modificar.TipoUsuario);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -236,7 +304,7 @@ namespace AccesoDatos.Services
 
             try
             {
-                accesoDatos.setearConsulta("UPDATE TB_USUARIOS" +
+                accesoDatos.setearConsulta("UPDATE TB_USUARIOS " +
                     "SET DESHABILITADO = 1 WHERE CD_USUARIO = " + id.ToString());
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
@@ -258,7 +326,7 @@ namespace AccesoDatos.Services
             entidad.Id = Converter.ToLong(lector["CD_USUARIO"]);
             entidad.Nombre = Converter.ToString(lector["NOMBRE_USUARIO"]);
             entidad.Contraseña = Converter.ToString(lector["CONTRASEÑA"]);
-            entidad.TipoUsuario = GetTipoUsuarioById(Converter.ToByte(lector["TIPO_USUARIO"]));
+            entidad.TipoUsuario = (TipoUsuario)Converter.ToByte(lector["TIPO_USUARIO"]);
             entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }

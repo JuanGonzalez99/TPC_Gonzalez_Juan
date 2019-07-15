@@ -26,13 +26,14 @@ namespace View.Forms
         {
             InitializeComponent();
             this.materia = materia;
+            this.Text = materia.ToString();
         }
 
         private void frmMateriasCorrelativas_Load(object sender, EventArgs e)
         {
             MateriaService s = new MateriaService();
             cmbMaterias.DataSource = s.GetByCarreraId(materia.Carrera.Id).FindAll(x => !x.Deshabilitado);
-            cmbEstado.DataSource = s.GetAllEstados().FindAll(x => x.Descripcion == "Aprobada" || x.Descripcion == "Regularizada");
+            cmbEstado.DataSource = new List<EstadoMateria> { EstadoMateria.Aprobada, EstadoMateria.Regularizada };
 
             cmbMaterias.SelectedIndex = -1;
             cmbEstado.SelectedIndex = -1;

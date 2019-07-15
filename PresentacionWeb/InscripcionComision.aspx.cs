@@ -20,7 +20,7 @@ namespace PresentacionWeb
 
             Usuario usuario = (Usuario)Session["Usuario"];
 
-            if (usuario.TipoUsuario.Nombre.ToLower() != "estudiante")
+            if (usuario.TipoUsuario != TipoUsuario.Estudiante)
             {
                 Response.Redirect("~/Docente.aspx");
                 return;

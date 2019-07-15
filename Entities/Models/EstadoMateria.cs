@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class EstadoMateria
+    public enum EstadoMateria
     {
-        public byte Id { get; set; }
-        public string Descripcion { get; set; }
-
-        public override string ToString()
-        {
-            return Descripcion;
-        }
+        Aprobada = 1,
+        Regularizada = 2,
+        Cursando = 3,
+        Recursada = 4,
+        Abandonada = 5
     }
 }

@@ -146,9 +146,8 @@ namespace AccesoDatos.Services
             entidad.Id = Converter.ToInt(lector["CD_HORARIO"]);
             entidad.HoraInicio = Converter.ToTimeSpan(lector["HORA_INICIO"]);
             entidad.HoraFin = Converter.ToTimeSpan(lector["HORA_FIN"]);
-            int aux = Converter.ToByte(lector["DIA_SEMANA"]);
-            entidad.DiaSemana = (DiaDeLaSemana)aux;
-
+            entidad.DiaSemana = (DiaDeLaSemana)Converter.ToByte(lector["DIA_SEMANA"]);
+            
             entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }

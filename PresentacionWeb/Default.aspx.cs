@@ -17,7 +17,7 @@ namespace PresentacionWeb
             {
                 Usuario usuario = (Usuario)Session["Usuario"];
 
-                if (usuario.TipoUsuario.Nombre.ToLower() == "estudiante")
+                if (usuario.TipoUsuario == TipoUsuario.Docente)
                     Response.Redirect("~/Estudiante.aspx");
 
                 else
@@ -64,7 +64,7 @@ namespace PresentacionWeb
                 ImageButton btnLogout = (ImageButton)Master.FindControl("btnLogout");
                 btnLogout.Visible = true;
 
-                if (usuario.TipoUsuario.Nombre.ToLower() == "estudiante")
+                if (usuario.TipoUsuario == TipoUsuario.Estudiante)
                     Response.Redirect("~/Estudiante.aspx");
 
                 else

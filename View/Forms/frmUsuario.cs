@@ -30,7 +30,7 @@ namespace View.Forms
 
         private void frmUsuario_Load(object sender, EventArgs e)
         {
-            cmbTipo.DataSource = new UsuarioService().GetAllTipoUsuarios();
+            cmbTipo.DataSource = Enum.GetValues(typeof(TipoUsuario));
 
             if (this.usuario != null)
             {

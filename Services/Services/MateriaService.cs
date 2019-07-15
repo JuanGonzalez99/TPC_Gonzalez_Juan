@@ -122,70 +122,70 @@ namespace AccesoDatos.Services
             }
         }
 
-        public List<EstadoMateria> GetAllEstados()
-        {
-            List<EstadoMateria> listado = new List<EstadoMateria>();
-            DataAccessManager accesoDatos = new DataAccessManager();
-            EstadoMateria estado;
-            try
-            {
-                accesoDatos.setearConsulta("SELECT * FROM TB_ESTADOS_MATERIA");
-                accesoDatos.abrirConexion();
-                accesoDatos.ejecutarConsulta();
-                while (accesoDatos.Lector.Read())
-                {
-                    estado = new EstadoMateria();
+        //public List<EstadoMateria> GetAllEstados()
+        //{
+        //    List<EstadoMateria> listado = new List<EstadoMateria>();
+        //    DataAccessManager accesoDatos = new DataAccessManager();
+        //    EstadoMateria estado;
+        //    try
+        //    {
+        //        accesoDatos.setearConsulta("SELECT * FROM TB_ESTADOS_MATERIA");
+        //        accesoDatos.abrirConexion();
+        //        accesoDatos.ejecutarConsulta();
+        //        while (accesoDatos.Lector.Read())
+        //        {
+        //            estado = new EstadoMateria();
 
-                    estado.Id = (byte)accesoDatos.Lector["CD_ESTADO"];
-                    estado.Descripcion = (string)accesoDatos.Lector["DESCRIPCION"];
+        //            estado.Id = (byte)accesoDatos.Lector["CD_ESTADO"];
+        //            estado.Descripcion = (string)accesoDatos.Lector["DESCRIPCION"];
 
-                    listado.Add(estado);
-                }
+        //            listado.Add(estado);
+        //        }
 
-                return listado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accesoDatos.cerrarConexion();
-            }
-        }
+        //        return listado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        accesoDatos.cerrarConexion();
+        //    }
+        //}
 
-        public EstadoMateria GetEstadoById(byte id)
-        {
-            DataAccessManager accesoDatos = new DataAccessManager();
-            EstadoMateria estado = new EstadoMateria();
+        //public EstadoMateria GetEstadoById(byte id)
+        //{
+        //    DataAccessManager accesoDatos = new DataAccessManager();
+        //    EstadoMateria estado = new EstadoMateria();
 
-            try
-            {
-                accesoDatos.setearConsulta("SELECT * FROM TB_ESTADOS_MATERIA " +
-                    "WHERE CD_ESTADO = @Id");
-                accesoDatos.Comando.Parameters.Clear();
-                accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
-                accesoDatos.abrirConexion();
-                accesoDatos.ejecutarConsulta();
+        //    try
+        //    {
+        //        accesoDatos.setearConsulta("SELECT * FROM TB_ESTADOS_MATERIA " +
+        //            "WHERE CD_ESTADO = @Id");
+        //        accesoDatos.Comando.Parameters.Clear();
+        //        accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
+        //        accesoDatos.abrirConexion();
+        //        accesoDatos.ejecutarConsulta();
 
-                while (accesoDatos.Lector.Read())
-                {
-                    estado = new EstadoMateria();
-                    estado.Id = (byte)accesoDatos.Lector["CD_ESTADO"];
-                    estado.Descripcion = (string)accesoDatos.Lector["DESCRIPCION"];
-                }
+        //        while (accesoDatos.Lector.Read())
+        //        {
+        //            estado = new EstadoMateria();
+        //            estado.Id = (byte)accesoDatos.Lector["CD_ESTADO"];
+        //            estado.Descripcion = (string)accesoDatos.Lector["DESCRIPCION"];
+        //        }
 
-                return estado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                accesoDatos.cerrarConexion();
-            }
-        }
+        //        return estado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        accesoDatos.cerrarConexion();
+        //    }
+        //}
 
 
         public void Insert(Materia nuevo)
@@ -224,7 +224,7 @@ namespace AccesoDatos.Services
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
                 accesoDatos.Comando.Parameters.AddWithValue("@IdCorrelativa", correlativaId);
-                accesoDatos.Comando.Parameters.AddWithValue("@IdEstado", estadoRequerido.Id);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdEstado", estadoRequerido);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }
@@ -336,7 +336,7 @@ namespace AccesoDatos.Services
             entidad.Id = Converter.ToLong(lector["ID"]);
             entidad.Materia = GetById(Converter.ToInt(lector["CD_MATERIA"]));
             entidad.Correlativa = GetById(Converter.ToInt(lector["CD_MATERIA_REQUERIDA"]));
-            entidad.EstadoRequerido = GetEstadoById(Converter.ToByte(lector["CD_ESTADO_REQUERIDO"]));
+            entidad.EstadoRequerido = (EstadoMateria)Converter.ToByte(lector["CD_ESTADO_REQUERIDO"]);
             entidad.Deshabilitado = Converter.ToBoolean(lector["DESHABILITADO"]);
 
             if (complete) { }

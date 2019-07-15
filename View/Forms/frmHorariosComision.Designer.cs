@@ -173,6 +173,7 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAsignarHorario);
             this.Controls.Add(this.dgvHorarios);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmHorariosComision";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.frmHorariosComision_Load);
