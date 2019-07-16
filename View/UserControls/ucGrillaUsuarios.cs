@@ -43,6 +43,9 @@ namespace View.UserControls
 
         private void cargarGrilla()
         {
+            if (cmbTipoUsuario.SelectedItem == null)
+                return;
+            
             UsuarioService s = new UsuarioService();
 
             try
@@ -54,13 +57,15 @@ namespace View.UserControls
                 UsuariosProfesores = s.GetAllProfesores();
 
                 dgvGrilla.Columns.Clear();
+                dgvGrilla.DataSource = null;
                 dgvGrilla.AutoGenerateColumns = false;
 
                 switch (tipo)
                 {
                     case TipoUsuario.Estudiante:
                         {
-                            dgvGrilla.DataSource = UsuariosAlumnos.FindAll(x => x.Alumno.Deshabilitado == false && x.Usuario.Deshabilitado == false);
+                            dgvGrilla.DataSource = UsuariosAlumnos.FindAll(x => x.Alumno.Deshabilitado == false && (x.Usuario.Deshabilitado == false || chbDeshabilitados.Checked))
+                                .OrderBy(x => x.Alumno.Id).ToList();
 
                             DataGridViewTextBoxColumn dgvc;
 
@@ -84,10 +89,16 @@ namespace View.UserControls
                             dgvc.DataPropertyName = "Usuario.TipoUsuario"; dgvc.HeaderText = "Tipo de usuario";
                             dgvGrilla.Columns.Add(dgvc);
 
+                            var checkBoxColumn = new DataGridViewCheckBoxColumn();
+                            checkBoxColumn.DataPropertyName = "Usuario.Deshabilitado"; checkBoxColumn.HeaderText = "Deshabilitado";
+                            checkBoxColumn.Visible = chbDeshabilitados.Checked;
+                            dgvGrilla.Columns.Add(checkBoxColumn);
+
                         } break;
                     case TipoUsuario.Docente:
                         {
-                            dgvGrilla.DataSource = UsuariosProfesores.FindAll(x => x.Profesor.Deshabilitado == false && x.Usuario.Deshabilitado == false);
+                            dgvGrilla.DataSource = UsuariosProfesores.FindAll(x => x.Profesor.Deshabilitado == false && (x.Usuario.Deshabilitado == false || chbDeshabilitados.Checked))
+                                .OrderBy(x => x.Profesor.Id).ToList();
 
                             DataGridViewTextBoxColumn dgvc;
 
@@ -111,17 +122,23 @@ namespace View.UserControls
                             dgvc.DataPropertyName = "Usuario.TipoUsuario"; dgvc.HeaderText = "Tipo de usuario";
                             dgvGrilla.Columns.Add(dgvc);
 
+                            var checkBoxColumn = new DataGridViewCheckBoxColumn();
+                            checkBoxColumn.DataPropertyName = "Usuario.Deshabilitado"; checkBoxColumn.HeaderText = "Deshabilitado";
+                            checkBoxColumn.Visible = chbDeshabilitados.Checked;
+                            dgvGrilla.Columns.Add(checkBoxColumn);
+
                         } break;
                     case TipoUsuario.Administrador:
                         {
                             dgvGrilla.AutoGenerateColumns = true;
-                            dgvGrilla.DataSource = Usuarios.FindAll(x => x.TipoUsuario == tipo && x.Deshabilitado == false);
+                            dgvGrilla.DataSource = Usuarios.FindAll(x => x.TipoUsuario == tipo && (x.Deshabilitado == false || chbDeshabilitados.Checked));
                             dgvGrilla.Columns["Id"].Visible = false;
                             dgvGrilla.Columns["Nombre"].HeaderText = "Nombre de usuario";
                             dgvGrilla.Columns["TipoUsuario"].HeaderText = "Tipo de usuario";
-                            dgvGrilla.Columns["Deshabilitado"].Visible = false;
+                            dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
                         } break;
                 }
+
             }
             catch (Exception ex)
             {
@@ -145,8 +162,10 @@ namespace View.UserControls
                     frm = new frmUsuarioAlumno();
                     break;
                 case TipoUsuario.Docente:
+                    frm = new frmUsuarioProfesor();
                     break;
                 case TipoUsuario.Administrador:
+                    frm = new frmUsuario();
                     break;
             }
 
@@ -164,13 +183,20 @@ namespace View.UserControls
             switch ((TipoUsuario)cmbTipoUsuario.SelectedItem)
             {
                 case TipoUsuario.Estudiante:
-                    UsuarioAlumno obj = (UsuarioAlumno)dgvGrilla.SelectedRows[0].DataBoundItem;
-                    frm = new frmUsuarioAlumno(obj);
-                    break;
+                    {
+                        UsuarioAlumno usuario = (UsuarioAlumno)dgvGrilla.SelectedRows[0].DataBoundItem;
+                        frm = new frmUsuario(usuario.Usuario);
+                    } break;
                 case TipoUsuario.Docente:
-                    break;
+                    {
+                        UsuarioProfesor usuario = (UsuarioProfesor)dgvGrilla.SelectedRows[0].DataBoundItem;
+                        frm = new frmUsuario(usuario.Usuario);
+                    } break;
                 case TipoUsuario.Administrador:
-                    break;
+                    {
+                        Usuario usuario = (Usuario)dgvGrilla.SelectedRows[0].DataBoundItem;
+                        frm = new frmUsuario(usuario);
+                    } break;
             }
 
             if (frm.ShowDialog() == DialogResult.OK)
@@ -182,14 +208,46 @@ namespace View.UserControls
             if (!CommonHelper.SeleccionoRegistro(dgvGrilla))
                 return;
 
-            if (!CommonHelper.Confirma())
-                return;
+            if (btnEliminar.Text == "Eliminar")
+            {
+                if (!CommonHelper.Confirma())
+                    return;
+            }
 
             try
             {
                 UsuarioService s = new UsuarioService();
-                Usuario entidad = (Usuario)dgvGrilla.SelectedRows[0].DataBoundItem;
-                s.Delete(entidad.Id);
+
+                Usuario usuario = new Usuario();
+
+                switch ((TipoUsuario)cmbTipoUsuario.SelectedItem)
+                {
+                    case TipoUsuario.Estudiante:
+                        {
+                            UsuarioAlumno aux = (UsuarioAlumno)dgvGrilla.SelectedRows[0].DataBoundItem;
+                            usuario = aux.Usuario;
+                        } break;
+                    case TipoUsuario.Docente:
+                        {
+                            UsuarioProfesor aux = (UsuarioProfesor)dgvGrilla.SelectedRows[0].DataBoundItem;
+                            usuario = aux.Usuario;
+                        } break;
+                    case TipoUsuario.Administrador:
+                        {
+                            usuario = (Usuario)dgvGrilla.SelectedRows[0].DataBoundItem;
+                        } break;
+                }
+
+                if (btnEliminar.Text == "Eliminar")
+                {
+                    s.Delete(usuario.Id);
+                }
+                else
+                {
+                    s.Restaurar(usuario.Id);
+                    CommonHelper.ShowInfo("Usuario restaurado con éxito.");
+                }
+
                 cargarGrilla();
             }
             catch (Exception ex)
@@ -202,18 +260,48 @@ namespace View.UserControls
         {
             if (txtBuscar.Text == "")
             {
-                dgvGrilla.DataSource = Usuarios.FindAll(x => x.Deshabilitado == false);
-                dgvGrilla.Columns["Deshabilitado"].Visible = false;
+                cargarGrilla();
+                return;
             }
-            else
+
+            if (cmbTipoUsuario.SelectedItem == null)
+                return;
+
+            string busqueda = txtBuscar.Text.ToUpper();
+
+            switch ((TipoUsuario)cmbTipoUsuario.SelectedItem)
             {
-                string busqueda = txtBuscar.Text.ToUpper();
-                List<Usuario> lista = Usuarios.FindAll(x => x.Id.ToString().Contains(busqueda)
-                                                        || x.Nombre.ToUpper().Contains(busqueda)
-                                                        || x.Contraseña.ToUpper().Contains(busqueda)
-                                                        || x.TipoUsuario.ToString().ToUpper().Contains(busqueda));
-                dgvGrilla.DataSource = lista;
-                dgvGrilla.Columns["Deshabilitado"].Visible = true;
+                case TipoUsuario.Estudiante:
+                    {
+                        List<UsuarioAlumno> lista = UsuariosAlumnos.FindAll(x => x.Usuario.Deshabilitado == false || chbDeshabilitados.Checked);
+                        lista = lista.FindAll(x => x.Alumno.Id.ToString().Contains(busqueda)
+                                            || x.Alumno.ToString().ToUpper().Contains(busqueda)
+                                            || x.Usuario.Nombre.ToUpper().Contains(busqueda)
+                                            || x.Usuario.Contraseña.ToUpper().Contains(busqueda));
+
+                        dgvGrilla.DataSource = lista;
+                        dgvGrilla.Columns[dgvGrilla.Columns.Count - 1].Visible = chbDeshabilitados.Checked;
+                    } break;
+                case TipoUsuario.Docente:
+                    {
+                        List<UsuarioProfesor> lista = UsuariosProfesores.FindAll(x => x.Usuario.Deshabilitado == false || chbDeshabilitados.Checked);
+                        lista = lista.FindAll(x => x.Profesor.Id.ToString().Contains(busqueda)
+                                            || x.Profesor.ToString().ToUpper().Contains(busqueda)
+                                            || x.Usuario.Nombre.ToUpper().Contains(busqueda)
+                                            || x.Usuario.Contraseña.ToUpper().Contains(busqueda));
+
+                        dgvGrilla.DataSource = lista;
+                        dgvGrilla.Columns[dgvGrilla.Columns.Count - 1].Visible = chbDeshabilitados.Checked;
+                    } break;
+                case TipoUsuario.Administrador:
+                    {
+                        List<Usuario> lista = Usuarios.FindAll(x => x.TipoUsuario == TipoUsuario.Administrador && (x.Deshabilitado == false || chbDeshabilitados.Checked));
+                        lista = lista.FindAll(x => x.Nombre.ToUpper().Contains(busqueda)
+                                            || x.Contraseña.ToUpper().Contains(busqueda));
+
+                        dgvGrilla.DataSource = lista;
+                        dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
+                    } break;
             }
         }
 
@@ -224,7 +312,7 @@ namespace View.UserControls
             if (cmbTipoUsuario.SelectedItem == null)
                 return;
 
-            TipoUsuario tipoUsuario = (TipoUsuario)cmbTipoUsuario.SelectedItem;
+            txtBuscar.Text = "";
             
             cargarGrilla();
         }
@@ -238,8 +326,7 @@ namespace View.UserControls
             if ((dgvGrilla.Rows[e.RowIndex].DataBoundItem != null) 
                 && (dgvGrilla.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
             {
-                e.Value = BindProperty(dgvGrilla.Rows[e.RowIndex].DataBoundItem, 
-                    dgvGrilla.Columns[e.ColumnIndex].DataPropertyName);
+                e.Value = BindProperty(dgvGrilla.Rows[e.RowIndex].DataBoundItem, dgvGrilla.Columns[e.ColumnIndex].DataPropertyName);
             }
         }
 
@@ -280,5 +367,44 @@ namespace View.UserControls
         }
 
         #endregion
+
+        private void chbDeshabilitados_CheckedChanged(object sender, EventArgs e)
+        {
+            txtBuscar_TextChanged(sender, e);
+        }
+
+        private void dgvGrilla_SelectionChanged(object sender, EventArgs e)
+        {
+            btnEliminar.Text = "Eliminar";
+
+            var rows = dgvGrilla.SelectedRows;
+            if (rows != null && rows.Count > 0)
+            {
+                Usuario usuario = new Usuario();
+
+                switch ((TipoUsuario)cmbTipoUsuario.SelectedItem)
+                {
+                    case TipoUsuario.Estudiante:
+                        {
+                            UsuarioAlumno aux = (UsuarioAlumno)dgvGrilla.SelectedRows[0].DataBoundItem;
+                            usuario = aux.Usuario;
+                        }
+                        break;
+                    case TipoUsuario.Docente:
+                        {
+                            UsuarioProfesor aux = (UsuarioProfesor)dgvGrilla.SelectedRows[0].DataBoundItem;
+                            usuario = aux.Usuario;
+                        }
+                        break;
+                    case TipoUsuario.Administrador:
+                        {
+                            usuario = (Usuario)dgvGrilla.SelectedRows[0].DataBoundItem;
+                        }
+                        break;
+                }
+
+                btnEliminar.Text = usuario.Deshabilitado ? "Restaurar" : "Eliminar";
+            }
+        }
     }
 }

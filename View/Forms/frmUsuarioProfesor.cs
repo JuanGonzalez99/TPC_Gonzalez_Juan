@@ -13,33 +13,34 @@ using System.Windows.Forms;
 
 namespace View.Forms
 {
-    public partial class frmUsuarioAlumno : Form
+    public partial class frmUsuarioProfesor : Form
     {
-        private UsuarioAlumno usuarioAlumno { get; set; }
+        private UsuarioProfesor usuarioProfesor { get; set; }
 
-        private List<Alumno> Alumnos { get; set; }
+        private List<Profesor> Profesores { get; set; }
 
-        public frmUsuarioAlumno()
+        public frmUsuarioProfesor()
         {
             InitializeComponent();
         }
 
-        private void frmUsuarioAlumno_Load(object sender, EventArgs e)
+        private void frmUsuarioProfesor_Load(object sender, EventArgs e)
         {
             cargarGrilla();
         }
 
         private void cargarGrilla()
         {
-            AlumnoService s = new AlumnoService();
+            ProfesorService s = new ProfesorService();
 
             try
             {
-                Alumnos = s.GetAll();
-                dgvAlumnos.DataSource = Alumnos.FindAll(x => x.Deshabilitado == false);
-                dgvAlumnos.Columns["Id"].HeaderText = "Legajo";
-                dgvAlumnos.Columns["FechaNac"].HeaderText = "Fecha de nacimiento";
-                dgvAlumnos.Columns["Deshabilitado"].Visible = false;
+                Profesores = s.GetAll();
+                dgvProfesores.DataSource = Profesores.FindAll(x => x.Deshabilitado == false);
+                dgvProfesores.Columns["Id"].HeaderText = "Legajo";
+                dgvProfesores.Columns["FechaNac"].HeaderText = "Fecha de nacimiento";
+                dgvProfesores.Columns["FechaIngreso"].HeaderText = "Fecha de ingreso";
+                dgvProfesores.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -49,7 +50,7 @@ namespace View.Forms
 
         private void btnAsignar_Click(object sender, EventArgs e)
         {
-            if (!CommonHelper.SeleccionoRegistro(dgvAlumnos))
+            if (!CommonHelper.SeleccionoRegistro(dgvProfesores))
                 return;
 
             try
@@ -59,9 +60,9 @@ namespace View.Forms
 
                 UsuarioService s = new UsuarioService();
 
-                usuarioAlumno.Usuario.Id = s.Insert(usuarioAlumno.Usuario);
+                usuarioProfesor.Usuario.Id = s.Insert(usuarioProfesor.Usuario);
 
-                s.AsignarProfesor(usuarioAlumno.Usuario.Id, usuarioAlumno.Alumno.Id);
+                s.AsignarProfesor(usuarioProfesor.Usuario.Id, usuarioProfesor.Profesor.Id);
 
                 CommonHelper.ShowInfo("Usuario asignado con éxito.");
                 this.DialogResult = DialogResult.OK;
@@ -80,27 +81,27 @@ namespace View.Forms
         {
             UsuarioService s = new UsuarioService();
 
-            Alumno alumno = (Alumno)dgvAlumnos.SelectedRows[0].DataBoundItem;
+            Profesor profesor = (Profesor)dgvProfesores.SelectedRows[0].DataBoundItem;
+            
+            usuarioProfesor = new UsuarioProfesor();
+            usuarioProfesor.Profesor = profesor;
+            usuarioProfesor.Usuario = new Usuario();
+            usuarioProfesor.Usuario.Nombre = profesor.Id + "." + TipoUsuario.Docente.ToString().ToLower();
+            usuarioProfesor.Usuario.Contraseña = profesor.DNI;
+            usuarioProfesor.Usuario.TipoUsuario = TipoUsuario.Docente;
+            usuarioProfesor.Usuario.Deshabilitado = false;
 
-            usuarioAlumno = new UsuarioAlumno();
-            usuarioAlumno.Alumno = alumno;
-            usuarioAlumno.Usuario = new Usuario();
-            usuarioAlumno.Usuario.Nombre = alumno.Id + "." + TipoUsuario.Estudiante.ToString().ToLower();
-            usuarioAlumno.Usuario.Contraseña = alumno.DNI;
-            usuarioAlumno.Usuario.TipoUsuario = TipoUsuario.Estudiante;
-            usuarioAlumno.Usuario.Deshabilitado = false;
-
-            var usuarios = s.GetAll().FindAll(x => x.Nombre == usuarioAlumno.Usuario.Nombre).OrderBy(x => x.Deshabilitado).ToList();
+            var usuarios = s.GetAll().FindAll(x => x.Nombre == usuarioProfesor.Usuario.Nombre).OrderBy(x => x.Deshabilitado).ToList();
 
             foreach (var Usuario in usuarios)
             {
                 if (Usuario.Deshabilitado == false)
                 {
-                    throw new WarningException("El alumno seleccionado ya tiene un usuario asociado.");
+                    throw new WarningException("El profesor seleccionado ya tiene un usuario asociado.");
                 }
                 else
                 {
-                    if (CommonHelper.Confirma("El alumno seleccionado posee un usuario asignado que se encuentra deshabilitado. ¿Desea restaurarlo? Si selecciona \"No\", no se guardará el nuevo usuario."))
+                    if (CommonHelper.Confirma("El profesor seleccionado posee un usuario asignado que se encuentra deshabilitado. ¿Desea restaurarlo? Si selecciona \"No\", no se guardará el nuevo usuario."))
                     {
                         s.Restaurar(Usuario.Id);
 
@@ -113,7 +114,7 @@ namespace View.Forms
                     {
                         throw new WarningException("Restauración cancelada");
                     }
-                    //if (!CommonHelper.Confirma("El alumno seleccionado tiene asociado un usuario deshabilitado que puede ser restaurado, ¿desea continuar de todos modos?"))
+                    //if (!CommonHelper.Confirma("El profesor seleccionado tiene asociado un usuario deshabilitado que puede ser restaurado, ¿desea continuar de todos modos?"))
                     //    throw new WarningException("Asignación cancelada.");
                 }
             }
@@ -123,7 +124,7 @@ namespace View.Forms
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
-            List<Alumno> lista = Alumnos.FindAll(x => x.Deshabilitado == false);
+            List<Profesor> lista = Profesores.FindAll(x => x.Deshabilitado == false);
 
             if (txtBuscar.Text != "")
             {
@@ -132,10 +133,11 @@ namespace View.Forms
                                     || x.DNI.ToString().Contains(busqueda)
                                     || x.Apellido.ToUpper().Contains(busqueda)
                                     || x.Nombre.ToUpper().Contains(busqueda)
-                                    || x.FechaNac.ToShortDateString().Contains(busqueda));
+                                    || x.FechaNac.ToShortDateString().Contains(busqueda)
+                                    || x.FechaIngreso.ToShortDateString().Contains(busqueda));
             }
 
-            dgvAlumnos.DataSource = lista;
+            dgvProfesores.DataSource = lista;
         }
     }
 }

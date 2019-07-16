@@ -36,6 +36,7 @@
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
             this.cmbTipoUsuario = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.chbDeshabilitados = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,6 +117,7 @@
             this.dgvGrilla.Size = new System.Drawing.Size(668, 213);
             this.dgvGrilla.TabIndex = 32;
             this.dgvGrilla.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGrilla_CellFormatting);
+            this.dgvGrilla.SelectionChanged += new System.EventHandler(this.dgvGrilla_SelectionChanged);
             // 
             // cmbTipoUsuario
             // 
@@ -135,11 +137,24 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "Tipo:";
             // 
+            // chbDeshabilitados
+            // 
+            this.chbDeshabilitados.AutoSize = true;
+            this.chbDeshabilitados.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chbDeshabilitados.Location = new System.Drawing.Point(524, 19);
+            this.chbDeshabilitados.Name = "chbDeshabilitados";
+            this.chbDeshabilitados.Size = new System.Drawing.Size(131, 17);
+            this.chbDeshabilitados.TabIndex = 35;
+            this.chbDeshabilitados.Text = "Mostrar deshabilitados";
+            this.chbDeshabilitados.UseVisualStyleBackColor = true;
+            this.chbDeshabilitados.CheckedChanged += new System.EventHandler(this.chbDeshabilitados_CheckedChanged);
+            // 
             // ucGrillaUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.Controls.Add(this.chbDeshabilitados);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbTipoUsuario);
             this.Controls.Add(this.dgvGrilla);
@@ -167,5 +182,6 @@
         private System.Windows.Forms.DataGridView dgvGrilla;
         private System.Windows.Forms.ComboBox cmbTipoUsuario;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chbDeshabilitados;
     }
 }

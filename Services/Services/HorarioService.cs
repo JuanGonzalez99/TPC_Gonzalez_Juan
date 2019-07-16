@@ -70,6 +70,7 @@ namespace AccesoDatos.Services
         public int Insert(Horario nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
+
             try
             {
                 accesoDatos.setearConsulta("INSERT INTO TB_HORARIOS (HORA_INICIO, HORA_FIN, DIA_SEMANA) " +

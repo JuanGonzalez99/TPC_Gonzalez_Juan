@@ -123,67 +123,6 @@ namespace AccesoDatos.Services
             }
         }
 
-        //public List<TipoUsuario> GetAllTipoUsuarios()
-        //{
-        //    List<TipoUsuario> listado = new List<TipoUsuario>();
-        //    DataAccessManager accesoDatos = new DataAccessManager();
-        //    TipoUsuario tipoUsuario;
-        //    try
-        //    {
-        //        accesoDatos.setearConsulta("SELECT * FROM TB_TIPOS_USUARIO");
-        //        accesoDatos.abrirConexion();
-        //        accesoDatos.ejecutarConsulta();
-        //        while (accesoDatos.Lector.Read())
-        //        {
-        //            tipoUsuario = new TipoUsuario();
-        //            tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
-        //            tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
-
-        //            listado.Add(tipoUsuario);
-        //        }
-
-        //        return listado;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        accesoDatos.cerrarConexion();
-        //    }
-        //}
-
-        //public TipoUsuario GetTipoUsuarioById(byte id)
-        //{
-        //    DataAccessManager accesoDatos = new DataAccessManager();
-        //    TipoUsuario tipoUsuario = new TipoUsuario();
-        //    try
-        //    {
-        //        accesoDatos.setearConsulta("SELECT * FROM TB_TIPOS_USUARIO WHERE CD_TIPO = @Id");
-        //        accesoDatos.Comando.Parameters.Clear();
-        //        accesoDatos.Comando.Parameters.AddWithValue("@Id", id);
-        //        accesoDatos.abrirConexion();
-        //        accesoDatos.ejecutarConsulta();
-        //        while (accesoDatos.Lector.Read())
-        //        {
-        //            tipoUsuario = new TipoUsuario();
-        //            tipoUsuario.Id = Converter.ToByte(accesoDatos.Lector["CD_TIPO"]);
-        //            tipoUsuario.Nombre = Converter.ToString(accesoDatos.Lector["NOMBRE"]);
-        //        }
-
-        //        return tipoUsuario;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        accesoDatos.cerrarConexion();
-        //    }
-        //}
-
         public List<UsuarioAlumno> GetAllAlumnos()
         {
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -252,20 +191,21 @@ namespace AccesoDatos.Services
             }
         }
 
-        public void Insert(Usuario nuevo)
+        public long Insert(Usuario nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
 
             try
             {
                 accesoDatos.setearConsulta("INSERT INTO TB_USUARIOS (NOMBRE_USUARIO, CONTRASEÑA, TIPO_USUARIO) " +
-                    "values(@Nombre, @Contraseña, @IdTipo)");
+                    "values(@Nombre, @Contraseña, @IdTipo) " +
+                    "select IDENT_CURRENT('TB_USUARIOS')");
                 accesoDatos.Comando.Parameters.Clear();
                 accesoDatos.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
                 accesoDatos.Comando.Parameters.AddWithValue("@Contraseña", nuevo.Contraseña);
                 accesoDatos.Comando.Parameters.AddWithValue("@IdTipo", nuevo.TipoUsuario);
                 accesoDatos.abrirConexion();
-                accesoDatos.ejecutarAccion();
+                return accesoDatos.ejecutarAccionReturn<long>();
             }
             catch (Exception ex)
             {
@@ -306,6 +246,73 @@ namespace AccesoDatos.Services
             {
                 accesoDatos.setearConsulta("UPDATE TB_USUARIOS " +
                     "SET DESHABILITADO = 1 WHERE CD_USUARIO = " + id.ToString());
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void Restaurar(long id)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE TB_USUARIOS " +
+                    "SET DESHABILITADO = 0 WHERE CD_USUARIO = " + id.ToString());
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void AsignarAlumno(long usuarioId, int alumnoId)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("INSERT INTO TB_USUARIOS_ALUMNOS (CD_USUARIO, CD_ALUMNO) " +
+                    "values(@IdUsuario, @IdAlumno)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdUsuario", usuarioId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdAlumno", alumnoId);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void AsignarProfesor(long usuarioId, int profesorId)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearConsulta("INSERT INTO TB_USUARIOS_PROFESORES (CD_USUARIO, CD_PROFESOR) " +
+                    "values(@IdUsuario, @IdProfesor)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdUsuario", usuarioId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdProfesor", profesorId);
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarAccion();
             }

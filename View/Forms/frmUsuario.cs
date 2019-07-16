@@ -34,14 +34,15 @@ namespace View.Forms
 
             if (this.usuario != null)
             {
-                txtID.Text = usuario.Id.ToString();
                 txtNombre.Text = usuario.Nombre;
                 txtContraseña.Text = usuario.Contraseña;
                 cmbTipo.SelectedIndex = cmbTipo.FindString(usuario.TipoUsuario.ToString());
+
+                txtNombre.Enabled = usuario.TipoUsuario == TipoUsuario.Administrador;
             }
             else
             {
-                cmbTipo.SelectedIndex = -1;
+                cmbTipo.SelectedIndex = cmbTipo.FindString(TipoUsuario.Administrador.ToString());
             }
         }
 
@@ -49,7 +50,8 @@ namespace View.Forms
         {
             try
             {
-                validarEntidad();
+                if (!validarEntidad())
+                    return;
 
                 UsuarioService s = new UsuarioService();
 
@@ -71,18 +73,15 @@ namespace View.Forms
             }
         }
 
-        private void validarEntidad()
+        private bool validarEntidad()
         {
             string errores = "";
 
             if (txtNombre.Text.Trim() == "")
-                errores += "Debe ingresar un nomber. " + Environment.NewLine;
+                errores += "Debe ingresar un nombre. " + Environment.NewLine;
 
             if (txtContraseña.Text.Trim() == "")
                 errores += "Debe ingresar una contraseña. " + Environment.NewLine;
-
-            if (cmbTipo.SelectedItem == null)
-                errores += "Debe seleccionar un tipo de usuario. " + Environment.NewLine;
 
             if (errores != "")
             {
@@ -93,6 +92,49 @@ namespace View.Forms
             usuario.Nombre = txtNombre.Text;
             usuario.Contraseña = txtContraseña.Text;
             usuario.TipoUsuario = (TipoUsuario)cmbTipo.SelectedItem;
+
+            if (usuario.Nombre.Contains(".docente") || usuario.Nombre.Contains(".estudiante"))
+            {
+                throw new WarningException("Por favor, no utilice las extensiones utilizadas para otro tipo de usuarios. Puede generar conflictos.");
+            }
+
+            UsuarioService s = new UsuarioService();
+
+            var usuarios = s.GetAll().OrderBy(x => x.Deshabilitado).ToList();
+
+            foreach (var Usuario in usuarios)
+            {
+                if (Usuario.Id == usuario.Id)
+                    continue;
+
+                if (Usuario.Nombre != usuario.Nombre)
+                    continue;
+                
+                if (Usuario.Deshabilitado == false)
+                {
+                    throw new WarningException("Ya existe un usuario con el mismo nombre.");
+                }
+
+                //if (!CommonHelper.Confirma("Existe un usuario deshabilitado con el mismo nombre del tipo " + 
+                //    Usuario.TipoUsuario + " que puede ser restaurado, ¿desea continuar de todos modos?"))
+                //    throw new WarningException("Guardado cancelado.");
+
+                if (CommonHelper.Confirma("Existe un usuario deshabilitado con el mismo nombre. ¿Desea restaurarlo? Si selecciona \"No\", no se guardará el nuevo usuario."))
+                {
+                    s.Restaurar(Usuario.Id);
+
+                    CommonHelper.ShowInfo("Usuario restaurado correctamente.");
+                    this.DialogResult = DialogResult.OK;
+
+                    return false;
+                }
+                else
+                {
+                    throw new WarningException("Restauración cancelada");
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -24,6 +24,9 @@ namespace PresentacionWeb
                     Response.Redirect("~/Docente.aspx");
             }
 
+            if (IsPostBack)
+                return;
+
             ImageButton btnLogout = (ImageButton)Master.FindControl("btnLogout");
             btnLogout.Visible = false;
         }
@@ -49,9 +52,9 @@ namespace PresentacionWeb
 
             Usuario usuario = s.GetByUsername(txtUsuario.Value);
 
-            if (usuario.Id == 0)
+            if (usuario.Id == 0 || usuario.TipoUsuario == TipoUsuario.Administrador)
             {
-                CrearModal("Atención", "El nombre de usuario ingresado no se encuentra registrado. ");
+                CrearModal("Atención", "El nombre de usuario ingresado no se encuentra registrado o está deshabilitado. ");
             }
             else if (usuario.Contraseña != txtPassword.Value)
             {

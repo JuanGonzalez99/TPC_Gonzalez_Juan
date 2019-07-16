@@ -12,10 +12,10 @@ namespace Entities.Helpers
         public static bool Confirma(string texto = "¿Está seguro que desea eliminar el registro seleccionado?",
                                     string titulo = "Atención")
         {
-            return MessageBox.Show(texto, titulo, MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK;
+            return MessageBox.Show(texto, titulo, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
-        public static bool SeleccionoRegistro(DataGridView dgv, string textoError = "Debe seleccionar un registro")
+        public static bool SeleccionoRegistro(DataGridView dgv, string textoError = "Debe seleccionar un registro.")
         {
             if (dgv.CurrentRow == null)
             {
