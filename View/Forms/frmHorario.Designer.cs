@@ -80,26 +80,24 @@
             // 
             // dtpHoraInicio
             // 
-            this.dtpHoraInicio.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.dtpHoraInicio.Cursor = System.Windows.Forms.Cursors.Default;
             this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpHoraInicio.Location = new System.Drawing.Point(111, 124);
             this.dtpHoraInicio.Name = "dtpHoraInicio";
             this.dtpHoraInicio.ShowUpDown = true;
             this.dtpHoraInicio.Size = new System.Drawing.Size(136, 20);
             this.dtpHoraInicio.TabIndex = 0;
-            this.dtpHoraInicio.UseWaitCursor = true;
             this.dtpHoraInicio.Value = new System.DateTime(2019, 6, 16, 13, 32, 32, 0);
             // 
             // dtpHoraFin
             // 
-            this.dtpHoraFin.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.dtpHoraFin.Cursor = System.Windows.Forms.Cursors.Default;
             this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpHoraFin.Location = new System.Drawing.Point(111, 163);
             this.dtpHoraFin.Name = "dtpHoraFin";
             this.dtpHoraFin.ShowUpDown = true;
             this.dtpHoraFin.Size = new System.Drawing.Size(136, 20);
             this.dtpHoraFin.TabIndex = 1;
-            this.dtpHoraFin.UseWaitCursor = true;
             this.dtpHoraFin.Value = new System.DateTime(2019, 6, 16, 13, 32, 32, 0);
             // 
             // label1

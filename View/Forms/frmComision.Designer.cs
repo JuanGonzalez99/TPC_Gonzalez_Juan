@@ -55,7 +55,7 @@
             this.cmbModalidad.Location = new System.Drawing.Point(232, 151);
             this.cmbModalidad.Name = "cmbModalidad";
             this.cmbModalidad.Size = new System.Drawing.Size(103, 21);
-            this.cmbModalidad.TabIndex = 3;
+            this.cmbModalidad.TabIndex = 5;
             // 
             // label6
             // 
@@ -74,7 +74,7 @@
             this.cmbCuatrimestre.Location = new System.Drawing.Point(253, 108);
             this.cmbCuatrimestre.Name = "cmbCuatrimestre";
             this.cmbCuatrimestre.Size = new System.Drawing.Size(82, 21);
-            this.cmbCuatrimestre.TabIndex = 2;
+            this.cmbCuatrimestre.TabIndex = 3;
             // 
             // label5
             // 
@@ -103,7 +103,7 @@
             this.cmbMateria.Location = new System.Drawing.Point(84, 71);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(251, 21);
-            this.cmbMateria.TabIndex = 0;
+            this.cmbMateria.TabIndex = 1;
             this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbMateria_SelectedIndexChanged);
             // 
             // label2
@@ -123,7 +123,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(208, 282);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(92, 33);
-            this.btnCancelar.TabIndex = 5;
+            this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -133,7 +133,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(65, 282);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(92, 33);
-            this.btnAceptar.TabIndex = 4;
+            this.btnAceptar.TabIndex = 8;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -146,7 +146,7 @@
             this.dtpAño.Name = "dtpAño";
             this.dtpAño.ShowUpDown = true;
             this.dtpAño.Size = new System.Drawing.Size(75, 20);
-            this.dtpAño.TabIndex = 1;
+            this.dtpAño.TabIndex = 2;
             // 
             // cmbCarrera
             // 
@@ -155,7 +155,7 @@
             this.cmbCarrera.Location = new System.Drawing.Point(83, 38);
             this.cmbCarrera.Name = "cmbCarrera";
             this.cmbCarrera.Size = new System.Drawing.Size(252, 21);
-            this.cmbCarrera.TabIndex = 31;
+            this.cmbCarrera.TabIndex = 0;
             this.cmbCarrera.SelectedIndexChanged += new System.EventHandler(this.cmbCarrera_SelectedIndexChanged);
             // 
             // label1
@@ -175,7 +175,7 @@
             this.cmbTurno.Location = new System.Drawing.Point(83, 151);
             this.cmbTurno.Name = "cmbTurno";
             this.cmbTurno.Size = new System.Drawing.Size(76, 21);
-            this.cmbTurno.TabIndex = 33;
+            this.cmbTurno.TabIndex = 4;
             // 
             // label3
             // 
@@ -194,7 +194,7 @@
             this.cmbProfesor.Location = new System.Drawing.Point(83, 191);
             this.cmbProfesor.Name = "cmbProfesor";
             this.cmbProfesor.Size = new System.Drawing.Size(252, 21);
-            this.cmbProfesor.TabIndex = 37;
+            this.cmbProfesor.TabIndex = 6;
             // 
             // label7
             // 
@@ -213,7 +213,7 @@
             this.cmbAyudante.Location = new System.Drawing.Point(84, 226);
             this.cmbAyudante.Name = "cmbAyudante";
             this.cmbAyudante.Size = new System.Drawing.Size(251, 21);
-            this.cmbAyudante.TabIndex = 35;
+            this.cmbAyudante.TabIndex = 7;
             // 
             // label8
             // 
@@ -251,7 +251,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmComision";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmComision";
+            this.Text = "Comision";
             this.Load += new System.EventHandler(this.frmComision_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

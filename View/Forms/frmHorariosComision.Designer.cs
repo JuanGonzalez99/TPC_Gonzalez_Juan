@@ -135,28 +135,26 @@
             // dtpHoraFin
             // 
             this.dtpHoraFin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpHoraFin.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHoraFin.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dtpHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraFin.Location = new System.Drawing.Point(267, 173);
             this.dtpHoraFin.Name = "dtpHoraFin";
             this.dtpHoraFin.ShowUpDown = true;
             this.dtpHoraFin.Size = new System.Drawing.Size(73, 20);
             this.dtpHoraFin.TabIndex = 28;
-            this.dtpHoraFin.UseWaitCursor = true;
-            this.dtpHoraFin.Value = new System.DateTime(2019, 6, 16, 13, 32, 32, 0);
+            this.dtpHoraFin.Value = new System.DateTime(2019, 7, 19, 0, 0, 0, 0);
             // 
             // dtpHoraInicio
             // 
             this.dtpHoraInicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dtpHoraInicio.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHoraInicio.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dtpHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpHoraInicio.Location = new System.Drawing.Point(96, 173);
             this.dtpHoraInicio.Name = "dtpHoraInicio";
             this.dtpHoraInicio.ShowUpDown = true;
             this.dtpHoraInicio.Size = new System.Drawing.Size(73, 20);
             this.dtpHoraInicio.TabIndex = 27;
-            this.dtpHoraInicio.UseWaitCursor = true;
-            this.dtpHoraInicio.Value = new System.DateTime(2019, 6, 16, 13, 32, 32, 0);
+            this.dtpHoraInicio.Value = new System.DateTime(2019, 7, 19, 0, 0, 0, 0);
             // 
             // frmHorariosComision
             // 

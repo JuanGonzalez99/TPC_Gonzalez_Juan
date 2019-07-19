@@ -27,19 +27,29 @@ namespace PresentacionWeb
                 return;
             }
 
+            if (Session["MateriaEstudiante"] != null)
+            {
+                Session.Remove("MateriaEstudiante");
+            }
+
             if (IsPostBack)
                 return;
 
+            #region Creacion de listado de materias a las que se puede inscribir
+
             AlumnoService alumnoService = new AlumnoService();
+            MateriaService materiaService = new MateriaService();
 
             Alumno alumno = alumnoService.GetAlumnoByUserName(usuario.Nombre);
 
-            List<AlumnoComision> alumnoComisiones = alumnoService.GetAlumnosComision().FindAll(x => x.Alumno.Id == alumno.Id
-                                                                                                && x.Deshabilitado == false);
-            List<Materia> materias = alumnoComisiones.Select(x => x.Comision.Materia).ToList();
+            List<AlumnoComision> alumnoComisiones = alumnoService.GetAlumnosComision()
+                .FindAll(x => x.Alumno.Id == alumno.Id && x.Deshabilitado == false);
+
+            List<Materia> materiasAExcluir = alumnoComisiones
+                .Where(x => x.Estado <= EstadoMateria.Cursando)
+                .Select(x => x.Comision.Materia).ToList();
 
             List<Carrera> carreras = new CarreraService().GetByAlumnoId(alumno.Id);
-            MateriaService materiaService = new MateriaService();
             List<Materia> lista = new List<Materia>();
 
             foreach (var carrera in carreras)
@@ -47,19 +57,51 @@ namespace PresentacionWeb
                 lista.AddRange(materiaService.GetByCarreraId(carrera.Id));
             }
 
-            foreach (var materia in materias)
+            List<Materia> aux = new List<Materia>(lista);
+
+            foreach (var materia in aux)
             {
-                lista.RemoveAll(x => x.Id == materia.Id);
-                //lista = lista.Remove(materia);
+                List<MateriaCorrelativa> materiasCorrelativas = materiaService.GetCorrelativasById(materia.Id)
+                    .FindAll(x => x.Deshabilitado == false);
+ 
+                foreach (var correlativa in materiasCorrelativas)
+                {
+                    bool puedeCursar = false;
+
+                    foreach (var alumnoComision in alumnoComisiones)
+                    {
+                        if (alumnoComision.Comision.Materia.Id == correlativa.Correlativa.Id
+                            && (alumnoComision.Estado == correlativa.EstadoRequerido || alumnoComision.Estado == EstadoMateria.Aprobada))
+                            puedeCursar = true;
+                    }
+
+                    if (!puedeCursar)
+                    {
+                        lista.Remove(materia);
+                        break;
+                    }
+                }
+
             }
 
-            lista.OrderBy(x => x.Año).ThenBy(x => x.Cuatrimestre).ToList();
+            foreach (var materia in materiasAExcluir)
+            {
+                lista.RemoveAll(x => x.Id == materia.Id);
+            }
 
-            dgvMaterias.DataSource = lista;
+            #endregion
+
+            dgvMaterias.DataSource = lista
+                .OrderBy(x => x.Carrera.Id)
+                .ThenBy(x => x.Año)
+                .ThenBy(x => x.Cuatrimestre).ToList();
+
             dgvMaterias.DataBind();
+
+            divSinRegistros.Visible = lista.Count == 0;
         }
 
-        protected void btnInscribirse_Click(object sender, EventArgs e)
+        protected void btnComisiones_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             GridViewRow row = (GridViewRow)button.NamingContainer;

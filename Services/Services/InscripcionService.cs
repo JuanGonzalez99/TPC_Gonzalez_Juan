@@ -71,7 +71,7 @@ namespace AccesoDatos.Services
             DataAccessManager accesoDatos = new DataAccessManager();
             try
             {
-                accesoDatos.setearConsulta("SELECT * FROM TB_INSCRIPCIONES" +
+                accesoDatos.setearConsulta("SELECT * FROM TB_INSCRIPCIONES " +
                     "WHERE GETDATE() BETWEEN FECHA_APERTURA AND FECHA_CIERRE");
                 accesoDatos.abrirConexion();
                 accesoDatos.ejecutarConsulta();

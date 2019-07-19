@@ -14,7 +14,7 @@ namespace Entities.Models
 
         public override string ToString()
         {
-            return Apellido + ", " + Nombre;
+            return (string.IsNullOrEmpty(Apellido) || string.IsNullOrEmpty(Nombre) ? string.Empty : Apellido + ", " + Nombre);
         }
     }
 }

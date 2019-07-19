@@ -44,7 +44,7 @@
             this.btnQuitar.Location = new System.Drawing.Point(150, 407);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(96, 33);
-            this.btnQuitar.TabIndex = 15;
+            this.btnQuitar.TabIndex = 3;
             this.btnQuitar.Text = "Quitar";
             this.btnQuitar.UseVisualStyleBackColor = true;
             this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
@@ -55,7 +55,7 @@
             this.btnVolver.Location = new System.Drawing.Point(268, 407);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(100, 33);
-            this.btnVolver.TabIndex = 14;
+            this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
@@ -64,7 +64,7 @@
             this.btnAsignar.Location = new System.Drawing.Point(28, 407);
             this.btnAsignar.Name = "btnAsignar";
             this.btnAsignar.Size = new System.Drawing.Size(100, 33);
-            this.btnAsignar.TabIndex = 12;
+            this.btnAsignar.TabIndex = 2;
             this.btnAsignar.Text = "Asignar";
             this.btnAsignar.UseVisualStyleBackColor = true;
             this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
@@ -76,7 +76,7 @@
             this.cmbMaterias.Location = new System.Drawing.Point(109, 307);
             this.cmbMaterias.Name = "cmbMaterias";
             this.cmbMaterias.Size = new System.Drawing.Size(223, 21);
-            this.cmbMaterias.TabIndex = 11;
+            this.cmbMaterias.TabIndex = 0;
             // 
             // lblCarreras
             // 
@@ -102,6 +102,7 @@
             this.dgvMaterias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterias.Size = new System.Drawing.Size(403, 269);
             this.dgvMaterias.TabIndex = 10;
+            this.dgvMaterias.TabStop = false;
             // 
             // cmbEstado
             // 
@@ -110,7 +111,7 @@
             this.cmbEstado.Location = new System.Drawing.Point(109, 352);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(223, 21);
-            this.cmbEstado.TabIndex = 16;
+            this.cmbEstado.TabIndex = 1;
             // 
             // label1
             // 

@@ -19,7 +19,7 @@ namespace Entities.Models
 
         public override string ToString()
         {
-            return DiaSemana.ToString() + " - " + HoraInicio.ToString() + " a " + HoraFin.ToString();
+            return DiaSemana + " - " + HoraInicio.ToString("hh\\:mm") + " a " + HoraFin.ToString("hh\\:mm");
         }
     }
 }

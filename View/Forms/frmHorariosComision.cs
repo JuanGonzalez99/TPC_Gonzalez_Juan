@@ -31,6 +31,9 @@ namespace View.Forms
 
         private void frmHorariosComision_Load(object sender, EventArgs e)
         {
+            dtpHoraInicio.CustomFormat = "HH:mm";
+            dtpHoraFin.CustomFormat = "HH:mm";
+
             this.Text = comision.ToString();
 
             cargarGrilla();
@@ -109,7 +112,9 @@ namespace View.Forms
                     .ThenBy(x => x.HoraFin).ToList();
                 dgvHorarios.Columns["Id"].Visible = false;
                 dgvHorarios.Columns["HoraInicio"].HeaderText = "Hora de inicio";
+                dgvHorarios.Columns["HoraInicio"].DefaultCellStyle.Format = "hh\\:mm";
                 dgvHorarios.Columns["HoraFin"].HeaderText = "Hora de fin";
+                dgvHorarios.Columns["HoraFin"].DefaultCellStyle.Format = "hh\\:mm";
                 dgvHorarios.Columns["DiaSemana"].HeaderText = "Día de la semana";
                 dgvHorarios.Columns["DiaSemana"].DisplayIndex = 0;
                 dgvHorarios.Columns["Deshabilitado"].Visible = false;

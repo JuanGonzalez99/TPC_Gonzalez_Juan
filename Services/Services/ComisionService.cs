@@ -65,6 +65,59 @@ namespace AccesoDatos.Services
             }
         }
 
+        public List<Comision> GetActualesByMateria(int materiaId)
+        {
+            List<Comision> listado = new List<Comision>();
+            DataAccessManager accesoDatos = new DataAccessManager();
+            try
+            {
+                accesoDatos.setearSP("SP_COMISIONES_ACTUALES_POR_MATERIA");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@p_materia_id", materiaId);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarConsulta();
+                while (accesoDatos.Lector.Read())
+                {
+                    listado.Add(Make(accesoDatos.Lector, true));
+                }
+
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void InscribirAlumno(long comisionId, int alumnoId)
+        {
+            DataAccessManager accesoDatos = new DataAccessManager();
+
+            try
+            {
+                accesoDatos.setearConsulta("INSERT INTO TB_ALUMNOS_COMISIONES (CD_COMISION, CD_ALUMNO, CD_ESTADO, NOTA) " +
+                    "values (@IdComision, @IdAlumno, @IdEstado, NULL)");
+                accesoDatos.Comando.Parameters.Clear();
+                accesoDatos.Comando.Parameters.AddWithValue("@IdComision", comisionId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdAlumno", alumnoId);
+                accesoDatos.Comando.Parameters.AddWithValue("@IdEstado", EstadoMateria.Cursando);
+                accesoDatos.abrirConexion();
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
+
         public void Insert(Comision nuevo)
         {
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -102,9 +155,9 @@ namespace AccesoDatos.Services
                     "CD_MATERIA = @IdMateria, " +
                     "AÑO = @Año, " +
                     "CUATRIMESTRE = @Cuatrimestre, " +
-                    "CD_TURNO = @IdTurno " +
-                    "CD_MODALIDAD = @IdModalidad " +
-                    "CD_PROFESOR = @IdProfesor " +
+                    "CD_TURNO = @IdTurno, " +
+                    "CD_MODALIDAD = @IdModalidad, " +
+                    "CD_PROFESOR = @IdProfesor, " +
                     "CD_AYUDANTE = @IdAyudante " +
                 "Where CD_COMISION = @Id");
                 accesoDatos.Comando.Parameters.Clear();
@@ -250,7 +303,10 @@ namespace AccesoDatos.Services
             if (ayudanteId != 0)
                 entidad.Ayudante = profesorService.GetById(ayudanteId);
 
-            if (complete) { }
+            if (complete)
+            {
+                entidad.Horarios = this.GetHorariosById(entidad.Id);
+            }
 
             return entidad;
         }

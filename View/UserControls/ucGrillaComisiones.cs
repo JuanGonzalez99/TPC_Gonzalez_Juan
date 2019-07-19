@@ -78,7 +78,7 @@ namespace View.UserControls
                     .OrderByDescending(x => x.Año)
                     .ThenBy(x => x.Cuatrimestre)
                     .ThenBy(x => x.Turno.Id)
-                    .ThenBy(x => x.Materia.Id).ToList();
+                    .ThenBy(x => x.Materia.Nombre).ToList();
                 dgvGrilla.Columns["Id"].Visible = false;
                 dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
             }

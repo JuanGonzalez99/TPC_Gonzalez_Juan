@@ -69,7 +69,7 @@
         }
     </style>
 
-    <script>
+    <script type="text/javascript">
         function ready()
         {
             var usuario = '<%= Session["Usuario"] %>';
@@ -84,7 +84,12 @@
             }
 
         } 
+        
     </script>
+
+<%--    <script type="text/javascript" src="InscripcionComision.aspx" >
+
+    </script>--%>
 
 </head>
 <body onload="ready()">

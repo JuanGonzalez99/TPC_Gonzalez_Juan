@@ -34,12 +34,14 @@
             this.lblBuscar = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.dgvGrilla = new System.Windows.Forms.DataGridView();
+            this.btnEscondido = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrilla)).BeginInit();
             this.SuspendLayout();
             // 
             // btnEliminar
             // 
             this.btnEliminar.BackColor = System.Drawing.Color.SlateGray;
+            this.btnEliminar.Cursor = System.Windows.Forms.Cursors.No;
             this.btnEliminar.Enabled = false;
             this.btnEliminar.FlatAppearance.BorderSize = 0;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -118,6 +120,19 @@
             this.dgvGrilla.TabIndex = 23;
             this.dgvGrilla.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvGrilla_CellFormatting);
             // 
+            // btnEscondido
+            // 
+            this.btnEscondido.BackColor = System.Drawing.Color.Transparent;
+            this.btnEscondido.Cursor = System.Windows.Forms.Cursors.No;
+            this.btnEscondido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEscondido.ForeColor = System.Drawing.Color.Transparent;
+            this.btnEscondido.Location = new System.Drawing.Point(489, 284);
+            this.btnEscondido.Name = "btnEscondido";
+            this.btnEscondido.Size = new System.Drawing.Size(102, 32);
+            this.btnEscondido.TabIndex = 26;
+            this.btnEscondido.Text = "button1";
+            this.btnEscondido.UseVisualStyleBackColor = false;
+            // 
             // ucGrillaInscripciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,6 +144,7 @@
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.btnEscondido);
             this.Name = "ucGrillaInscripciones";
             this.Size = new System.Drawing.Size(668, 346);
             this.Load += new System.EventHandler(this.ucGrillaAlumnos_Load);
@@ -146,5 +162,6 @@
         private System.Windows.Forms.Label lblBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.DataGridView dgvGrilla;
+        private System.Windows.Forms.Button btnEscondido;
     }
 }

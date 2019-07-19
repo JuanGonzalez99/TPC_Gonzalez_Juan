@@ -16,9 +16,9 @@ namespace Entities.Models
         public Modalidad Modalidad { get; set; }
         public Profesor Profesor { get; set; }
         public Profesor Ayudante { get; set; }
-        //public List<AlumnoComision> Alumnos { get; set; }
-        //public List<ProfesorComision> Profesores { get; set; }
         public bool Deshabilitado { get; set; }
+
+        public List<Horario> Horarios { get; set; }
 
         public override string ToString()
         {

@@ -13,5 +13,10 @@ namespace Entities.Models
         public EstadoMateria Estado { get; set; }
         public byte? Nota { get; set; }
         public bool Deshabilitado { get; set; }
+
+        public override string ToString()
+        {
+            return Alumno + " - " + Comision.Materia + " - " + Estado;
+        }
     }
 }

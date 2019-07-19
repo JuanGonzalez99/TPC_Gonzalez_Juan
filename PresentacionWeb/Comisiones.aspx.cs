@@ -42,7 +42,9 @@ namespace PresentacionWeb
             List<Comision> lista = new ComisionService().GetAll().FindAll(x => x.Profesor.Id == profesor.Id 
                                                                         || (x.Ayudante == null ? false : x.Ayudante.Id == profesor.Id));
 
-            dgvComisiones.DataSource = lista;
+            dgvComisiones.DataSource = lista
+                .OrderByDescending(x => x.Año)
+                .ThenBy(x => x.Cuatrimestre).ToList();
             dgvComisiones.DataBind();
 
             divSinRegistros.Visible = lista.Count == 0;

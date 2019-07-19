@@ -6,10 +6,16 @@
         <h3>Listado de materias</h3>
     </div>
 
+    <div id="divSinRegistros" runat="server" class="row" style="text-align:center; margin-bottom:50px;">
+        <h3>
+            No hay materias a las que pueda inscribirse de momento.
+        </h3>
+    </div>
+
     <asp:GridView ID="dgvMaterias" runat="server" AutoGenerateColumns="false" CssClass="table" 
         RowStyle-BackColor="#f2f2f2" AlternatingRowStyle-BackColor="#cccccc" HeaderStyle-BackColor="#222222" HeaderStyle-ForeColor="LightGray">
         <Columns>
-            <asp:BoundField DataField="Id" HeaderText="Código" />
+            <asp:BoundField DataField="Id" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
             <asp:BoundField DataField="Carrera" HeaderText="Carrera" />
             <asp:BoundField DataField="Año" HeaderText="Año" />
@@ -17,8 +23,8 @@
 
             <asp:TemplateField HeaderText="Acción">
                 <ItemTemplate>
-                    <asp:Button ID="btnInscribirse" runat="server" CausesValidation="false" OnClick="btnInscribirse_Click" 
-                        Text="Inscribirse" Font-Size="Small" CssClass="btn btn-primary" />
+                    <asp:Button ID="btnComisiones" runat="server" CausesValidation="false" OnClick="btnComisiones_Click" 
+                        Text="Comisiones" Font-Size="Small" CssClass="btn btn-primary" />
                 </ItemTemplate>
                 <HeaderStyle Width="88px" />
             </asp:TemplateField>

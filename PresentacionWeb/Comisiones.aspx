@@ -15,10 +15,10 @@
     <asp:GridView ID="dgvComisiones" runat="server" AutoGenerateColumns="false" CssClass="table"
         RowStyle-BackColor="#f2f2f2" AlternatingRowStyle-BackColor="#cccccc" HeaderStyle-BackColor="#222222" HeaderStyle-ForeColor="LightGray">
         <Columns>
-            <asp:BoundField DataField="Id" HeaderText="Código" ItemStyle-Width="200px" />
+            <asp:BoundField DataField="Id" ItemStyle-CssClass="hidden" HeaderStyle-CssClass="hidden" />
             <asp:BoundField DataField="Materia" HeaderText="Materia" ItemStyle-Width="200px" />
-            <asp:BoundField DataField="Año" HeaderText="Año" ItemStyle-Width="200px" />
-            <asp:BoundField DataField="Cuatrimestre" HeaderText="Cuatrimestre" ItemStyle-Width="200px" />
+            <asp:BoundField DataField="Año" HeaderText="Año" ItemStyle-Width="100px" />
+            <asp:BoundField DataField="Cuatrimestre" HeaderText="Cuatrimestre" ItemStyle-Width="100px" />
             <asp:BoundField DataField="Turno" HeaderText="Turno" ItemStyle-Width="200px" />
             <asp:BoundField DataField="Modalidad" HeaderText="Modalidad" ItemStyle-Width="200px" />
             <asp:BoundField DataField="Profesor" HeaderText="Profesor" ItemStyle-Width="200px" />

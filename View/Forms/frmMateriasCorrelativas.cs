@@ -51,6 +51,8 @@ namespace View.Forms
                 MateriaService s = new MateriaService();
                 s.InsertCorrelativa(materia.Id, correlativa.Id, (EstadoMateria)cmbEstado.SelectedItem);
 
+                CommonHelper.ShowInfo("Correlativa asignada con éxito.");
+
                 cargarGrilla();
 
             }
@@ -82,9 +84,14 @@ namespace View.Forms
             Materia correlativa = (Materia)cmbMaterias.SelectedItem;
             MateriaService s = new MateriaService();
 
+            if (correlativa.Id == this.materia.Id)
+            {
+                throw new WarningException("La materia no puede tenerse a sí misma como correlativa.");
+            }
+
             if (s.GetCorrelativasById(materia.Id).Any(x => x.Correlativa.Id == correlativa.Id && x.Deshabilitado == false))
             {
-                throw new WarningException("La materia ya tiene asociada esa correlativa");
+                throw new WarningException("La materia ya tiene asociada esa correlativa.");
             }
         }
 

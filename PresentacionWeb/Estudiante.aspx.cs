@@ -37,7 +37,24 @@ namespace PresentacionWeb
 
         protected void btnInscripciones_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Inscripciones.aspx");
+            InscripcionService s = new InscripcionService();
+
+            if (s.GetAllByActualDate().Count == 0)
+            {
+                CrearModal("Atención", "No se encuentra habilitado el período de inscripciones a materias.");
+            }
+            else
+            {
+                Response.Redirect("~/Inscripciones.aspx");
+            }
+        }
+
+        private void CrearModal(string Titulo, string Mensaje)
+        {
+            lblModalTitle.Text = Titulo;
+            lblModalBody.Text = Mensaje;
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+            upModal.Update();
         }
     }
 }

@@ -13,5 +13,10 @@ namespace Entities.Models
         public Materia Correlativa { get; set; }
         public EstadoMateria EstadoRequerido { get; set; }
         public bool Deshabilitado { get; set; }
+
+        public override string ToString()
+        {
+            return Correlativa + " - " + EstadoRequerido;
+        }
     }
 }

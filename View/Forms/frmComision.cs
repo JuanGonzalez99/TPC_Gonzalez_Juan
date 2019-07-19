@@ -38,7 +38,10 @@ namespace View.Forms
             cmbTurno.DataSource = new TurnoService().GetAll().OrderBy(x => x.Id).ToList();
             cmbModalidad.DataSource = new ModalidadService().GetAll().FindAll(x => !x.Deshabilitado);
             cmbProfesor.DataSource = new ProfesorService().GetAll().FindAll(x => !x.Deshabilitado);
-            cmbAyudante.DataSource = new ProfesorService().GetAll().FindAll(x => !x.Deshabilitado);
+
+            List<Profesor> ayudantes = new ProfesorService().GetAll().FindAll(x => !x.Deshabilitado);
+            ayudantes.Insert(0, new Profesor());
+            cmbAyudante.DataSource = ayudantes;
 
             if (this.comision != null)
             {
@@ -123,6 +126,12 @@ namespace View.Forms
             comision.Modalidad = (Modalidad)cmbModalidad.SelectedItem;
             comision.Profesor = (Profesor)cmbProfesor.SelectedItem;
             comision.Ayudante = (Profesor)cmbAyudante.SelectedItem ?? null;
+            if (comision.Ayudante != null && comision.Ayudante.Id == 0) comision.Ayudante = null;
+
+            if (comision.Ayudante != null && comision.Ayudante.Id == comision.Profesor.Id)
+            {
+                throw new WarningException("No puede asignar el profesor como ayudante a la vez.");
+            }
 
             ComisionService s = new ComisionService();
 
