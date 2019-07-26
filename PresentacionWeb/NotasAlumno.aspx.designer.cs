@@ -10,34 +10,43 @@
 namespace PresentacionWeb {
     
     
-    public partial class Estudiante {
+    public partial class NotasAlumno {
         
         /// <summary>
-        /// Control txtAlumno.
+        /// Control lblAlumno.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtAlumno;
+        protected global::System.Web.UI.WebControls.Label lblAlumno;
         
         /// <summary>
-        /// Control btnMaterias.
+        /// Control divSinRegistros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMaterias;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSinRegistros;
         
         /// <summary>
-        /// Control btnInscripciones.
+        /// Control dgvNotas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInscripciones;
+        protected global::System.Web.UI.WebControls.GridView dgvNotas;
+        
+        /// <summary>
+        /// Control btnVolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
         
         /// <summary>
         /// Control upModal.

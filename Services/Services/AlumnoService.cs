@@ -96,7 +96,7 @@ namespace AccesoDatos.Services
             }
         }
 
-        public List<AlumnoComision> GetAlumnosComision()
+        public List<AlumnoComision> GetAlumnosComision(bool includeHorarios = false)
         {
             List<AlumnoComision> listado = new List<AlumnoComision>();
             DataAccessManager accesoDatos = new DataAccessManager();
@@ -113,7 +113,7 @@ namespace AccesoDatos.Services
 
                     alumno = new AlumnoComision();
                     alumno.Alumno = GetById(alumnoId);
-                    alumno.Comision = new ComisionService().GetById(comisionId);
+                    alumno.Comision = new ComisionService().GetById(comisionId, includeHorarios);
                     alumno.Estado = (EstadoMateria)Converter.ToByte(accesoDatos.Lector["CD_ESTADO"]);
                     alumno.Nota = Converter.ToNulleableByte(accesoDatos.Lector["NOTA"]);
                     alumno.Deshabilitado = Converter.ToBoolean(accesoDatos.Lector["DESHABILITADO"]);

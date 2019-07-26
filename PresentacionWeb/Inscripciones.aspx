@@ -24,7 +24,7 @@
             <asp:TemplateField HeaderText="Acción">
                 <ItemTemplate>
                     <asp:Button ID="btnComisiones" runat="server" CausesValidation="false" OnClick="btnComisiones_Click" 
-                        Text="Comisiones" Font-Size="Small" CssClass="btn btn-primary" />
+                        Text="Comisiones" Font-Size="Smaller" CssClass="btn btn-link" />
                 </ItemTemplate>
                 <HeaderStyle Width="88px" />
             </asp:TemplateField>

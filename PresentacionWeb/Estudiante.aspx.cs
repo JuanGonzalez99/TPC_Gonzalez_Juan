@@ -48,6 +48,11 @@ namespace PresentacionWeb
                 Response.Redirect("~/Inscripciones.aspx");
             }
         }
+        
+        protected void btnMaterias_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/MateriasEstudiante.aspx");
+        }
 
         private void CrearModal(string Titulo, string Mensaje)
         {

@@ -87,12 +87,11 @@
             this.dgvCarreras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCarreras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvCarreras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCarreras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarreras.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvCarreras.Location = new System.Drawing.Point(0, 0);
             this.dgvCarreras.Name = "dgvCarreras";
-            this.dgvCarreras.RowHeadersVisible = false;
             this.dgvCarreras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarreras.Size = new System.Drawing.Size(410, 111);
             this.dgvCarreras.TabIndex = 4;
@@ -108,7 +107,7 @@
             this.btnQuitar.UseVisualStyleBackColor = true;
             this.btnQuitar.Click += new System.EventHandler(this.btnQuitar_Click);
             // 
-            // frmAlumnosCarreras
+            // frmCarrerasAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -120,7 +119,7 @@
             this.Controls.Add(this.lblCarreras);
             this.Controls.Add(this.dgvCarreras);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "frmAlumnosCarreras";
+            this.Name = "frmCarrerasAlumno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Load += new System.EventHandler(this.frmAlumnosCarreras_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarreras)).EndInit();

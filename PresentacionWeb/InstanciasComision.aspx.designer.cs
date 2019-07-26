@@ -10,34 +10,43 @@
 namespace PresentacionWeb {
     
     
-    public partial class Estudiante {
+    public partial class InstanciasComision {
         
         /// <summary>
-        /// Control txtAlumno.
+        /// Control btnAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtAlumno;
+        protected global::System.Web.UI.WebControls.Button btnAgregar;
         
         /// <summary>
-        /// Control btnMaterias.
+        /// Control divSinRegistros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMaterias;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSinRegistros;
         
         /// <summary>
-        /// Control btnInscripciones.
+        /// Control dgvInstancias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnInscripciones;
+        protected global::System.Web.UI.WebControls.GridView dgvInstancias;
+        
+        /// <summary>
+        /// Control btnVolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVolver;
         
         /// <summary>
         /// Control upModal.

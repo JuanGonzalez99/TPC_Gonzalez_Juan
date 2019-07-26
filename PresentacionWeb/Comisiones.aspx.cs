@@ -50,7 +50,7 @@ namespace PresentacionWeb
             divSinRegistros.Visible = lista.Count == 0;
         }
 
-        protected void btnVisualizar_Click(object sender, EventArgs e)
+        protected void btnAlumnos_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             GridViewRow row = (GridViewRow)button.NamingContainer;
@@ -61,6 +61,19 @@ namespace PresentacionWeb
 
             Session.Add("ComisionDocente", comision);
             Response.Redirect("~/AlumnosComision.aspx");
+        }
+
+        protected void btnInstancias_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            GridViewRow row = (GridViewRow)button.NamingContainer;
+
+            long comisionId = Convert.ToInt64(row.Cells[0].Text);
+
+            Comision comision = new ComisionService().GetById(comisionId);
+
+            Session.Add("ComisionDocente", comision);
+            Response.Redirect("~/InstanciasComision.aspx");
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)

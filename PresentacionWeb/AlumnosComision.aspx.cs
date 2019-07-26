@@ -29,7 +29,7 @@ namespace PresentacionWeb
 
             if (Session["ComisionDocente"] == null)
             {
-                Response.Redirect("~/Docente.aspx");
+                Response.Redirect("~/Comisiones.aspx");
                 return;
             }
 
@@ -46,6 +46,17 @@ namespace PresentacionWeb
             dgvAlumnos.DataBind();
 
             divSinRegistros.Visible = lista.Count == 0;
+        }
+
+        protected void btnNotas_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            GridViewRow row = (GridViewRow)button.NamingContainer;
+
+            int alumnoId = Convert.ToInt32(row.Cells[0].Text);
+
+            Session.Add("AlumnoComision", alumnoId);
+            Response.Redirect("~/NotasAlumno.aspx");
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)

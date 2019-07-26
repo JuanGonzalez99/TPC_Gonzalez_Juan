@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -74,6 +75,12 @@ namespace PresentacionWeb
                     Response.Redirect("~/Docente.aspx");
             }
         }
+
+        //[WebMethod]
+        //public static string GetDataAjax(string nombre, string apellido)
+        //{
+        //    return string.Format("Bienvenido al mundo AJAX {0} {1}", nombre, apellido);
+        //}
 
         private void CrearModal(string Titulo, string Mensaje)
         {

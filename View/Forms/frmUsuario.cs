@@ -93,7 +93,7 @@ namespace View.Forms
             usuario.Contraseña = txtContraseña.Text;
             usuario.TipoUsuario = (TipoUsuario)cmbTipo.SelectedItem;
 
-            if (usuario.Nombre.Contains(".docente") || usuario.Nombre.Contains(".estudiante"))
+            if (usuario.TipoUsuario == TipoUsuario.Administrador && (usuario.Nombre.Contains(".docente") || usuario.Nombre.Contains(".estudiante")))
             {
                 throw new WarningException("Por favor, no utilice las extensiones utilizadas para otro tipo de usuarios. Puede generar conflictos.");
             }

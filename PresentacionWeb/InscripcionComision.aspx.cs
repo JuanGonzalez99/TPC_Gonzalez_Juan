@@ -29,7 +29,7 @@ namespace PresentacionWeb
 
             if (Session["MateriaEstudiante"] == null)
             {
-                Response.Redirect("~/Estudiante.aspx");
+                Response.Redirect("~/Inscripciones.aspx");
                 return;
             }
 
@@ -76,10 +76,7 @@ namespace PresentacionWeb
 
                 new ComisionService().InscribirAlumno(comisionId, alumno.Id);
                 Session.Remove("MateriaEstudiante");
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect",
-                //    "alert(Usted se ha inscripto correctamente para la materia " + materia + ".); window.location=''" + Request.ApplicationPath + "Inscripciones.aspx", true);
-                //CrearModal("Atención", "Usted se ha inscripto correctamente para la materia " + materia + ".");
-                Response.Redirect("~/Inscripciones.aspx");
+                CrearModal("Atención", "Usted se ha inscripto correctamente para la materia " + materia + ".");
             }
             catch (Exception ex)
             {

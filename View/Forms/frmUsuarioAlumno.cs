@@ -61,7 +61,7 @@ namespace View.Forms
 
                 usuarioAlumno.Usuario.Id = s.Insert(usuarioAlumno.Usuario);
 
-                s.AsignarProfesor(usuarioAlumno.Usuario.Id, usuarioAlumno.Alumno.Id);
+                s.AsignarAlumno(usuarioAlumno.Usuario.Id, usuarioAlumno.Alumno.Id);
 
                 CommonHelper.ShowInfo("Usuario asignado con éxito.");
                 this.DialogResult = DialogResult.OK;

@@ -25,6 +25,70 @@
         <span class="psw">Forgot <a href="#">password?</a></span>
     </div>--%>
 
+    <script type="text/javascript">
+
+        //$(document).ready(function () {
+        //    $('#MainContent_txtPassword').blur(function () {
+        //        debugger;
+        //        var txt = $('#MainContent_txtPassword').val();
+        //        if (txt.length == 0) {
+        //            $('#divPassword').addClass('has-error');
+        //        }
+        //        else {
+        //            if ($('#divPassword').hasClass('has-error')) {
+        //                $('#divPassword').removeClass('has-error');
+        //            }
+        //        }
+        //    })
+        //});
+
+        //function verificarusuario() {
+        //    var txt = $('#maincontent_txtusuario').val;
+        //    if (txt.val().length == 0) {
+        //        txt.addclass('');
+        //    }
+        //}
+
+        //function verificarContra() {
+        //    var txt = $('#MainContent_txtPassword').val();
+        //    if (txt.length == 0) {
+        //        $('#divPassword').addClass('has-error');
+        //    }
+        //    else {
+        //        if ($('#divPassword').hasClass('has-error')) {
+        //            $('#divPassword').removeClass('has-error');
+        //        }
+        //    }
+        //}
+
+        //$(document).ready(function() {
+        //    $('#btnPrueba').click(function() {
+        //        var nombre = "juan";
+        //        var apellido = "gonzalez";
+ 
+        //        sendDataAjax(nombre, apellido);
+        //    });
+        //});
+ 
+        //function sendDataAjax(nombre, apellido) {
+        //    var actionData = "{'nombre': '" + nombre + "', 'apellido': '" + apellido + "'}";
+        //    debugger;
+        //    $.ajax(
+        //    {
+        //        url: "Default.aspx/GetDataAjax",
+        //        data: actionData,
+        //        dataType: "json",
+        //        type: "POST",
+        //        contentType: "application/json; charset=utf-8",
+        //        success: function(msg) { alert(msg.d); },
+        //        error: function(result) {
+        //            alert("ERROR " + result.status + ' ' + result.statusText);
+        //        }
+        //    });        
+        //};
+
+    </script>
+
     <br />
     <br />
     <br />
@@ -47,13 +111,16 @@
                                             <tr>
                                                 <td align="right" nowrap="" class="textoTabla">Usuario: </td>
                                                 <td align="left">
-                                                    <input type="text" name="legajo" id="txtUsuario" runat="server"></td>
+                                                    <input type="text" name="nombreUsuario" id="txtUsuario" runat="server" >
+                                                </td>
                                             </tr>
 
                                             <tr>
                                                 <td align="right" nowrap="" class="textoTabla">Contraseña: </td>
                                                 <td>
-                                                    <input type="password" id="txtPassword" runat="server" name="password" maxlength="20">
+                                                    <%--<div id="divPassword" class="form-group">--%>
+                                                        <input type="password" id="txtPassword" runat="server" name="password" maxlength="30" >
+                                                    <%--</div>--%>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -63,7 +130,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class="textoTabla" style="padding-left: 50px;">
-                                                                    <asp:Button ID="btnLogin" runat="server" Text="Ingresar" OnClick="btnLogin_Click" />
+                                                                    <asp:Button ID="btnLogin" runat="server" Text="Ingresar" OnClick="btnLogin_Click"/>
                                                                 </td>
                                                             </tr>
                                                         </tbody>

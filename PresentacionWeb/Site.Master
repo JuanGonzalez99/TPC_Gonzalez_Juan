@@ -16,13 +16,15 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
     <style type="text/css">
         <!-- .titulo {
             color: royalblue;
         }
 
         body {
-            background-image: url("http://sysacadweb.frgp.utn.edu.ar/fondo.gif")
+            background-color: beige
         }
 
         .tituloTabla {

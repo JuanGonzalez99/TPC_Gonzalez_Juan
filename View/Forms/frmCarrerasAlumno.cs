@@ -32,6 +32,7 @@ namespace View.Forms
         {
             CarreraService s = new CarreraService();
             cmbCarreras.DataSource = s.GetAll().FindAll(x => x.Deshabilitado == false);
+            cmbCarreras.SelectedIndex = -1;
 
             this.Text = alumno.ToString();
             cargarGrilla();
@@ -95,7 +96,7 @@ namespace View.Forms
             {
                 dgvCarreras.DataSource = new CarreraService().GetByAlumnoId(alumno.Id).FindAll(x => x.Deshabilitado == false);
                 dgvCarreras.Columns["Id"].HeaderText = "Código";
-
+                dgvCarreras.Columns["NombreCorto"].HeaderText = "Nombre corto";
                 dgvCarreras.Columns["Deshabilitado"].Visible = false;
             }
             catch (Exception ex)

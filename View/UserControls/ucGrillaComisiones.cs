@@ -79,7 +79,7 @@ namespace View.UserControls
                     .ThenBy(x => x.Cuatrimestre)
                     .ThenBy(x => x.Turno.Id)
                     .ThenBy(x => x.Materia.Nombre).ToList();
-                dgvGrilla.Columns["Id"].Visible = false;
+                dgvGrilla.Columns["Id"].HeaderText = "Código";
                 dgvGrilla.Columns["Deshabilitado"].Visible = chbDeshabilitados.Checked;
             }
             catch (Exception ex)
