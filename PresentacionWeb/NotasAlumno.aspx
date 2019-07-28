@@ -5,7 +5,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            
+
             $('input[value="Borrar"]').on('click', function (e) {
 
                 e.preventDefault();
@@ -17,7 +17,7 @@
                 if (cells[3].textContent.trim() == "") {
                     return;
                 }
-                
+
                 var input = $(this).closest('input');
 
                 var confirma = confirm('¿Está seguro que desea borrar la nota? Podrá volver a cargarla más adelante.');
@@ -25,14 +25,19 @@
 
                     var instanciaId = cells[0].textContent;
 
-                    var dataSet = '{instancia: "' + instanciaId + '" }';
+                    var DataSet = JSON.stringify(
+                        {
+                            data: {
+                                id: instanciaId
+                            }
+                        });
 
                     $.ajax({
                         type: "POST",
                         url: "NotasAlumno.aspx/DeleteNota",
-                        data: dataSet,
-                        contentType: "application/json; charset=utf-8",
+                        data: DataSet,
                         dataType: "json",
+                        contentType: "application/json; charset=utf-8",
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
                         },
@@ -70,8 +75,7 @@
     </div>
 
     <div id="divSinRegistros" runat="server" class="row" style="text-align: center; margin-bottom: 50px;">
-        <h3>Comisión sin instancias evaluativas asignadas.
-        </h3>
+        <h3>Comisión sin instancias evaluativas asignadas.</h3>
     </div>
 
     <asp:GridView ID="dgvNotas" runat="server" AutoGenerateColumns="false" CssClass="table" OnRowDataBound="dgvNotas_RowDataBound"
@@ -87,7 +91,7 @@
                 <ItemTemplate>
                     <asp:Button ID="btnEditar" runat="server" CausesValidation="false" OnClick="btnEditar_Click"
                         Text="Editar" Font-Size="Smaller" CssClass="btn btn-link" />
-                    <asp:Button ID="btnBorrar" runat="server" CausesValidation="false" 
+                    <asp:Button ID="btnBorrar" runat="server" CausesValidation="false"
                         Text="Borrar" Font-Size="Smaller" CssClass="btn btn-link" />
                     <%--<button id="btnBorrar" style="font-size: smaller;" class="btn btn-link">Borrar</button>--%>
                 </ItemTemplate>

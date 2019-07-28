@@ -94,37 +94,39 @@ namespace PresentacionWeb
             Response.Redirect("~/EditarNota.aspx");
         }
 
-        protected void btnBorrar_Click(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            GridViewRow row = (GridViewRow)button.NamingContainer;
+        //protected void btnBorrar_Click(object sender, EventArgs e)
+        //{
+        //    Button button = (Button)sender;
+        //    GridViewRow row = (GridViewRow)button.NamingContainer;
 
-            long instanciaId = Convert.ToInt64(row.Cells[0].Text);
-            int alumnoId = (int)Session["AlumnoComision"];
+        //    long instanciaId = Convert.ToInt64(row.Cells[0].Text);
+        //    int alumnoId = (int)Session["AlumnoComision"];
 
-            try
-            {
-                InstanciaService s = new InstanciaService();
+        //    try
+        //    {
+        //        InstanciaService s = new InstanciaService();
 
-                s.DeleteNota(instanciaId, alumnoId);
+        //        s.DeleteNota(instanciaId, alumnoId);
 
-                row.Cells[2].Text = "";
-            }
-            catch (Exception ex)
-            {
-                CrearModal("Error", "Ha ocurrido un error. Intente nuevamente en unos momentos");
-                Response.Write("<script>console.log(' " + ex.Message + "');</script>");
-            }
+        //        row.Cells[2].Text = "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        CrearModal("Error", "Ha ocurrido un error. Intente nuevamente en unos momentos");
+        //        Response.Write("<script>console.log(' " + ex.Message + "');</script>");
+        //    }
 
-        }
+        //}
 
         [WebMethod (EnableSession = true)]
-        public static string DeleteNota(string instancia)
+        public static string DeleteNota(Dictionary<string, object> data)
         {
             try
             {
+                string id = data["id"].ToString();
+
                 int alumnoId = (int)HttpContext.Current.Session["AlumnoComision"];
-                long instanciaId = long.Parse(instancia);
+                long instanciaId = long.Parse(id);
 
                 InstanciaService s = new InstanciaService();
 
