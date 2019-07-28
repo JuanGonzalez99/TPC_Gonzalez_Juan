@@ -24,7 +24,7 @@ namespace View.Forms
         {
             try
             {
-                //validar();
+                validar();
 
                 this.Hide();
                 var frm = new frmPrincipal();
